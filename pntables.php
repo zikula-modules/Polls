@@ -61,4 +61,3 @@ function Polls_pntables()
 
     return $pntable;
 }
-?>

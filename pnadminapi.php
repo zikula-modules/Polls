@@ -179,5 +179,3 @@ function polls_adminapi_getlinks()
 
     return $links;
 }
-
-?>

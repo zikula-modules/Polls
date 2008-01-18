@@ -9,6 +9,5 @@
  * @package PostNuke_Value_Addons
  * @subpackage Polls
 */
-define('_POLLSNOCOMMENTS','EZComments module not available - this is required to migrate any poll comments');
 
-?>
+define('_POLLSNOCOMMENTS','EZComments module not available - this is required to migrate any poll comments');

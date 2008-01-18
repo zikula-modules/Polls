@@ -32,5 +32,3 @@ define('_POLLSCONFIRMDELETE', 'Confirm Deletion of Poll');
 define('_POLLSCANCELDELETE', 'Cancel Deletion of Poll');
 define('_POLLSNOSUCHITEM', 'No such Poll');
 define('_POLLSDELETED', 'Poll Deleted');
-
-?>

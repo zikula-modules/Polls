@@ -338,5 +338,3 @@ function Polls_admin_updateconfig()
 
     return pnRedirect(pnModURL('Polls', 'admin', 'view'));
 }
-
-?>

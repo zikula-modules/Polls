@@ -137,5 +137,3 @@ function Polls_Pollblock_update($blockinfo)
 
     return $blockinfo;
 }
-
-?>

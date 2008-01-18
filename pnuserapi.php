@@ -189,5 +189,3 @@ function Polls_userapi_countvotes($args)
     // Return the number of items
     return $votecount;
 }
-
-?>

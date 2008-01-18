@@ -12,5 +12,3 @@
 
 define('_POLLSDISPLAY', 'Poll to display');
 define('_POLLSAJAXVOTING', 'Use ajax for voting');
-
-?>

@@ -190,5 +190,3 @@ function Polls_user_vote($args)
         return pnRedirect(pnModURL('Polls', 'user', 'results', array('pollid' => $pollid)));
     }
 }
-
-?>

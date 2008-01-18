@@ -122,5 +122,3 @@ function Polls_delete()
     // Deletion successful
     return true;
 }
-
-?>

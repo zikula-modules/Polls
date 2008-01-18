@@ -64,5 +64,3 @@ function polls_ajax_vote()
     // return the new content for the block
     return array('result' => $result);
 }
-
-?>

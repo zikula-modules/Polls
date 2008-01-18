@@ -27,5 +27,3 @@ define('_POLLSYOUVOTEDALREADY', 'You already voted today!');
 define('_POLLSITEMFAILED', 'Failed to get any polls');
 define('_POLLRESULTS', 'Results');
 define('_POLLSRECORDINGVOTE', 'Recording vote');
-
-?>

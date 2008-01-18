@@ -21,4 +21,3 @@ $modversion['official'] = 1;
 $modversion['author'] = 'Mark West';
 $modversion['contact'] = 'http://www.markwest.me.uk/';
 $modversion['securityschema'] = array('Polls::' => 'Poll title::Poll ID');
-?>
