@@ -1,0 +1,39 @@
+<!--[*  $Id: polls_user_results.htm 18013 2006-02-21 22:52:26Z markwest $  *]-->
+<!--[include file="polls_user_menu.htm"]-->
+<h2><!--[$title]--></h2>
+<div class="polls-resultstable">
+<table width="100%">
+  <!--[section name=options loop=$options]-->
+	<!--[if $options[options].optiontext neq ""]-->
+      <tr>
+	    <td align="left"><!--[$options[options].optiontext|pnvarprepfordisplay]--></td>
+	    <td align="left">
+	    <!--[strip]-->
+          <!--[pnimg src=leftbar.gif height=15 width=7 title="`$options[options].percent`%"]-->
+          <!--[pnimg src=mainbar.gif height=15 width=$options[options].percentscaled title="`$options[options].percent`%"]-->
+          <!--[pnimg src=rightbar.gif height=15 width=7 title="`$options[options].percentscaled`%"]-->
+         <!--[/strip]-->
+		</td>
+		<td align="right"><!--[$options[options].percent|pnvarprepfordisplay]-->%</td>
+      </tr>
+	<!--[/if]-->
+  <!--[/section]-->
+</table>
+</div>
+<div class="polls-resultlinks">
+<!--[$votecount|pnvarprepfordisplay]-->
+<!--[if $votecount eq 1]-->
+ <!--[pnml name="_POLLSVOTE"]-->
+<!--[else]-->
+ <!--[pnml name="_POLLSVOTES"]-->
+<!--[/if]-->
+</div>
+<div class="polls-resultlinks">
+<!--[pnml name="_POLLSONEVOTEPERDAY"]-->
+</div>
+<div class="polls-resultlinks">
+[ <a href="<!--[pnmodurl modname="Polls" type="user" func="display" pollid=$pollid]-->"><!--[pnml name="_POLLSVOTINGBOOTH"]--></a> | <a href="<!--[pnmodurl modname="Polls" type="user" func="view"]-->"><!--[pnml name="_POLLSOTHERPOLLS"]--></a> ]
+</div>
+<!--[pnmodurl modname=Polls func=display pollid=$pollid assign=returnurl]-->
+<!--[pnmodcallhooks hookobject=item hookaction=display hookid=$pollid module=Polls returnurl=$returnurl]-->
+

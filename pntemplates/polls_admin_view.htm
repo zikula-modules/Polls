@@ -1,0 +1,26 @@
+<!--[*  $Id: polls_admin_view.htm 18393 2006-03-29 19:45:33Z markwest $  *]-->
+<!--[include file="polls_admin_menu.htm"]-->
+<div class="pn-admincontainer">
+<div class="pn-adminpageicon"><!--[pnimg modname=core src=windowlist.gif set=icons/large alt='_POLLSVIEW' altml=true]--></div>
+<h2><!--[pnml name="_POLLSVIEW"]--></h2>
+<table class="pn-admintable">
+  <tr>
+    <th><!--[pnml name="_POLLSTITLE"]--></th>
+    <th><!--[pnml name="_POLLSID"]--></th>
+    <th><!--[pnml name="_POLLSOPTIONS"]--></th>
+  </tr>
+  <!--[section name=polls loop=$polls]-->  
+    <tr class="<!--[cycle values="pn-odd,pn-even"]-->">
+      <td><!--[$polls[polls].title|pnvarprepfordisplay]--></td>
+      <td><!--[$polls[polls].pollid|pnvarprepfordisplay]--></td>
+	  <td>
+	    <!--[assign var="options" value=$polls[polls].options]-->
+        <!--[section name=options loop=$options]-->
+          <a href="<!--[$options[options].url|pnvarprepfordisplay]-->"><!--[pnimg modname=core set=icons/extrasmall src=$options[options].image alt=$options[options].title]--></a>
+        <!--[/section]-->
+      </td>
+    </tr>
+  <!--[/section]-->
+</table>
+<!--[pager show=page rowcount=$pager.numitems limit=$pager.itemsperpage posvar=startnum shift=1 img_prev=images/icons/extrasmall/previous.gif img_next=images/icons/extrasmall/next.gif]-->
+</div>

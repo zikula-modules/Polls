@@ -1,0 +1,26 @@
+<!--[*  $Id: polls_user_display.htm 18013 2006-02-21 22:52:26Z markwest $  *]-->
+<!--[include file="polls_user_menu.htm"]-->
+<h2><!--[$title|pnmodcallhooks:"Polls"|pnvarprephtmldisplay]--></h2>
+<form action="<!--[pnmodurl modname="Polls" type="user" func="vote"]-->" method="post" enctype="application/x-www-form-urlencoded">
+  <div class="polls-voteform">
+  <input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="Polls"]-->" />
+  <input type="hidden" name="pollid" value="<!--[$pollid|pnvarprepfordisplay]-->" />
+  <input type="hidden" name="title" value="<!--[$title|pnvarprepfordisplay]-->" />
+  <table width="100%">
+    <!--[foreach from=$options item=option]-->
+	  <!--[if $option.optiontext neq '']-->
+        <tr>
+	      <td align="left"><label for="_<!--[$option.voteid]-->"><!--[$option.optiontext|pnmodcallhooks:"Polls"|pnvarprephtmldisplay]--></label></td>
+		  <td align="right"><input id="_<!--[$option.voteid]-->" name="voteid" type="radio" value="<!--[$option.voteid]-->" /></td>
+        </tr>
+	  <!--[/if]-->
+	<!--[/foreach]-->
+  </table>
+  <input name="submit" type="submit" value="<!--[pnml name="_POLLSADDVOTE"]-->" />
+  </div>
+</form>
+<div class="polls-voteformlinks">
+[ <a href="<!--[pnmodurl modname="Polls" type="user" func="results" pollid=$pollid]-->"><!--[pnml name=_POLLSRESULTS]--></a> | <a href="<!--[pnmodurl modname="Polls" type="user" func="view"]-->"><!--[pnml name="_POLLSOTHERPOLLS"]--></a> ]
+</div>
+<!--[pnmodurl modname=Polls func=display pollid=$pollid assign=returnurl]-->
+<!--[pnmodcallhooks hookobject=item hookaction=display hookid=$pollid module=Polls returnurl=$returnurl]-->

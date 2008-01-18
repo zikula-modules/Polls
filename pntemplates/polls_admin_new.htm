@@ -1,0 +1,75 @@
+<!--[*  $Id: polls_admin_new.htm 18393 2006-03-29 19:45:33Z markwest $  *]-->
+<!--[include file="polls_admin_menu.htm"]-->
+<div class="pn-admincontainer">
+<div class="pn-adminpageicon"><!--[pnimg modname=core src=filenew.gif set=icons/large alt='_POLLSADD' altml=true]--></div>
+<h2><!--[pnml name="_POLLSADD"]--></h2>
+<form class="pn-adminform" action="<!--[pnmodurl modname="Polls" type="admin" func="create"]-->" method="post" enctype="application/x-www-form-urlencoded">
+<div>
+    <input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="Polls"]-->" />
+	<div class="pn-adminformrow">
+        <label for="polls_title"><!--[pnml name="_POLLSTITLE"]--></label>
+        <input id="polls_title" type="text" name="poll[title]" size="32" maxlength="32" />
+	</div>
+	<div class="pn-adminformrow">
+        <label for="polls_language"><!--[pnml name="_LANGUAGE"]--></label>
+		<!--[languagelist name=poll[language] installed=true]-->
+	</div>
+	<div class="pn-adminformrow">
+	  <!--[pnml name="_POLLSENTRY"]-->
+	</div>
+	<div class="pn-adminformrow">
+        <label for="polls_polloption1"><!--[pnml name="_POLLSOPTION"]--> 1</label>
+        <input id="polls_polloption1" type="text" name="poll[options][1]" size="50" maxlength="50" />
+	</div>
+	<div class="pn-adminformrow">
+        <label for="polls_polloption2"><!--[pnml name="_POLLSOPTION"]--> 2</label>
+        <input id="polls_polloption2" type="text" name="poll[options][2]" size="50" maxlength="50" />
+	</div>
+	<div class="pn-adminformrow">
+        <label for="polls_polloption3"><!--[pnml name="_POLLSOPTION"]--> 3</label>
+        <input id="polls_polloption3" type="text" name="poll[options][3]" size="50" maxlength="50" />
+	</div>
+	<div class="pn-adminformrow">
+        <label for="polls_polloption4"><!--[pnml name="_POLLSOPTION"]--> 4</label>
+        <input id="polls_polloption4" type="text" name="poll[options][4]" size="50" maxlength="50" />
+	</div>
+	<div class="pn-adminformrow">
+        <label for="polls_polloption5"><!--[pnml name="_POLLSOPTION"]--> 5</label>
+        <input id="polls_polloption5" type="text" name="poll[options][5]" size="50" maxlength="50" />
+	</div>
+	<div class="pn-adminformrow">
+        <label for="polls_polloption6"><!--[pnml name="_POLLSOPTION"]--> 6</label>
+        <input id="polls_polloption6" type="text" name="poll[options][6]" size="50" maxlength="50" />
+	</div>
+	<div class="pn-adminformrow">
+        <label for="polls_polloption7"><!--[pnml name="_POLLSOPTION"]--> 7</label>
+        <input id="polls_polloption7" type="text" name="poll[options][7]" size="50" maxlength="50" />
+	</div>
+	<div class="pn-adminformrow">
+        <label for="polls_polloption8"><!--[pnml name="_POLLSOPTION"]--> 8</label>
+        <input id="polls_polloption8" type="text" name="poll[options][8]" size="50" maxlength="50" />
+	</div>
+	<div class="pn-adminformrow">
+        <label for="polls_polloption9"><!--[pnml name="_POLLSOPTION"]--> 9</label>
+        <input id="polls_polloption9" type="text" name="poll[options][9]" size="50" maxlength="50" />
+	</div>
+	<div class="pn-adminformrow">
+        <label for="polls_polloption10"><!--[pnml name="_POLLSOPTION"]--> 10</label>
+        <input id="polls_polloption10" type="text" name="poll[options][10]" size="50" maxlength="50" />
+	</div>
+	<div class="pn-adminformrow">
+        <label for="polls_polloption11"><!--[pnml name="_POLLSOPTION"]--> 11</label>
+        <input id="polls_polloption11" type="text" name="poll[options][11]" size="50" maxlength="50" />
+	</div>
+	<div class="pn-adminformrow">
+        <label for="polls_polloption12"><!--[pnml name="_POLLSOPTION"]--> 12</label>
+        <input id="polls_polloption12" type="text" name="poll[options][12]" size="50" maxlength="50" />
+	</div>
+    <!--[pnmodcallhooks hookobject=item hookaction=new module=Polls]-->
+    <div class="pn-adminformrow pn-adminformbuttons">
+    <a href="<!--[pnmodurl modname=Polls type=admin func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_CANCEL" title="_CANCEL"]--></a>
+    <!--[pnbutton src=button_ok.gif set=icons/small alt="_POLLSADD" title="_POLLSADD"]-->
+    </div>
+</div>
+</form>
+</div>

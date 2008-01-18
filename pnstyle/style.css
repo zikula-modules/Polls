@@ -1,0 +1,10 @@
+.polls-voteform, .polls-resultstable {
+	width:50%;
+	margin-left:25%;
+	margin-right:25%;
+	text-align:center;
+}
+
+.polls-voteformlinks, .polls-resultlinks {
+	text-align:center;
+}

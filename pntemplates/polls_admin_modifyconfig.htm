@@ -1,0 +1,23 @@
+<!--[*  $Id: polls_admin_modifyconfig.htm 18393 2006-03-29 19:45:33Z markwest $  *]-->
+<!--[include file="polls_admin_menu.htm"]-->
+<div class="pn-admincontainer">
+<h2><!--[pnml name="_MODIFYCONFIG"]--></h2>
+<form class="pn-adminform" action="<!--[pnmodurl modname="Polls" type="admin" func="updateconfig"]-->" method="post" enctype="application/x-www-form-urlencoded">
+<div>
+    <input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="Polls"]-->" />
+	<div class="pn-adminformrow">
+        <label for="polls_itemsperpage"><!--[pnml name="_POLLSITEMSPERPAGE"]--></label>
+        <input id="polls_itemsperpage" type="text" name="itemsperpage" size="3" value="<!--[$itemsperpage|pnvarprepfordisplay]-->" />
+	</div>
+	<div class="pn-adminformrow">
+        <label for="polls_scale"><!--[pnml name="_POLLSRESULTSBARSCALE"]--></label>
+        <input id="polls_scale" type="text" name="scale" size="3" value="<!--[$scale|pnvarprepfordisplay]-->" />
+	</div>
+    <!--[pnmodcallhooks hookobject=module hookaction=modifyconfig module=Polls]-->
+    <div class="pn-adminformrow pn-adminformbuttons">
+    <a href="<!--[pnmodurl modname=Polls type=admin func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_CANCEL" title="_CANCEL"]--></a>
+    <!--[pnbutton src=button_ok.gif set=icons/small alt="_UPDATECONFIG" title="_UPDATECONFIG"]-->
+    </div>
+</div>
+</form>
+</div>

@@ -1,0 +1,20 @@
+<!--[*  $Id: polls_admin_delete.htm 18393 2006-03-29 19:45:33Z markwest $  *]-->
+<!--[include file="polls_admin_menu.htm"]-->
+<div class="pn-admincontainer">
+<div class="pn-adminpageicon"><!--[pnimg modname=core src=editdelete.gif set=icons/large alt='_POLLSDELETE' altml=true]--></div>
+<h2><!--[pnml name="_POLLSDELETE"]--></h2>
+<form class="pn-adminform" action="<!--[pnmodurl modname="Polls" type="admin" func="delete"]-->" method="post" enctype="application/x-www-form-urlencoded">
+<div>
+    <input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="Polls"]-->">
+    <input type="hidden" name="confirmation" value="1">
+    <input type="hidden" name="pollid" value="<!--[$pollid|pnvarprepfordisplay]-->">
+	<div class="pn-adminformrow">
+	    <p><!--[pnml name="_POLLSCONFIRMDELETE"]--></p>
+	</div>
+    <div class="pn-adminformrow pn-adminformbuttons">
+    <a href="<!--[pnmodurl modname=Polls type=admin func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_CANCEL" title="_CANCEL"]--></a>
+    <!--[pnbutton src=button_ok.gif set=icons/small alt="_POLLSCONFIRMDELETE" title="_POLLSCONFIRMDELETE"]-->
+    </div>
+</div>
+</form>
+</div>

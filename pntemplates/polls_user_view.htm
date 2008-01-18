@@ -1,0 +1,13 @@
+<!--[*  $Id: polls_user_view.htm 18013 2006-02-21 22:52:26Z markwest $  *]-->
+<!--[include file="polls_user_menu.htm"]-->
+<h2><!--[pnml name=_POLLSPASTSURVEYS]--></h2>
+<ul>
+<!--[section name=polls loop=$polls]-->  
+	<li>
+		<a href="<!--[$polls[polls].url|pnvarprepfordisplay]-->"><!--[$polls[polls].title|pnvarprepfordisplay]--></a>
+		(<a href="<!--[$polls[polls].results|pnvarprepfordisplay]-->"><!--[pnml name="_POLLSRESULTS"]--></a> -
+		<!--[$polls[polls].votecount|pnvarprepfordisplay]--> <!--[pnml name="_POLLSVOTES"]-->)
+	</li>
+<!--[/section]-->
+</ul>
+<!--[pager show=page rowcount=$pager.numitems limit=$pager.itemsperpage fposvar=startnum shift=1]-->

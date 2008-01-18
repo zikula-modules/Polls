@@ -1,0 +1,54 @@
+<!--[if $uservotedalready eq false and $ajaxvoting]-->
+<!--[pnajaxheader modname=Polls filename=polls.js]-->
+<!--[/if]-->
+<div id="pollblockcontent">
+<h3><!--[$title|pnmodcallhooks:"Polls"|pnvarprephtmldisplay|pnvarcensor]--></h3>
+<!--[if $uservotedalready]-->
+  <div class="polls-resultstable">
+  <table width="100%">
+  <!--[section name=options loop=$options]-->
+	<!--[if $options[options].optiontext neq ""]-->
+      <tr>
+	    <td><!--[$options[options].optiontext|pnvarprepfordisplay]--></td>
+		<td><!--[$options[options].percent|pnvarprepfordisplay]-->%</td>
+      </tr>
+	<!--[/if]-->
+  <!--[/section]-->
+  </table>
+  </div>
+<!--[else]-->
+<form id="pollvoteform" action="<!--[pnmodurl modname=Polls type=user func=vote]-->" method="post" enctype="application/x-www-form-urlencoded">
+  <div style="text-align:center; margin-left:5%">
+  <input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="Polls"]-->" />
+  <input type="hidden" name="title" value="<!--[$title|pnvarprepfordisplay]-->" />
+  <input type="hidden" name="pollid" value="<!--[$pollid|pnvarprepfordisplay]-->" />
+  <input type="hidden" name="polldisplayresults" value="1" />
+  <table width="95%">
+  <!--[section name=options loop=$options]-->
+    <!--[if $options[options].optiontext neq '']-->
+    <tr>
+      <td align="left"><label for="polls_<!--[$options[options].voteid|pnvarprepfordisplay]-->"><!--[$options[options].optiontext|pnmodcallhooks:"Polls"|pnvarprephtmldisplay|pnvarcensor]--></label></td>
+      <td><input id="polls_<!--[$options[options].voteid|pnvarprepfordisplay]-->" type="radio" name="voteid" value="<!--[$options[options].voteid]-->" /></td>
+    </tr>
+    <!--[/if]-->
+  <!--[/section]-->
+  </table>
+  <!--[if $ajaxvoting]-->
+  <input onclick="javascript:pollvote();" name="vote" type="button" value="<!--[pnml name="_POLLSADDVOTE"]-->" />
+  <!--[else]-->
+  <input name="submit" type="submit" value="<!--[pnml name="_POLLSADDVOTE"]-->" />
+  <!--[/if]-->
+  </div>
+</form>
+<div id="pollvoteinfo">&nbsp;</div>
+<!--[/if]-->
+<div style="text-align:center">
+[ <a href="<!--[pnmodurl modname="Polls" type="user" func="results" pollid=$pollid]-->"><!--[pnml name="_POLLRESULTS"]--></a> |
+ <a href="<!--[pnmodurl modname="Polls" type="user"]-->"><!--[pnml name="_POLLS"]--></a> ]
+</div>
+<!--[if $ajaxvoting]-->
+<script type="text/javascript">
+    var recordingvote  = '<!--[pnml name=_POLLSRECORDINGVOTE]-->';
+</script>
+<!--[/if]-->
+</div>
