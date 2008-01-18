@@ -10,5 +10,6 @@
  * @subpackage Polls
  */
 
-define('_POLLS_CATEGORY_DESCRIPTION', 'Polls');
-define('_POLLS_NOEZCOMMENTS','EZComments module not available - this is required to migrate any poll comments');
+define('_POLLS_NAME',        'Polls');
+define('_POLLS_DISPLAYNAME', 'Polls');
+define('_POLLS_DESCRIPTION', 'Voting System Module');

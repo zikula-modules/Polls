@@ -10,9 +10,10 @@
  * @subpackage Polls
 */
 
-$modversion['name'] = 'Polls';
+$modversion['name'] = _POLLS_NAME;
+$modversion['displayname'] = _POLLS_DISPLAYNAME;
+$modversion['description'] = _POLLS_DESCRIPTION;
 $modversion['version'] = '1.2';
-$modversion['description'] = 'Voting System Module';
 $modversion['credits'] = 'pndocs/credits.txt';
 $modversion['help'] = 'pndocs/install.txt';
 $modversion['changelog'] = 'pndocs/changelog.txt';

@@ -17,48 +17,22 @@
  */
 function Polls_init()
 {
-    $sql = "pn_ip C(20) NOTNULL DEFAULT '',
-            pn_time C(14) NOTNULL DEFAULT ''
-           ";
-
-    if (!DBUtil::createTable('poll_check', $sql)) {
-        return false;
+    $tables = array('poll_check', 'poll_data', 'poll_desc');
+    foreach ($tables as $table) {
+        if (!DBUtil::createTable($table)) {
+            return false;
+        }
     }
 
-    // Create indexes
-    if (!DBUtil::createIndex('pn_ip', 'poll_check', 'ip')) {
-        return false;
-    }
-
-    $sql = "pn_pollid I(11) NOTNULL DEFAULT '0',
-            pn_optiontext C(50) NOTNULL DEFAULT '',
-            pn_optioncount I(11) NOTNULL DEFAULT '0',
-            pn_voteid I(11) NOTNULL DEFAULT '0'
-          ";
-
-    if (!DBUtil::createTable('poll_data', $sql)) {
-        return false;
-    }
-
-    // Create indexes
-    if (!DBUtil::createIndex('pn_pollid', 'poll_data', 'pollid')) {
-        return false;
-    }
-
-    $sql = "pn_pollid I(11) NOTNULL AUTOINCREMENT PRIMARY,
-            pn_title C(100) NOTNULL DEFAULT '',
-            pn_timestamp I(11) NOTNULL DEFAULT '0',
-            pn_voters I4(9) NOTNULL DEFAULT '0',
-            pn_language C(30) NOTNULL DEFAULT ''
-           ";
-
-    if (!DBUtil::createTable('poll_desc', $sql)) {
-        return false;
+    // create our default category
+    if (!_polls_createdefaultcategory()) {
+        return LogUtil::registerError (_CREATEFAILED);
     }
 
     // Set up module variables
     pnModSetVar('Polls', 'itemsperpage', 25);
     pnModSetVar('Polls', 'scale', 1);
+    pnModSetVar('Polls', 'enablecategorization', 1);
 
     // Initialisation successful
     return true;
@@ -75,7 +49,7 @@ function Polls_upgrade($oldversion)
         case 1.1:
             // check for the ezcomments module
             if (!pnModAvailable('EZComments')) {
-                return LogUtil::registerError (_POLLSNOCOMMENTS);
+                return LogUtil::registerError (_POLLS_NOEZCOMMENTS);
             }
             // migrate the comments to ezcomments
             // and drop the comments table if successful
@@ -104,21 +78,59 @@ function Polls_upgrade($oldversion)
  */
 function Polls_delete()
 {
-    if (!DBUtil::dropTable('poll_check')) {
-        return false;
-    }
-
-    if (!DBUtil::dropTable('poll_data')) {
-        return false;
-    }
-
-    if (!DBUtil::dropTable('poll_desc')) {
-        return false;
+    $tables = array('poll_check', 'poll_data', 'poll_desc');
+    foreach ($tables as $table) {
+        if (!DBUtil::dropTable($table)) {
+            return false;
+        }
     }
 
     // Delete module variables
     pnModDelVar('Polls');
 
     // Deletion successful
+    return true;
+}
+
+function _polls_createdefaultcategory($regpath = '/__SYSTEM__/Modules/Global')
+{
+    // load necessary classes
+    Loader::loadClass('CategoryUtil');
+    Loader::loadClassFromModule('Categories', 'Category');
+    Loader::loadClassFromModule('Categories', 'CategoryRegistry');
+
+    // get the language file
+    $lang = pnUserGetLang();
+
+    // get the category path for which we're going to insert our place holder category
+    $rootcat = CategoryUtil::getCategoryByPath('/__SYSTEM__/Modules');
+    $pCat    = CategoryUtil::getCategoryByPath('/__SYSTEM__/Modules/Polls');
+
+    if (!$pCat) {
+        // create placeholder for all our migrated categories
+        $cat = new PNCategory ();
+        $cat->setDataField('parent_id', $rootcat['id']);
+        $cat->setDataField('name', 'Polls');
+        $cat->setDataField('display_name', array($lang => _POLLS_NAME));
+        $cat->setDataField('display_desc', array($lang => _POLLS_CATEGORY_DESCRIPTION));
+        if (!$cat->validate('admin')) {
+            return false;
+        }
+        $cat->insert();
+        $cat->update();
+    }
+
+    // get the category path for which we're going to insert our upgraded categories
+    $rootcat = CategoryUtil::getCategoryByPath($regpath);
+    if ($rootcat) {
+        // create an entry in the categories registry
+        $registry = new PNCategoryRegistry();
+        $registry->setDataField('modname', 'Polls');
+        $registry->setDataField('table', 'poll_desc');
+        $registry->setDataField('property', 'Main');
+        $registry->setDataField('category_id', $rootcat['id']);
+        $registry->insert();
+    }
+
     return true;
 }
