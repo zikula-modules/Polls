@@ -1,26 +1,44 @@
 <!--[*  $Id: polls_admin_view.htm 18393 2006-03-29 19:45:33Z markwest $  *]-->
 <!--[include file="polls_admin_menu.htm"]-->
+<!--[pnml name="_POLLS_VIEW" assign=templatetitle]-->
 <div class="pn-admincontainer">
-<div class="pn-adminpageicon"><!--[pnimg modname=core src=windowlist.gif set=icons/large alt='_POLLSVIEW' altml=true]--></div>
-<h2><!--[pnml name="_POLLSVIEW"]--></h2>
+<div class="pn-adminpageicon"><!--[pnimg modname=core src=windowlist.gif set=icons/large alt=$templatetitle]--></div>
+<h2><!--[$templatetitle]--></h2>
+<!--[if $enablecategorization]-->
+  <form action="<!--[pnmodurl modname=Pages type=admin func=view]-->" method="post" enctype="application/x-www-form-urlencoded">
+    <div>
+      <label for="pages_category"><!--[pnml name=_CATEGORY]--></label>
+      <!--[pnml assign="lblDef" name="_ALLCATEGORIES"]-->
+      <!--[nocache]-->
+        <!--[selector_category category=$mainCategory name="pages_category" allValue=$pages_category allValue=0 defaultText=$lblDef]-->
+      <!--[/nocache]-->
+      <input name="submit" type="submit" value="<!--[pnml name="_SUBMIT"]-->" />
+      <input name="clear" type="submit" value="<!--[pnml name="_CLEAR"]-->" />
+    </div>
+  </form>
+<!--[/if]-->
 <table class="pn-admintable">
+  <thead>
   <tr>
-    <th><!--[pnml name="_POLLSTITLE"]--></th>
-    <th><!--[pnml name="_POLLSID"]--></th>
-    <th><!--[pnml name="_POLLSOPTIONS"]--></th>
+    <th><!--[pnml name="_TITLE"]--></th>
+    <th><!--[pnml name="_ID"]--></th>
+    <th><!--[pnml name="_OPTIONS"]--></th>
   </tr>
-  <!--[section name=polls loop=$polls]-->  
+  </thead>
+  <tbody>
+  <!--[foreach from=$polls item=poll]-->
     <tr class="<!--[cycle values="pn-odd,pn-even"]-->">
-      <td><!--[$polls[polls].title|pnvarprepfordisplay]--></td>
-      <td><!--[$polls[polls].pollid|pnvarprepfordisplay]--></td>
+      <td><!--[$poll.title|pnvarprepfordisplay]--></td>
+      <td><!--[$poll.pollid|pnvarprepfordisplay]--></td>
 	  <td>
-	    <!--[assign var="options" value=$polls[polls].options]-->
+	    <!--[assign var="options" value=$poll.options]-->
         <!--[section name=options loop=$options]-->
           <a href="<!--[$options[options].url|pnvarprepfordisplay]-->"><!--[pnimg modname=core set=icons/extrasmall src=$options[options].image alt=$options[options].title]--></a>
         <!--[/section]-->
       </td>
     </tr>
-  <!--[/section]-->
+  <!--[/foreach]-->
+  </tbody>
 </table>
 <!--[pager show=page rowcount=$pager.numitems limit=$pager.itemsperpage posvar=startnum shift=1 img_prev=images/icons/extrasmall/previous.gif img_next=images/icons/extrasmall/next.gif]-->
 </div>

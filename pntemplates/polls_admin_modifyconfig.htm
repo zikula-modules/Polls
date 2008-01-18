@@ -5,14 +5,28 @@
 <form class="pn-adminform" action="<!--[pnmodurl modname="Polls" type="admin" func="updateconfig"]-->" method="post" enctype="application/x-www-form-urlencoded">
 <div>
     <input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="Polls"]-->" />
-	<div class="pn-adminformrow">
-        <label for="polls_itemsperpage"><!--[pnml name="_POLLSITEMSPERPAGE"]--></label>
-        <input id="polls_itemsperpage" type="text" name="itemsperpage" size="3" value="<!--[$itemsperpage|pnvarprepfordisplay]-->" />
-	</div>
-	<div class="pn-adminformrow">
-        <label for="polls_scale"><!--[pnml name="_POLLSRESULTSBARSCALE"]--></label>
-        <input id="polls_scale" type="text" name="scale" size="3" value="<!--[$scale|pnvarprepfordisplay]-->" />
-	</div>
+	<fieldset>
+		<legend><!--[pnml name=_POLLS_GENERAL]--></legend>
+		<div class="pn-adminformrow">
+			<label for="pages_enablecategorization"><!--[pnml name="_ENABLECATEGORISATION"]--></label>
+			<input id="pages_enablecategorization" type="checkbox" name="enablecategorization"<!--[if $enablecategorization]--> checked="checked"<!--[/if]--> />
+		</div>
+		<div class="pn-adminformrow">
+	        <label for="polls_itemsperpage"><!--[pnml name="_ITEMSPERPAGE"]--></label>
+	        <input id="polls_itemsperpage" type="text" name="itemsperpage" size="3" value="<!--[$itemsperpage|pnvarprepfordisplay]-->" />
+		</div>
+		<div class="pn-adminformrow">
+	        <label for="polls_scale"><!--[pnml name="_POLLS_RESULTSBARSCALE"]--></label>
+	        <input id="polls_scale" type="text" name="scale" size="3" value="<!--[$scale|pnvarprepfordisplay]-->" />
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend><!--[pnml name=_PERMALINKS]--></legend>
+		<div class="pn-adminformrow">
+			<label for="pages_addcategorytitletopermalink"><!--[pnml name="_ADDCATEGORYTITLETOPERMALINK"]--></label>
+			<input id="pages_addcategorytitletopermalink" type="checkbox" name="addcategorytitletopermalink"<!--[if $addcategorytitletopermalink]--> checked="checked"<!--[/if]--> />
+		</div>
+	</fieldset>
     <!--[pnmodcallhooks hookobject=module hookaction=modifyconfig module=Polls]-->
     <div class="pn-adminformrow pn-adminformbuttons">
     <a href="<!--[pnmodurl modname=Polls type=admin func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_CANCEL" title="_CANCEL"]--></a>

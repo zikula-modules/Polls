@@ -12,23 +12,22 @@
 
 define('_POLL','Poll');
 define('_POLLS','Polls');
-define('_POLLSNEW', 'Create New Poll');
-define('_POLLSVIEW', 'View Polls');
-define('_POLLSADD', 'Create New Poll');
-define('_POLLSTITLE', 'Poll Title');
-define('_POLLSENTRY', 'Please enter each available option into a single field');
-define('_POLLSOPTION', 'Option');
-define('_POLLSID', 'Poll ID');
-define('_POLLSOPTIONS', 'Options');
-define('_POLLSEDIT', 'Modify Poll');
-define('_POLLSUPDATE', 'Update Poll');
-define('_POLLSITEMSPERPAGE', 'Items Per Page');
-define('_POLLSRESULTSBARSCALE', 'Scale of results bar');
-define('_POLLSCREATED', 'Poll Created');
-define('_POLLSUPDATED', 'Poll Updated');
-define('_POLLSUPDATEFAILED', 'Failed to update poll');
-define('_POLLSDELETE', 'Delete Poll');
-define('_POLLSCONFIRMDELETE', 'Confirm Deletion of Poll');
-define('_POLLSCANCELDELETE', 'Cancel Deletion of Poll');
-define('_POLLSNOSUCHITEM', 'No such Poll');
-define('_POLLSDELETED', 'Poll Deleted');
+
+// menu options
+define('_POLLS_NEW', 'Create New Poll');
+define('_POLLS_VIEW', 'View Polls');
+
+// modify config template
+define('_POLLS_GENERAL', 'General settings');
+define('_POLLS_RESULTSBARSCALE', 'Scale of results bar');
+
+// new/modify templates
+define('_POLLS_ENTRY', 'Please enter each available choice into a single field');
+define('_POLLS_MODIFY', 'Modify Poll');
+define('_POLLS_OPTION', 'Option');
+define('_POLLS_OPTIONS', 'Voting choices');
+define('_POLL_OVERVIEW', 'Overview');
+
+// delete template
+define('_POLLS_DELETE', 'Delete Poll');
+define('_POLLS_CONFIRMDELETE', 'Confirm Deletion of Poll');

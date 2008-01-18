@@ -42,11 +42,13 @@ function Polls_pntables()
     $pntable['poll_desc'] = DBUtil::getLimitedTablename('poll_desc');
     $pntable['poll_desc_column'] = array ('pollid'    => 'pn_pollid',
                                           'title'     => 'pn_title',
+                                          'urltitle'  => 'pn_urltitle',
                                           'timestamp' => 'pn_timestamp',
                                           'voters'    => 'pn_voters',
                                           'language'  => 'pn_language');
     $pntable['poll_desc_column_def'] = array ('pollid'    => 'I NOTNULL AUTOINCREMENT PRIMARY',
                                               'title'     => "C(100) NOTNULL DEFAULT ''",
+                                              'urltitle'  => "X NOTNULL DEFAULT ''",
                                               'timestamp' => "I NOTNULL DEFAULT '0'",
                                               'voters'    => "I4 NOTNULL DEFAULT '0'",
                                               'language'  => "C(30) NOTNULL DEFAULT ''");

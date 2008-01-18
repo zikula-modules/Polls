@@ -33,6 +33,7 @@ function Polls_init()
     pnModSetVar('Polls', 'itemsperpage', 25);
     pnModSetVar('Polls', 'scale', 1);
     pnModSetVar('Polls', 'enablecategorization', 1);
+    pnModSetVar('Polls', 'addcategorytitletopermalink', true);
 
     // Initialisation successful
     return true;
@@ -45,6 +46,14 @@ function Polls_init()
  */
 function Polls_upgrade($oldversion)
 {
+    // update tables
+    $tables = array('poll_check', 'poll_data', 'poll_desc');
+    foreach ($tables as $table) {
+        if (!DBUtil::changeTable($table)) {
+            return false;
+        }
+    }
+
     switch ($oldversion) {
         case 1.1:
             // check for the ezcomments module
@@ -65,6 +74,16 @@ function Polls_upgrade($oldversion)
             // create indexes
             DBUtil::createIndex('pn_ip', 'poll_check', 'ip');
             DBUtil::createIndex('pn_pollid', 'poll_data', 'pollid');
+            return polls_upgrade(1.2);
+        case 1.2:
+            return polls_upgrade(2.0);
+        case 2.0:
+            pnModSetVar('Polls', 'enablecategorization', true);
+            pnModSetVar('Polls', 'addcategorytitletopermalink', true);
+            pnModDBInfoLoad('Polls', 'Polls', true);
+            if (!_polls_createdefaultcategory()) {
+                return LogUtil::registerError (_UPDATEFAILED);
+            }
             break;
     }
     // Upgrade successful

@@ -12,7 +12,6 @@
 
 /**
  * create a new Polls item
- * @author Mark West
  * @param string $args['title'] name of the item
  * @param string $args['language'] language of the item
  * @param array $args['options'] options for poll
@@ -21,10 +20,18 @@
 function Polls_adminapi_create($args)
 {
     // Argument check
-    if ((!isset($args['title'])) ||
-        (!isset($args['language'])) ||
-        (!isset($args['options']))) {
+    if (!isset($args['title']) || !isset($args['language']) || !isset($args['options'])) {
         return LogUtil::registerError (_MODARGSERROR);
+    }
+
+    // defaults
+    if (!isset($args['language'])) {
+        $args['language'] = '';
+    }
+
+    // define the permalink title if not present
+    if (!isset($args['urltitle']) || empty($args['urltitle'])) {
+        $args['urltitle'] = DataUtil::formatPermalink($args['title']);
     }
 
     // Security check
@@ -33,15 +40,9 @@ function Polls_adminapi_create($args)
     }
 
     // create the poll
-    $item = array('title' => $args['title'],
-                  'language' => $args['language'],
-                  'timestamp' => time(),
-                  'voters' => 0);
     if (!DBUtil::insertObject($item, 'poll_desc', 'pollid')) {
         return LogUtil::registerError (_CREATEFAILED);
     }
-
-    $pollid = DBUtil::getInsertID('poll_desc', 'pollid');
 
     for ($count = 0; $count <= (sizeof($args['options'])-1); $count++) {
         $item = array('pollid' => $pollid, 'optiontext' => $args['options'][$count+1], 'optioncount' => 0, 'voteid' => $count);
@@ -51,10 +52,10 @@ function Polls_adminapi_create($args)
     }
 
     // Let any hooks know that we have created a new item
-    pnModCallHooks('item', 'create', $pollid, array('module' => 'Polls'));
+    pnModCallHooks('item', 'create', $args['pollid'], array('module' => 'Polls'));
 
     // Return the id of the newly created item to the calling process
-    return $pollid;
+    return $args['pollid'];
 }
 
 /**
@@ -74,7 +75,7 @@ function Polls_adminapi_delete($args)
     $item = pnModAPIFunc('Polls', 'user', 'get', array('pollid' => $args['pollid']));
 
     if ($item == false) {
-        return LogUtil::registerError (_POLLSNOSUCHITEM);
+        return LogUtil::registerError (_NOSUCHITEM);
     }
 
     // Security check
@@ -83,10 +84,10 @@ function Polls_adminapi_delete($args)
     }
 
     // Delete the object
-    if (!DBUtil::deleteObjectByID('poll_desc', $args['pollid'], 'pollid')) {
+    if (!DBUtil::deleteObjectByID('poll_data', $args['pollid'], 'pollid')) {
         return LogUtil::registerError (_DELETEFAILED);
     }
-    if (!DBUtil::deleteObjectByID('poll_data', $args['pollid'], 'pollid')) {
+    if (!DBUtil::deleteObjectByID('poll_desc', $args['pollid'], 'pollid')) {
         return LogUtil::registerError (_DELETEFAILED);
     }
 
@@ -115,11 +116,19 @@ function Polls_adminapi_update($args)
         return LogUtil::registerError (_MODARGSERROR);
     }
 
+    // set some defaults
+    if (!isset($args['language'])) {
+        $args['language'] = '';
+    }
+    if (!isset($args['urltitle']) || empty($args['urltitle'])) {
+        $args['urltitle'] = DataUtil::formatPermalink($args['title']);
+    }
+
     // Get the current poll
     $item = pnModAPIFunc('Polls', 'user', 'get', array('pollid' => $args['pollid']));
 
     if ($item == false) {
-        return LogUtil::registerError (_POLLSNOSUCHITEM);
+        return LogUtil::registerError (_NOSUCHITEM);
     }
 
     // Security check
@@ -130,13 +139,7 @@ function Polls_adminapi_update($args)
         return LogUtil::registerError (_MODULENOAUTH);
     }
 
-    $item = array('pollid' => $args['pollid'],
-                  'title' => $args['title'],
-                  'language' => $args['language'],
-                  'timestamp' => time(),
-                  'voters' => 0);
-
-    if (!DBUtil::updateObject($item, 'poll_desc', '', 'pollid')) {
+    if (!DBUtil::updateObject($args, 'poll_desc', '', 'pollid')) {
         return LogUtil::registerError (_UPDATEFAILED);
     }
 
@@ -168,10 +171,10 @@ function polls_adminapi_getlinks()
     pnModLangLoad('Polls', 'admin');
 
     if (SecurityUtil::checkPermission('Polls::', '::', ACCESS_READ)) {
-        $links[] = array('url' => pnModURL('Polls', 'admin', 'view'), 'text' => _POLLSVIEW);
+        $links[] = array('url' => pnModURL('Polls', 'admin', 'view'), 'text' => _POLLS_VIEW);
     }
     if (SecurityUtil::checkPermission('Polls::', '::', ACCESS_ADD)) {
-        $links[] = array('url' => pnModURL('Polls', 'admin', 'new'), 'text' => _POLLSNEW);
+        $links[] = array('url' => pnModURL('Polls', 'admin', 'new'), 'text' => _POLLS_NEW);
     }
     if (SecurityUtil::checkPermission('Polls::', '::', ACCESS_ADMIN)) {
         $links[] = array('url' => pnModURL('Polls', 'admin', 'modifyconfig'), 'text' => _MODIFYCONFIG);
