@@ -212,7 +212,6 @@ function Polls_userapi_countvotes($args)
     return $votecount;
 }
 
-
 /**
  * form custom url string
  *
@@ -298,13 +297,14 @@ function Polls_userapi_decodeurl($args)
         $nextvar = 3;
     }
 
+    $func = FormUtil::getPassedValue('func');
+
     // add the category info
-    if (FormUtil::getPassedValue('func') == 'view') {
+    if ($func == 'view') {
         pnQueryStringSetVar('cat', (string)$args['vars'][$nextvar]);
     }
 
     // identify the correct parameter to identify the page
-    $func = FormUtil::getPassedValue('func');
     if ($func == 'display' || $func == 'results') {
         if (pnModGetVar('Polls', 'addcategorytitletopermalink') && !empty($args['vars'][$nextvar+1])) {
             $nextvar++;
@@ -313,10 +313,6 @@ function Polls_userapi_decodeurl($args)
             pnQueryStringSetVar('pollid', $args['vars'][$nextvar]);
         } else {
             pnQueryStringSetVar('title', $args['vars'][$nextvar]);
-        }
-        $nextvar++;
-        if (isset($args['vars'][$nextvar]) && $args['vars'][$nextvar] == 'page') {
-            pnQueryStringSetVar('page', (int)$args['vars'][$nextvar+1]);
         }
     }
 

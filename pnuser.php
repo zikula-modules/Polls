@@ -88,16 +88,16 @@ function Polls_user_view()
 function Polls_user_display($args)
 {
     $pollid = FormUtil::getPassedValue('pollid', isset($args['pollid']) ? $args['pollid'] : null, 'GET');
-    $title = FormUtil::getPassedValue('title', isset($args['title']) ? $args['title'] : null, 'REQUEST');
+    $title = FormUtil::getPassedValue('title', isset($args['title']) ? $args['title'] : null, 'GET');
     $objectid = FormUtil::getPassedValue('objectid', isset($args['objectid']) ? $args['objectid'] : null, 'GET');
     if (!empty($objectid)) {
         $pollid = $objectid;
     }
 
     // Check the user has already voted in this poll
-    if (pnSessionGetVar("poll_voted$pollid")) {
-       LogUtil::registerStatus (_POLLSYOUVOTEDALREADY);
-       return pnRedirect(pnModURL('Polls', 'user', 'results', array('pollid' => $pollid)));
+    if (SessionUtil::getVar("poll_voted$pollid")) {
+		LogUtil::registerStatus(_POLLSYOUVOTEDALREADY);
+		return pnModFunc('Polls', 'user', 'results', $args);
     }
 
     // Create output object
@@ -132,6 +132,7 @@ function Polls_user_results($args)
 {
     $pollid = FormUtil::getPassedValue('pollid', isset($args['pollid']) ? $args['pollid'] : null, 'GET');
     $objectid = FormUtil::getPassedValue('objectid', isset($args['objectid']) ? $args['objectid'] : null, 'GET');
+    $title = FormUtil::getPassedValue('title', isset($args['title']) ? $args['title'] : null, 'GET');
     if (!empty($objectid)) {
         $pollid = $objectid;
     }
@@ -140,7 +141,12 @@ function Polls_user_results($args)
     $pnRender = pnRender::getInstance('Polls');
 
     // Get the poll
-    $item = pnModAPIFunc('Polls', 'user', 'get', array('pollid' => $pollid));
+    if (isset($pollid) && is_numeric($pollid)) {
+        $item = pnModAPIFunc('Polls', 'user', 'get', array('pollid' => $pollid, 'parse' => true));
+    } else {
+        $item = pnModAPIFunc('Polls', 'user', 'get', array('title' => $title, 'parse' => true));
+        pnQueryStringSetVar('pollid', $item['pollid']);
+    }
 
     if ($item == false) {
         return LogUtil::registerError (_NOSUCHITEM, 404);
