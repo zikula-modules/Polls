@@ -40,7 +40,7 @@ function Polls_adminapi_create($args)
     }
 
     // create the poll
-    if (!DBUtil::insertObject($item, 'poll_desc', 'pollid')) {
+    if (!DBUtil::insertObject($args, 'poll_desc', 'pollid')) {
         return LogUtil::registerError (_CREATEFAILED);
     }
 
