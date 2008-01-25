@@ -248,7 +248,7 @@ function Polls_admin_view()
 
     // Get parameters from whatever input we need.
     $startnum = FormUtil::getPassedValue('startnum', isset($args['startnum']) ? $args['startnum'] : null, 'GET');
-    $category = FormUtil::getPassedValue('pages_category', null);
+    $category = FormUtil::getPassedValue('polls_category', null);
     $clear    = FormUtil::getPassedValue('clear');
     if ($clear) {
         $category = null;

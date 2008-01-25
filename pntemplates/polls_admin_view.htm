@@ -5,12 +5,12 @@
 <div class="pn-adminpageicon"><!--[pnimg modname=core src=windowlist.gif set=icons/large alt=$templatetitle]--></div>
 <h2><!--[$templatetitle]--></h2>
 <!--[if $enablecategorization]-->
-  <form action="<!--[pnmodurl modname=Pages type=admin func=view]-->" method="post" enctype="application/x-www-form-urlencoded">
+  <form action="<!--[pnmodurl modname=Polls type=admin func=view]-->" method="post" enctype="application/x-www-form-urlencoded">
     <div>
-      <label for="pages_category"><!--[pnml name=_CATEGORY]--></label>
+      <label for="polls_category"><!--[pnml name=_CATEGORY]--></label>
       <!--[pnml assign="lblDef" name="_ALLCATEGORIES"]-->
       <!--[nocache]-->
-        <!--[selector_category category=$mainCategory name="pages_category" allValue=$pages_category allValue=0 defaultText=$lblDef]-->
+        <!--[selector_category category=$mainCategory name="polls_category" allValue=$pages_category allValue=0 defaultText=$lblDef]-->
       <!--[/nocache]-->
       <input name="submit" type="submit" value="<!--[pnml name="_SUBMIT"]-->" />
       <input name="clear" type="submit" value="<!--[pnml name="_CLEAR"]-->" />
@@ -22,6 +22,9 @@
   <tr>
     <th><!--[pnml name="_TITLE"]--></th>
     <th><!--[pnml name="_ID"]--></th>
+    <!--[if $enablecategorization]-->
+		<th><!--[pnml name="_CATEGORY"]--></th>
+	<!--[/if]-->
     <th><!--[pnml name="_OPTIONS"]--></th>
   </tr>
   </thead>
@@ -30,6 +33,13 @@
     <tr class="<!--[cycle values="pn-odd,pn-even"]-->">
       <td><!--[$poll.title|pnvarprepfordisplay]--></td>
       <td><!--[$poll.pollid|pnvarprepfordisplay]--></td>
+      <!--[if $enablecategorization]-->
+        <td>
+          <!--[ foreach from=$poll.__CATEGORIES__ item=cat ]-->
+            <!--[ $cat.path_relative ]-->
+          <!--[ /foreach ]-->
+        </td>
+      <!--[/if]-->
 	  <td>
 	    <!--[assign var="options" value=$poll.options]-->
         <!--[section name=options loop=$options]-->

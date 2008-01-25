@@ -24,6 +24,15 @@ function Polls_userapi_getall($args)
         $args['numitems'] = -1;
     }
 
+    $args['catFilter'] = array();
+    if ($args['category']) {
+        if (is_array($args['category'])) {
+            $args['catFilter'] = $args['category'];
+        } else {
+            $args['catFilter'][] = $args['category'];
+        }
+    }
+
     $items = array();
 
     // Security check
@@ -39,10 +48,19 @@ function Polls_userapi_getall($args)
                               'level'          => ACCESS_READ));
 
     // get the objects from the db
-    $items = DBUtil::selectObjectArray('poll_desc', '', 'pollid', $args['startnum']-1, $args['numitems'], '', $permFilter);
+    $items = DBUtil::selectObjectArray('poll_desc', '', 'pollid', $args['startnum']-1, $args['numitems'], '', $permFilter, $args['catFilter']);
 
     if($items === false) {
         return LogUtil::registerError (_GETFAILED);
+    }
+
+    // need to do this here as the category expansion code can't know the
+    // root category which we need to build the relative path component
+     if ($items && isset($args['mainCat']) && $args['mainCat']) {
+        if (!Loader::loadClass ('CategoryUtil')) {
+            pn_exit('Unable to load class [CategoryUtil]');
+	    }
+        ObjectUtil::postProcessExpandedObjectArrayCategories ($items, $args['mainCat']);
     }
 
     // Return the items
