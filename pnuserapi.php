@@ -71,11 +71,11 @@ function Polls_userapi_get($args)
                               'level'          => ACCESS_READ));
 
     if (isset($args['pollid']) && is_numeric($args['pollid'])) {
-        $item = DBUtil::selectObjectByID('poll_desc', $args['pollid'], 'pollid', '', $permFilter);
+        $poll = DBUtil::selectObjectByID('poll_desc', $args['pollid'], 'pollid', '', $permFilter);
     } else {
-        $item = DBUtil::selectObjectByID('poll_desc', $args['title'], 'urltitle', '', $permFilter);
+        $poll = DBUtil::selectObjectByID('poll_desc', $args['title'], 'urltitle', '', $permFilter);
     }
-    $poll['options'] = DBUtil::selectObjectArray('poll_data', 'pn_pollid=\''.DataUtil::formatForStore($item['pollid']).'\'', 'voteid');
+    $poll['options'] = DBUtil::selectObjectArray('poll_data', 'pn_pollid=\''.DataUtil::formatForStore($poll['pollid']).'\'', 'voteid');
 
     $results = array();
     $count = count($poll['options']);
