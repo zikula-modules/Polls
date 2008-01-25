@@ -45,7 +45,7 @@ function Polls_adminapi_create($args)
     }
 
     for ($count = 0; $count <= (sizeof($args['options'])-1); $count++) {
-        $item = array('pollid' => $pollid, 'optiontext' => $args['options'][$count+1], 'optioncount' => 0, 'voteid' => $count);
+        $item = array('pollid' => $args['pollid'], 'optiontext' => $args['options'][$count+1], 'optioncount' => 0, 'voteid' => $count);
         if (!DBUtil::insertObject($item, 'poll_data')) {
             return LogUtil::registerError (_CREATEFAILED);
         }
