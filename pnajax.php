@@ -24,18 +24,21 @@ function polls_ajax_vote()
     $title = FormUtil::getPassedValue('title', null, 'POST');
     $voteid = FormUtil::getPassedValue('voteid', null, 'POST');
 
-    if (!SecurityUtil::checkPermission( 'Polls::', "$title::", ACCESS_COMMENT)) {
-        AjaxUtil::error(DataUtil::formatForDisplayHTML(_MODULENOAUTH));
+    if (!SecurityUtil::checkPermission('Polls::', "$title::", ACCESS_COMMENT)) {
+        AjaxUtil::error(_MODULENOAUTH);
     }
 
     if (!SecurityUtil::confirmAuthKey()) {
-        AjaxUtil::error(FormUtil::getPassedValue('authid') . ' : ' . _BADAUTHKEY);
+        AjaxUtil::error(_BADAUTHKEY);
     }
 
     // load the language file
     pnModLangLoad('Polls', 'user');
 
-    if (!pnSessionGetVar("poll_voted$pollid")) {
+    // Check the user has already voted in this poll
+    $uservotedalready = (bool)SessionUtil::getVar("poll_voted{$pollid}");
+
+    if (!$uservotedalready) {
         $result = pnModAPIFunc('Polls', 'user', 'vote',
                                array('pollid' => $pollid,
                                      'title' => $title,
@@ -47,16 +50,9 @@ function polls_ajax_vote()
 
     $pnRender = new pnRender('Polls', false);
     $pnRender->assign($item);
-
+    $pnRender->assign('uservotedalready', $uservotedalready);
     // ajax voting is definately on here...
     $pnRender->assign('ajaxvoting', true);
-
-    // Check the user has already voted in this poll
-    $uservotedalready = false;
-    if (pnSessionGetVar("poll_voted$item[pollid]")) {
-        $uservotedalready = true;
-    }
-    $pnRender->assign('uservotedalready', $uservotedalready);
 
     // Populate block info and pass to theme
     $result = $pnRender->fetch('polls_block_poll.htm');
