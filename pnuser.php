@@ -46,17 +46,17 @@ function Polls_user_view()
 
     $startnum = FormUtil::getPassedValue('startnum', isset($args['startnum']) ? $args['startnum'] : null, 'GET');
 
-    // Create output object
-    $pnRender = pnRender::getInstance('Polls');
-
     // Get all the polls
     $items = pnModAPIFunc('Polls', 'user', 'getall',
                           array('startnum' => $startnum,
                                 'numitems' => pnModGetVar('Polls', 'itemsperpage')));
 
     if ($items == false) {
-        return DataUtil::formatForDisplayHTML(_POLLSITEMFAILED);
+        return LogUtil::registerError(_NOITEMSFOUND);
     }
+
+    // Create output object
+    $pnRender = pnRender::getInstance('Polls');
 
     // Loop through each item and display it
     $polls = array();
@@ -94,15 +94,6 @@ function Polls_user_display($args)
         $pollid = $objectid;
     }
 
-    // Check the user has already voted in this poll
-    if (SessionUtil::getVar("poll_voted$pollid")) {
-		LogUtil::registerStatus(_POLLSYOUVOTEDALREADY);
-		return pnModFunc('Polls', 'user', 'results', $args);
-    }
-
-    // Create output object
-    $pnRender = pnRender::getInstance('Polls');
-
     // Get the poll
     if (isset($pollid) && is_numeric($pollid)) {
         $item = pnModAPIFunc('Polls', 'user', 'get', array('pollid' => $pollid, 'parse' => true));
@@ -114,6 +105,15 @@ function Polls_user_display($args)
     if ($item == false) {
         return LogUtil::registerError (_NOSUCHITEM, 404);
     }
+
+    // Check the user has already voted in this poll
+    if (SessionUtil::getVar("poll_voted{$item['pollid']}")) {
+		LogUtil::registerStatus(_POLLSYOUVOTEDALREADY);
+		return pnModFunc('Polls', 'user', 'results', $args);
+    }
+
+    // Create output object
+    $pnRender = pnRender::getInstance('Polls');
 
     // assign the poll
     $pnRender->assign($item);
@@ -137,9 +137,6 @@ function Polls_user_results($args)
         $pollid = $objectid;
     }
 
-    // Create output object
-    $pnRender = pnRender::getInstance('Polls');
-
     // Get the poll
     if (isset($pollid) && is_numeric($pollid)) {
         $item = pnModAPIFunc('Polls', 'user', 'get', array('pollid' => $pollid, 'parse' => true));
@@ -151,6 +148,9 @@ function Polls_user_results($args)
     if ($item == false) {
         return LogUtil::registerError (_NOSUCHITEM, 404);
     }
+
+    // Create output object
+    $pnRender = pnRender::getInstance('Polls');
 
     // assign the item
     $pnRender->assign($item);
@@ -186,7 +186,7 @@ function Polls_user_vote($args)
         return LogUtil::registerPermissionError();
     }
 
-    if (pnSessionGetVar("poll_voted$pollid")) {
+    if (SessionUtil::getVar("poll_voted$pollid")) {
         LogUtil::registerError (_POLLSYOUVOTEDALREADY);
     } else {
         $result = pnModAPIFunc('Polls', 'user', 'vote',

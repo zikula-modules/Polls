@@ -24,6 +24,5 @@ define('_POLLSONEVOTEPERDAY', 'Es ist nur eine Abstimmung pro Tag erlaubt');
 define('_POLLSVOTINGBOOTH', 'Votingstand');
 define('_POLLSOTHERPOLLS', 'Andere Umfragen');
 define('_POLLSYOUVOTEDALREADY', 'Sie haben heute bereits abgestimmt!');
-define('_POLLSITEMFAILED', 'Fehler beim Ermitteln der Umfragen');
 define('_POLLRESULTS', 'Ergebnisse');
 define('_POLLSRECORDINGVOTE', 'Stimme aufzeichnen');

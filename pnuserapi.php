@@ -170,7 +170,7 @@ function Polls_userapi_vote($args)
 
         // set cookie to indicate vote made in this poll used only with cookie based voting
 		// but set all the time in case admin changes voting regs.
-        pnSessionSetVar("poll_voted" . $args['pollid'], 1);
+        SessionUtil::setVar("poll_voted{$args['pollid']}", 1);
     }
 
     return true;
@@ -285,7 +285,7 @@ function Polls_userapi_decodeurl($args)
     }
 
     // define the available user functions
-    $funcs = array('main', 'view', 'display', 'results');
+    $funcs = array('main', 'view', 'display', 'results', 'vote');
     // set the correct function name based on our input
     if (empty($args['vars'][2])) {
         pnQueryStringSetVar('func', 'main');

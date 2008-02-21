@@ -24,6 +24,5 @@ define('_POLLSONEVOTEPERDAY', 'We only allow one vote per day');
 define('_POLLSVOTINGBOOTH', 'Voting Booth');
 define('_POLLSOTHERPOLLS', 'Other Polls');
 define('_POLLSYOUVOTEDALREADY', 'You already voted today!');
-define('_POLLSITEMFAILED', 'Failed to get any polls');
 define('_POLLRESULTS', 'Results');
 define('_POLLSRECORDINGVOTE', 'Recording vote');
