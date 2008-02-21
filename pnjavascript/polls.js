@@ -5,7 +5,7 @@
  * @link http://www.postnuke.com
  * @version $Id: polls.js 18677 2006-04-06 12:07:09Z markwest $
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
- * @package PostNuke_ResourcePack_Modules
+ * @package PostNuke_3rdParty_Modules
  * @subpackage Polls
 */
 
