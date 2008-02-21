@@ -6,7 +6,7 @@
  * @link http://www.postnuke.com
  * @version $Id: pnajax.php 20166 2006-10-01 21:43:37Z markwest $
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
- * @package PostNuke_Value_Addons
+ * @package PostNuke_3rdParty_Modules
  * @subpackage Polls
 */
 

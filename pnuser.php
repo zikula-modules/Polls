@@ -6,7 +6,7 @@
  * @link http://www.postnuke.com
  * @version $Id: pnuser.php 20571 2006-11-22 18:25:29Z rgasch $
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
- * @package PostNuke_Value_Addons
+ * @package PostNuke_3rdParty_Modules
  * @subpackage Polls
 */
 

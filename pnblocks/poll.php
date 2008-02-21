@@ -6,7 +6,7 @@
  * @link http://www.postnuke.com
  * @version $Id: poll.php 20108 2006-09-24 19:56:21Z rgasch $
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
- * @package PostNuke_Value_Addons
+ * @package PostNuke_3rdParty_Modules
  * @subpackage Polls
  */
 

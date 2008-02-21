@@ -6,7 +6,7 @@
  * @link http://www.postnuke.com
  * @version $Id: pnversion.php 19262 2006-06-12 14:45:18Z markwest $
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
- * @package PostNuke_Value_Addons
+ * @package PostNuke_3rdParty_Modules
  * @subpackage Polls
 */
 
