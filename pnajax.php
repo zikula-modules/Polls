@@ -1,9 +1,9 @@
 <?php
 /**
- * PostNuke Application Framework
+ * Polls Module for PostNuke
  *
  * @copyright (c) 2001, PostNuke Development Team
- * @link http://www.postnuke.com
+ * @link http://www.markwest.me.uk
  * @version $Id: pnajax.php 20166 2006-10-01 21:43:37Z markwest $
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  * @package PostNuke_3rdParty_Modules

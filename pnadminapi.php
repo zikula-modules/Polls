@@ -1,9 +1,9 @@
 <?php
 /**
- * PostNuke Application Framework
+ * Polls Module for PostNuke
  *
- * @copyright (c) 2002, PostNuke Development Team
- * @link http://www.postnuke.com
+ * @copyright (c) 2008, Mark West
+ * @link http://www.markwest.me.uk
  * @version $Id: pnadminapi.php 20596 2006-11-24 15:17:08Z markwest $
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
  * @package PostNuke_3rdParty_Modules
