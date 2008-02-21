@@ -10,19 +10,14 @@
  * @subpackage Polls
 */
 
-define('_POLL','Umfrage');
-define('_POLLS','Umfragen');
-if(!defined('_POLLSVIEW')) {
-    define('_POLLSVIEW', 'Umfragen anzeigen');
-}
-define('_POLLSPASTSURVEYS', 'ältere Umfragen');
-define('_POLLSADDVOTE', 'Abstimmen');
-define('_POLLSRESULTS', 'Ergebnisse');
-define('_POLLSVOTE', 'Umfrage');
-define('_POLLSVOTES', 'Umfragen');
-define('_POLLSONEVOTEPERDAY', 'Es ist nur eine Abstimmung pro Tag erlaubt');
-define('_POLLSVOTINGBOOTH', 'Votingstand');
-define('_POLLSOTHERPOLLS', 'Andere Umfragen');
-define('_POLLSYOUVOTEDALREADY', 'Sie haben heute bereits abgestimmt!');
-define('_POLLRESULTS', 'Ergebnisse');
-define('_POLLSRECORDINGVOTE', 'Stimme aufzeichnen');
+define('_POLLS_PASTSURVEYS', 'ältere Umfragen');
+define('_POLLS_ADDVOTE', 'Abstimmen');
+define('_POLLS_RESULTS', 'Ergebnisse');
+define('_POLLS_VOTE', 'Umfrage');
+define('_POLLS_VOTES', 'Umfragen');
+define('_POLLS_ONEVOTEPERDAY', 'Es ist nur eine Abstimmung pro Tag erlaubt');
+define('_POLLS_VOTINGBOOTH', 'Votingstand');
+define('_POLLS_OTHERPOLLS', 'Andere Umfragen');
+define('_POLLS_YOUVOTEDALREADY', 'Sie haben heute bereits abgestimmt!');
+define('_POLLS_RESULTS', 'Ergebnisse');
+define('_POLLS_RECORDINGVOTE', 'Stimme aufzeichnen');

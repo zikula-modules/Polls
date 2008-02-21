@@ -156,7 +156,7 @@ function Polls_userapi_vote($args)
                 AND ($poll_data_column[voteid] = '" . (int)DataUtil::formatForStore($args['voteid']) . "')";
         $result = DBUtil::executeSQL($sql);
         if (!$result) {
-            return LogUtil::registerError (_POLLSVOTEFAILED);
+            return LogUtil::registerError (_POLLS_VOTEFAILED);
         }
 
         // add second part of the vote - adds 1 to total vote count
@@ -165,7 +165,7 @@ function Polls_userapi_vote($args)
                WHERE $poll_desc_column[pollid] = '" . (int)DataUtil::formatForStore($args['pollid']) . "'";
         $result = DBUtil::executeSQL($sql);
         if (!$result) {
-            return LogUtil::registerError (_POLLSVOTEFAILED);
+            return LogUtil::registerError (_POLLS_VOTEFAILED);
         }
 
         // set cookie to indicate vote made in this poll used only with cookie based voting

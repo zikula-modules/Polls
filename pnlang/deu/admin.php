@@ -10,12 +10,8 @@
  * @subpackage Polls
 */
 
-define('_POLL','Umfrage');
-define('_POLLS','Umfragen');
-
 // menu options
 define('_POLLS_NEW', 'Umfrage anlegen');
-define('_POLLS_VIEW', 'Umfragen anzeigen');
 
 // modify config template
 define('_POLLS_GENERAL', 'Allgemeine Einstellungen');

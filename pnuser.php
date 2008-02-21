@@ -108,7 +108,7 @@ function Polls_user_display($args)
 
     // Check the user has already voted in this poll
     if (SessionUtil::getVar("poll_voted{$item['pollid']}")) {
-		LogUtil::registerStatus(_POLLSYOUVOTEDALREADY);
+		LogUtil::registerStatus(_POLLS_YOUVOTEDALREADY);
 		return pnModFunc('Polls', 'user', 'results', $args);
     }
 
@@ -187,7 +187,7 @@ function Polls_user_vote($args)
     }
 
     if (SessionUtil::getVar("poll_voted$pollid")) {
-        LogUtil::registerError (_POLLSYOUVOTEDALREADY);
+        LogUtil::registerError (_POLLS_YOUVOTEDALREADY);
     } else {
         $result = pnModAPIFunc('Polls', 'user', 'vote',
                                array('pollid' => $pollid,

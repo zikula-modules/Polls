@@ -10,12 +10,8 @@
  * @subpackage Polls
 */
 
-define('_POLL','Poll');
-define('_POLLS','Polls');
-
 // menu options
 define('_POLLS_NEW', 'Create New Poll');
-define('_POLLS_VIEW', 'View Polls');
 
 // modify config template
 define('_POLLS_GENERAL', 'General settings');

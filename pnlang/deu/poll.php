@@ -10,5 +10,5 @@
  * @subpackage Polls
  */
 
-define('_POLLSDISPLAY', 'anzuzeigene Umfrage');
-define('_POLLSAJAXVOTING', 'Ajax für die Umfrage benutzen');
+define('_POLLS_DISPLAY', 'anzuzeigene Umfrage');
+define('_POLLS_AJAXVOTING', 'Ajax für die Umfrage benutzen');

@@ -16,11 +16,11 @@
 	  <!--[/if]-->
 	<!--[/foreach]-->
   </table>
-  <input name="submit" type="submit" value="<!--[pnml name="_POLLSADDVOTE"]-->" />
+  <input name="submit" type="submit" value="<!--[pnml name="_POLLS_ADDVOTE"]-->" />
   </div>
 </form>
 <div class="polls-voteformlinks">
-[ <a href="<!--[pnmodurl modname="Polls" type="user" func="results" pollid=$pollid]-->"><!--[pnml name=_POLLSRESULTS]--></a> | <a href="<!--[pnmodurl modname="Polls" type="user" func="view"]-->"><!--[pnml name="_POLLSOTHERPOLLS"]--></a> ]
+[ <a href="<!--[pnmodurl modname="Polls" type="user" func="results" pollid=$pollid]-->"><!--[pnml name=_POLLS_RESULTS]--></a> | <a href="<!--[pnmodurl modname="Polls" type="user" func="view"]-->"><!--[pnml name="_POLLS_OTHERPOLLS"]--></a> ]
 </div>
 <!--[pnmodurl modname=Polls func=display pollid=$pollid assign=returnurl]-->
 <!--[pnmodcallhooks hookobject=item hookaction=display hookid=$pollid module=Polls returnurl=$returnurl]-->

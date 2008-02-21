@@ -23,17 +23,16 @@
 <div class="polls-resultlinks">
 <!--[$votecount|pnvarprepfordisplay]-->
 <!--[if $votecount eq 1]-->
- <!--[pnml name="_POLLSVOTE"]-->
+ <!--[pnml name="_POLLS_VOTE"]-->
 <!--[else]-->
- <!--[pnml name="_POLLSVOTES"]-->
+ <!--[pnml name="_POLLS_VOTES"]-->
 <!--[/if]-->
 </div>
 <div class="polls-resultlinks">
-<!--[pnml name="_POLLSONEVOTEPERDAY"]-->
+<!--[pnml name="_POLLS_ONEVOTEPERDAY"]-->
 </div>
 <div class="polls-resultlinks">
-[ <a href="<!--[pnmodurl modname="Polls" type="user" func="display" pollid=$pollid]-->"><!--[pnml name="_POLLSVOTINGBOOTH"]--></a> | <a href="<!--[pnmodurl modname="Polls" type="user" func="view"]-->"><!--[pnml name="_POLLSOTHERPOLLS"]--></a> ]
+[ <a href="<!--[pnmodurl modname="Polls" type="user" func="display" pollid=$pollid]-->"><!--[pnml name="_POLLS_VOTINGBOOTH"]--></a> | <a href="<!--[pnmodurl modname="Polls" type="user" func="view"]-->"><!--[pnml name="_POLLS_OTHERPOLLS"]--></a> ]
 </div>
 <!--[pnmodurl modname=Polls func=display pollid=$pollid assign=returnurl]-->
 <!--[pnmodcallhooks hookobject=item hookaction=display hookid=$pollid module=Polls returnurl=$returnurl]-->
-

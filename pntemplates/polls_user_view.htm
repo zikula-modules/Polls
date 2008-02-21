@@ -1,12 +1,12 @@
 <!--[*  $Id: polls_user_view.htm 18013 2006-02-21 22:52:26Z markwest $  *]-->
 <!--[include file="polls_user_menu.htm"]-->
-<h2><!--[pnml name=_POLLSPASTSURVEYS]--></h2>
+<h2><!--[pnml name=_POLLS_PASTSURVEYS]--></h2>
 <ul>
 <!--[section name=polls loop=$polls]-->  
 	<li>
 		<a href="<!--[$polls[polls].url|pnvarprepfordisplay]-->"><!--[$polls[polls].title|pnvarprepfordisplay]--></a>
-		(<a href="<!--[$polls[polls].results|pnvarprepfordisplay]-->"><!--[pnml name="_POLLSRESULTS"]--></a> -
-		<!--[$polls[polls].votecount|pnvarprepfordisplay]--> <!--[pnml name="_POLLSVOTES"]-->)
+		(<a href="<!--[$polls[polls].results|pnvarprepfordisplay]-->"><!--[pnml name="_POLLS_RESULTS"]--></a> -
+		<!--[$polls[polls].votecount|pnvarprepfordisplay]--> <!--[pnml name="_POLLS_VOTES"]-->)
 	</li>
 <!--[/section]-->
 </ul>

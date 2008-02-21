@@ -10,19 +10,14 @@
  * @subpackage Polls
 */
 
-define('_POLL','Poll');
-define('_POLLS','Polls');
-if(!defined('_POLLSVIEW')) {
-    define('_POLLSVIEW', 'View Polls');
-}
-define('_POLLSPASTSURVEYS', 'Past Surveys');
-define('_POLLSADDVOTE', 'Vote');
-define('_POLLSRESULTS', 'Results');
-define('_POLLSVOTE', 'Vote');
-define('_POLLSVOTES', 'Votes');
-define('_POLLSONEVOTEPERDAY', 'We only allow one vote per day');
-define('_POLLSVOTINGBOOTH', 'Voting Booth');
-define('_POLLSOTHERPOLLS', 'Other Polls');
-define('_POLLSYOUVOTEDALREADY', 'You already voted today!');
-define('_POLLRESULTS', 'Results');
-define('_POLLSRECORDINGVOTE', 'Recording vote');
+define('_POLLS_PASTSURVEYS', 'Past Surveys');
+define('_POLLS_ADDVOTE', 'Vote');
+define('_POLLS_RESULTS', 'Results');
+define('_POLLS_VOTE', 'Vote');
+define('_POLLS_VOTES', 'Votes');
+define('_POLLS_ONEVOTEPERDAY', 'We only allow one vote per day');
+define('_POLLS_VOTINGBOOTH', 'Voting Booth');
+define('_POLLS_OTHERPOLLS', 'Other Polls');
+define('_POLLS_YOUVOTEDALREADY', 'You already voted today!');
+define('_POLLS_RESULTS', 'Results');
+define('_POLLS_RECORDINGVOTE', 'Recording vote');
