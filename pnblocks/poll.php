@@ -57,7 +57,7 @@ function Polls_pollblock_display($blockinfo)
     }
 
     // Create output object
-    $pnRender = new pnRender('Polls');
+    $pnRender = pnRender::getInstance('Polls');
 
     // Define the cache id
     $pnRender->cache_id = pnUserGetVar('uid') . $vars['pollid'] . pnSessionGetVar("poll_voted$vars[pollid]");
