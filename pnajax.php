@@ -21,7 +21,7 @@
 function polls_ajax_vote()
 {
     $pollid = FormUtil::getPassedValue('pollid', null, 'POST');
-    $title = FormUtil::getPassedValue('title', null, 'POST');
+    $title  = FormUtil::getPassedValue('title', null, 'POST');
     $voteid = FormUtil::getPassedValue('voteid', null, 'POST');
 
     if (!SecurityUtil::checkPermission('Polls::', "$title::", ACCESS_COMMENT)) {

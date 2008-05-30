@@ -10,6 +10,5 @@
  * @subpackage Polls
  */
 
-define('_POLLS_NAME',        'Polls');
 define('_POLLS_DISPLAYNAME', 'Polls');
 define('_POLLS_DESCRIPTION', 'Voting System Module');

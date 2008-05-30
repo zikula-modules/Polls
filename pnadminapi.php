@@ -20,8 +20,13 @@
 function Polls_adminapi_create($args)
 {
     // Argument check
-    if (!isset($args['title']) || !isset($args['language']) || !isset($args['options'])) {
+    if (!isset($args['title']) || !isset($args['options'])) {
         return LogUtil::registerError (_MODARGSERROR);
+    }
+
+    // Security check
+    if (!SecurityUtil::checkPermission( 'Polls::', "$args[title]::", ACCESS_ADD)) {
+        return LogUtil::registerError (_MODULENOAUTH);
     }
 
     // defaults
@@ -32,11 +37,6 @@ function Polls_adminapi_create($args)
     // define the permalink title if not present
     if (!isset($args['urltitle']) || empty($args['urltitle'])) {
         $args['urltitle'] = DataUtil::formatPermalink($args['title']);
-    }
-
-    // Security check
-    if (!SecurityUtil::checkPermission( 'Polls::', "$args[title]::", ACCESS_ADD)) {
-        return LogUtil::registerError (_MODULENOAUTH);
     }
 
     // create the poll
@@ -111,7 +111,6 @@ function Polls_adminapi_update($args)
     // Argument check
     if (!isset($args['pollid']) ||
         !isset($args['title']) ||
-        !isset($args['language']) ||
         !isset($args['options'])) {
         return LogUtil::registerError (_MODARGSERROR);
     }

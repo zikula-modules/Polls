@@ -4,33 +4,42 @@
 <div class="pn-admincontainer">
 <div class="pn-adminpageicon"><!--[pnimg modname=core src=filenew.gif set=icons/large alt=$templatetitle]--></div>
 <h2><!--[$templatetitle]--></h2>
-<form class="pn-adminform" action="<!--[pnmodurl modname="Polls" type="admin" func="create"]-->" method="post" enctype="application/x-www-form-urlencoded">
+<form id="polls_admin_newform" class="pn-form" action="<!--[pnmodurl modname="Polls" type="admin" func="create"]-->" method="post" enctype="application/x-www-form-urlencoded">
 <div>
     <input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="Polls"]-->" />
-    <fieldset>
+    <fieldset class="pn-form-fieldset">
         <legend><!--[pnml name=_POLL_OVERVIEW]--></legend>
-		<div class="pn-adminformrow">
+		<div class="pn-formrow">
 	        <label for="polls_title"><!--[pnml name="_TITLE"]--></label>
-	        <input id="polls_title" type="text" name="poll[title]" size="32" maxlength="32" />
+	        <input id="polls_title" class="pn-form-text" type="text" name="poll[title]" size="32" maxlength="100" />
 		</div>
-	    <div class="pn-adminformrow">
+	    <div class="pn-formrow">
 	        <label for="pages_urltitle"><!--[pnml name="_PERMALINKTITLE"]--></label>
-	        <input id="pages_urltitle" name="page[urltitle]" type="text" size="32" maxlength="255" />
+	        <input id="pages_urltitle" class="pn-form-text" name="poll[urltitle]" type="text" size="32" maxlength="255" />
 			<!--[pnml name=_PERMALINKTITLEBLANK]-->
 	    </div>
 		<!--[if $enablecategorization]-->
-		<div class="pn-adminformrow">
-			<label for="page___CATEGORIES_____"><!--[pnml name="_CATEGORY"]--></label>
+		<div class="pn-formrow">
+			<label for="polls_categories"><!--[pnml name="_CATEGORY"]--></label>
 			<!--[ pnml assign="lblDef" name="_CHOOSECATEGORY" ]-->
-			<!--[ selector_category category=$mainCategory name="page[__CATEGORIES__][]" field="id" defaultValue="0" defaultText="$lblDef" ]-->
+			<!--[nocache]-->
+			<ul id="polls_categories" class="selector_category">
+			<!--[foreach from=$catregistry key=property item=category]-->
+				<li><!--[selector_category category=$category name="poll[__CATEGORIES__][$property]" field="id" selectedValue="0" defaultValue="0" defaultText=$lblDef]--></li>
+			<!--[/foreach]-->
+			</ul>
+			<!--[/nocache]-->
 		</div>
 		<!--[/if]-->
-		<div class="pn-adminformrow">
-	        <label for="polls_language"><!--[pnml name="_LANGUAGE"]--></label>
-			<!--[html_select_languages id=polls_language name=poll[language] all=true installed=true]-->
+		<!--[pnconfiggetvar name=multilingual assign=multilingual]-->
+		<!--[if $multilingual]-->
+		<div class="pn-formrow">
+			<label for="polls_language"><!--[pnml name="_LANGUAGE"]--></label>
+			<!--[languagelist id=polls_language name=poll[language] all=true installed=true selected=$lang]-->
 		</div>
+		<!--[/if]-->
     </fieldset>
-    <fieldset>
+    <fieldset class="pn-form-fieldset">
         <legend><!--[pnml name=_POLLS_OPTIONS]--></legend>
 		<p><!--[pnml name="_POLLS_ENTRY"]--></p>
 		<div class="pn-adminformrow">
@@ -83,7 +92,7 @@
 		</div>
     </fieldset>
     <!--[pnmodcallhooks hookobject=item hookaction=new module=Polls]-->
-    <div class="pn-adminformrow pn-adminformbuttons">
+    <div class="pn-formrow pn-formbuttons">
     <!--[pnbutton src=button_ok.gif set=icons/small alt="_CREATE" title="_CREATE"]-->
     <a href="<!--[pnmodurl modname=Polls type=admin func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_CANCEL" title="_CANCEL"]--></a>
     </div>

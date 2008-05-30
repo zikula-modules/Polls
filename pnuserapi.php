@@ -9,8 +9,9 @@
  * @package PostNuke_3rdParty_Modules
  * @subpackage Polls
 */
+
 /**
- * get all example items
+ * get all poll items
  * @author Mark West
  * @return array array of items, or false on failure
  */
@@ -23,21 +24,31 @@ function Polls_userapi_getall($args)
     if (!isset($args['numitems']) || !is_numeric($args['numitems'])) {
         $args['numitems'] = -1;
     }
-
-    $args['catFilter'] = array();
-    if ($args['category']) {
-        if (is_array($args['category'])) {
-            $args['catFilter'] = $args['category'];
-        } else {
-            $args['catFilter'][] = $args['category'];
-        }
+    if (!isset($args['ignoreml']) || !is_bool($args['ignoreml'])) {
+        $args['ignoreml'] = false;
     }
 
+    if (!is_numeric($args['startnum']) ||
+        !is_numeric($args['numitems'])) {
+        return LogUtil::registerError (_MODARGSERROR);
+    }
+
+    // create a empty result set
     $items = array();
 
     // Security check
     if (!SecurityUtil::checkPermission('Polls::', '::', ACCESS_READ)) {
         return $items;
+    }
+
+    $args['catFilter'] = array();
+    if (isset($args['category']) && !empty($args['category'])){
+        if (is_array($args['category'])) { 
+            $args['catFilter'] = $args['category'];
+        } elseif (isset($args['property'])) {
+            $property = $args['property'];
+            $args['catFilter'][$property] = $args['category'];
+        }
     }
 
     // define the permission filter to apply
@@ -47,20 +58,31 @@ function Polls_userapi_getall($args)
                               'instance_right' => 'pollid',
                               'level'          => ACCESS_READ));
 
+    // populate an array with each part of the where clause and then implode the array if there is a need.
+    // credit to Jorg Napp for this technique - markwest
+    $pntable = pnDBGetTables();
+    $polldesccolumn = $pntable['poll_desc_column'];
+    $queryargs = array();
+    if (pnConfigGetVar('multilingual') == 1 && !$args['ignoreml']) {
+        $queryargs[] = "($polldesccolumn[language]='" . DataUtil::formatForStore(pnUserGetLang()) . "' OR $polldesccolumn[language]='')";
+    }
+
+    $where = null;
+    if (count($queryargs) > 0) {
+        $where = ' WHERE ' . implode(' AND ', $queryargs);
+    }
+
     // get the objects from the db
-    $items = DBUtil::selectObjectArray('poll_desc', '', 'pollid', $args['startnum']-1, $args['numitems'], '', $permFilter, $args['catFilter']);
+    $items = DBUtil::selectObjectArray('poll_desc', $where, 'pollid', $args['startnum']-1, $args['numitems'], '', $permFilter, $args['catFilter']);
 
     if($items === false) {
         return LogUtil::registerError (_GETFAILED);
     }
 
     // need to do this here as the category expansion code can't know the
-    // root category which we need to build the relative path component
-     if ($items && isset($args['mainCat']) && $args['mainCat']) {
-        if (!Loader::loadClass ('CategoryUtil')) {
-            pn_exit('Unable to load class [CategoryUtil]');
-	    }
-        ObjectUtil::postProcessExpandedObjectArrayCategories ($items, $args['mainCat']);
+    // root categories which we need to build the relative paths component
+     if (pnModGetVar('Polls', 'enablecategorization') && $items && isset($args['catregistry']) && $args['catregistry']) {
+        ObjectUtil::postProcessExpandedObjectArrayCategories ($items, $args['catregistry']);
     }
 
     // Return the items
@@ -75,6 +97,11 @@ function Polls_userapi_getall($args)
  */
 function Polls_userapi_get($args)
 {
+    // optional arguments
+    if (isset($args['objectid'])) {
+       $args['pollid'] = $args['objectid'];
+    }
+
     // Argument check
     if ((!isset($args['pollid']) || !is_numeric($args['pollid'])) &&
          !isset($args['title'])) {
@@ -82,11 +109,12 @@ function Polls_userapi_get($args)
     }
 
     // define the permission filter to apply
-    $permFilter = array(array('realm'          => 0,
-                              'component_left' => 'Polls',
-                              'instance_left'  => 'title',
-                              'instance_right' => 'pollid',
-                              'level'          => ACCESS_READ));
+    $permFilter = array();
+    $permFilter[] = array('realm' => 0,
+                          'component_left' => 'Polls',
+                          'instance_left'  => 'title',
+                          'instance_right' => 'pollid',
+                          'level'          => ACCESS_READ);
 
     if (isset($args['pollid']) && is_numeric($args['pollid'])) {
         $poll = DBUtil::selectObjectByID('poll_desc', $args['pollid'], 'pollid', '', $permFilter);
@@ -113,6 +141,14 @@ function Polls_userapi_get($args)
         $poll['options'][$i]['percentscaled'] = $percentintscaled;
     }
 
+    if (pnModGetVar('Polls', 'enablecategorization') && !empty($poll['__CATEGORIES__'])) {
+        if (!($class = Loader::loadClass('CategoryRegistryUtil'))) {
+            pn_exit (pnML('_UNABLETOLOADCLASS', array('s' => 'CategoryRegistryUtil')));
+        }
+        $registeredCats  = CategoryRegistryUtil::getRegisteredModuleCategories('Polls', 'poll_desc');
+        ObjectUtil::postProcessExpandedObjectCategories($poll['__CATEGORIES__'], $registeredCats);
+    }
+
     // Return the item array
     return $poll;
 }
@@ -124,7 +160,31 @@ function Polls_userapi_get($args)
  */
 function Polls_userapi_countitems()
 {
-    return DBUtil::selectObjectCount('poll_desc', '');
+    $args['catFilter'] = array();
+    if (isset($args['category']) && !empty($args['category'])){
+        if (is_array($args['category'])) { 
+            $args['catFilter'] = $args['category'];
+	    } elseif (isset($args['property'])) {
+            $property = $args['property'];
+            $args['catFilter'][$property] = $args['category'];
+        }
+    }
+
+    // populate an array with each part of the where clause and then implode the array if there is a need.
+    // credit to Jorg Napp for this technique - markwest
+    $pntable = pnDBGetTables();
+    $polldesccolumn = $pntable['poll_desc_column'];
+    $queryargs = array();
+    if (pnConfigGetVar('multilingual') == 1 && isset($args['ignoreml']) && !$args['ignoreml']) {
+        $queryargs[] = "($polldesccolumn[language]='" . DataUtil::formatForStore(pnUserGetLang()) . "' OR $polldesccolumn[language]='')";
+    }
+
+    $where = '';
+    if (count($queryargs) > 0) {
+        $where = ' WHERE ' . implode(' AND ', $queryargs);
+    }
+
+    return DBUtil::selectObjectCount('poll_desc', $where, 'pollid', false, $args['catFilter']);
 }
 
 /**
@@ -306,8 +366,14 @@ function Polls_userapi_decodeurl($args)
 
     // identify the correct parameter to identify the page
     if ($func == 'display' || $func == 'results') {
+        // get rid of unused vars
+        $args['vars'] = array_slice($args['vars'], $nextvar);
+        $nextvar = 0;
         if (pnModGetVar('Polls', 'addcategorytitletopermalink') && !empty($args['vars'][$nextvar+1])) {
-            $nextvar++;
+            $varscount = count($args['vars']);
+            $category = array_slice($args['vars'], 0, $varscount - 1);
+            pnQueryStringSetVar('cat', implode('/', $category));
+            array_splice($args['vars'], 0,  $varscount - 1);
         }
         if (is_numeric($args['vars'][$nextvar])) {
             pnQueryStringSetVar('pollid', $args['vars'][$nextvar]);

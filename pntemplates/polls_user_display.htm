@@ -10,8 +10,8 @@
     <!--[foreach from=$options item=option]-->
 	  <!--[if $option.optiontext neq '']-->
         <tr>
-	      <td align="left"><label for="_<!--[$option.voteid]-->"><!--[$option.optiontext|pnmodcallhooks:"Polls"|pnvarprephtmldisplay]--></label></td>
-		  <td align="right"><input id="_<!--[$option.voteid]-->" name="voteid" type="radio" value="<!--[$option.voteid]-->" /></td>
+		  <td align="right"><input id="polls_<!--[$option.voteid]-->" name="voteid" type="radio" value="<!--[$option.voteid]-->" /></td>
+	      <td align="left"><label for="polls_<!--[$option.voteid]-->"><!--[$option.optiontext|pnmodcallhooks:"Polls"|pnvarprephtmldisplay]--></label></td>
         </tr>
 	  <!--[/if]-->
 	<!--[/foreach]-->

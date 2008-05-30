@@ -10,7 +10,7 @@
 */
 
 /**
- * Test a permission for a user
+ * Submit a poll vote
  *
  *@params none;
  *@return none;
@@ -22,17 +22,16 @@ function pollvote()
     var pars = "module=Polls&func=vote&"
                + Form.serialize('pollvoteform');
     var myAjax = new Ajax.Request(
-        "ajax.php", 
+        document.location.pnBaseURL+'ajax.php', 
         {
             method: 'post', 
             parameters: pars, 
             onComplete: pollsvote_response
-        }); 
-    
+        });
 }
 
 /**
- * Ajax response function for the permission test: show the result
+ * Ajax response function for the vote: show the result
  *
  *@params none;
  *@return none;

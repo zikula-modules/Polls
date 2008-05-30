@@ -1,24 +1,19 @@
 <!--[*  $Id: polls_user_results.htm 18013 2006-02-21 22:52:26Z markwest $  *]-->
 <!--[include file="polls_user_menu.htm"]-->
 <h2><!--[$title]--></h2>
+
 <div class="polls-resultstable">
-<table width="100%">
-  <!--[section name=options loop=$options]-->
-	<!--[if $options[options].optiontext neq ""]-->
-      <tr>
-	    <td align="left"><!--[$options[options].optiontext|pnvarprepfordisplay]--></td>
-	    <td align="left">
-	    <!--[strip]-->
-          <!--[pnimg src=leftbar.gif height=15 width=7 title="`$options[options].percent`%"]-->
-          <!--[pnimg src=mainbar.gif height=15 width=$options[options].percentscaled title="`$options[options].percent`%"]-->
-          <!--[pnimg src=rightbar.gif height=15 width=7 title="`$options[options].percentscaled`%"]-->
-         <!--[/strip]-->
-		</td>
-		<td align="right"><!--[$options[options].percent|pnvarprepfordisplay]-->%</td>
-      </tr>
-	<!--[/if]-->
-  <!--[/section]-->
-</table>
+<ul class="polls-resultschart">
+ <!--[section name=options loop=$options]-->
+  <!--[if $options[options].optiontext neq ""]-->
+  <li>
+    <span class="item"><!--[$options[options].optiontext|pnvarprepfordisplay]--></span> 
+    <span class="count"><!--[$options[options].percent|pnvarprepfordisplay]-->%</span>
+    <span class="index" style="width: <!--[$options[options].percent|pnvarprepfordisplay]-->%"> <!--[$options[options].optioncount|pnvarprepfordisplay]--> <!--[pnml name="_POLLS_VOTES"]--></span>
+  </li>
+  <!--[/if]-->
+ <!--[/section]-->
+</ul>
 </div>
 <div class="polls-resultlinks">
 <!--[$votecount|pnvarprepfordisplay]-->

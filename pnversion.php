@@ -10,7 +10,7 @@
  * @subpackage Polls
 */
 
-$modversion['name'] = _POLLS_NAME;
+$modversion['name'] = 'Polls';
 $modversion['displayname'] = _POLLS_DISPLAYNAME;
 $modversion['description'] = _POLLS_DESCRIPTION;
 $modversion['version'] = '2.0';

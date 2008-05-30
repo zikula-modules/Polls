@@ -1,34 +1,36 @@
+<!--[pnpageaddvar name="stylesheet" value="modules/Polls/pnstyle/style.css"]-->
 <!--[if $uservotedalready eq false and $ajaxvoting]-->
 <!--[pnajaxheader modname=Polls filename=polls.js]-->
 <!--[/if]-->
 <div id="pollblockcontent">
 <h3><!--[$title|pnmodcallhooks:"Polls"|pnvarprephtmldisplay|pnvarcensor]--></h3>
 <!--[if $uservotedalready]-->
-  <div class="polls-resultstable">
-  <table width="100%">
-  <!--[section name=options loop=$options]-->
-	<!--[if $options[options].optiontext neq ""]-->
-      <tr>
-	    <td><!--[$options[options].optiontext|pnvarprepfordisplay]--></td>
-		<td><!--[$options[options].percent|pnvarprepfordisplay]-->%</td>
-      </tr>
-	<!--[/if]-->
-  <!--[/section]-->
-  </table>
-  </div>
+<div class="polls-resultstable">
+<ul class="polls-resultschart">
+ <!--[section name=options loop=$options]-->
+  <!--[if $options[options].optiontext neq ""]-->
+  <li>
+    <span class="item"><!--[$options[options].optiontext|pnvarprepfordisplay]--></span> 
+    <span class="count"><!--[$options[options].percent|pnvarprepfordisplay]-->%</span>
+    <span class="index" style="width: <!--[$options[options].percent|pnvarprepfordisplay]-->%"> <!--[$options[options].optioncount|pnvarprepfordisplay]--> <!--[pnml name="_POLLS_VOTES"]--></span>
+  </li>
+  <!--[/if]-->
+ <!--[/section]-->
+</ul>
+</div>
 <!--[else]-->
 <form id="pollvoteform" action="<!--[pnmodurl modname=Polls type=user func=vote]-->" method="post" enctype="application/x-www-form-urlencoded">
   <div style="text-align:center; margin-left:5%">
   <input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="Polls"]-->" />
   <input type="hidden" name="title" value="<!--[$title|pnvarprepfordisplay]-->" />
   <input type="hidden" name="pollid" value="<!--[$pollid|pnvarprepfordisplay]-->" />
-  <input type="hidden" name="polldisplayresults" value="1" />
+  <input type="hidden" name="displayresults" value="1" />
   <table width="95%">
   <!--[section name=options loop=$options]-->
     <!--[if $options[options].optiontext neq '']-->
     <tr>
-      <td align="left"><label for="polls_<!--[$options[options].voteid|pnvarprepfordisplay]-->"><!--[$options[options].optiontext|pnmodcallhooks:"Polls"|pnvarprephtmldisplay|pnvarcensor]--></label></td>
       <td><input id="polls_<!--[$options[options].voteid|pnvarprepfordisplay]-->" type="radio" name="voteid" value="<!--[$options[options].voteid]-->" /></td>
+      <td align="left"><label for="polls_<!--[$options[options].voteid|pnvarprepfordisplay]-->"><!--[$options[options].optiontext|pnmodcallhooks:"Polls"|pnvarprephtmldisplay|pnvarcensor]--></label></td>
     </tr>
     <!--[/if]-->
   <!--[/section]-->
@@ -43,8 +45,9 @@
 <div id="pollvoteinfo">&nbsp;</div>
 <!--[/if]-->
 <div style="text-align:center">
-[ <a href="<!--[pnmodurl modname="Polls" type="user" func="results" pollid=$pollid]-->"><!--[pnml name="_POLLS_RESULTS"]--></a> |
- <a href="<!--[pnmodurl modname="Polls" type="user"]-->"><!--[pnml name="_POLLS_OTHERPOLLS"]--></a> ]
+  <a href="<!--[pnmodurl modname="Polls" type="user" func="results" pollid=$pollid]-->"><!--[pnml name="_POLLS_RESULTS"]--></a>
+  <br />
+  <a href="<!--[pnmodurl modname="Polls" type="user"]-->"><!--[pnml name="_POLLS_OTHERPOLLS"]--></a>
 </div>
 <!--[if $ajaxvoting]-->
 <script type="text/javascript">
