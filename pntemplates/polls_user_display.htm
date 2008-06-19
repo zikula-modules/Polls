@@ -2,20 +2,18 @@
 <!--[include file="polls_user_menu.htm"]-->
 <h2><!--[$title|pnmodcallhooks:"Polls"|pnvarprephtmldisplay]--></h2>
 <form action="<!--[pnmodurl modname="Polls" type="user" func="vote"]-->" method="post" enctype="application/x-www-form-urlencoded">
-  <div class="polls-voteform">
+  <div class="polls-voteform" >
   <input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="Polls"]-->" />
   <input type="hidden" name="pollid" value="<!--[$pollid|pnvarprepfordisplay]-->" />
   <input type="hidden" name="title" value="<!--[$title|pnvarprepfordisplay]-->" />
-  <table width="100%">
+  <ul class="poll-options-list">
     <!--[foreach from=$options item=option]-->
 	  <!--[if $option.optiontext neq '']-->
-        <tr>
-		  <td align="right"><input id="polls_<!--[$option.voteid]-->" name="voteid" type="radio" value="<!--[$option.voteid]-->" /></td>
-	      <td align="left"><label for="polls_<!--[$option.voteid]-->"><!--[$option.optiontext|pnmodcallhooks:"Polls"|pnvarprephtmldisplay]--></label></td>
-        </tr>
+		  <li><input id="polls_<!--[$option.voteid]-->" name="voteid" type="radio" value="<!--[$option.voteid]-->" />
+	      <label for="polls_<!--[$option.voteid]-->"><!--[$option.optiontext|pnmodcallhooks:"Polls"|pnvarprephtmldisplay]--></label></li>
 	  <!--[/if]-->
 	<!--[/foreach]-->
-  </table>
+  </ul>
   <input name="submit" type="submit" value="<!--[pnml name="_POLLS_ADDVOTE"]-->" />
   </div>
 </form>

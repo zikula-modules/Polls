@@ -1,10 +1,16 @@
-.polls-voteform,
 .polls-resultstable {
 	width: 80%;
 	margin-left: 10%;
 	margin-right: 10%;
 	text-align: left;
 }
+.polls-voteform {
+	width: 80%;
+	margin-left: 40%;
+	margin-right: 40%;
+	text-align: left;
+}
+
 #pollblockcontent .polls-resultstable {
 	width: 100%;
 	margin: 0%;
@@ -14,11 +20,15 @@
 	text-align: center;
 }
 
+.poll-options-list
+{
+    list-style:none;
+}
+
 /* admin panel */
 div#polls_category_selectors {
 	display: inline;
 }
-
 
 .polls-resultschart { 
 	border-top: 1px solid #EEE;
