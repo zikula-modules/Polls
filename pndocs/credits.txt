@@ -1,3 +1,2 @@
-Original Author of non API Compliant Module
-Till Gerken
-tig@skv.org
+Original Author of non API Compliant Module Till Gerken tig@skv.org
+Early pre-dbutil init work by Xiaoyu Huang

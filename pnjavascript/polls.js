@@ -1,11 +1,11 @@
 /**
  * PostNuke Application Framework
  *
- * @copyright (c) 2002, PostNuke Development Team
+ * @copyright (c) 2002, Zikula Development Team
  * @link http://www.postnuke.com
  * @version $Id: polls.js 18677 2006-04-06 12:07:09Z markwest $
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
- * @package PostNuke_3rdParty_Modules
+ * @package Zikula_3rdParty_Modules
  * @subpackage Polls
 */
 

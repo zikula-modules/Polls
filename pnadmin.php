@@ -1,12 +1,12 @@
 <?php
 /**
- * Polls Module for PostNuke
+ * Polls Module for Zikula
  *
  * @copyright (c) 2008, Mark West
  * @link http://www.markwest.me.uk
  * @version $Id: pnadmin.php 20578 2006-11-22 19:19:01Z rgasch $
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
- * @package PostNuke_3rdParty_Modules
+ * @package Zikula_3rdParty_Modules
  * @subpackage Polls
 */
 
@@ -32,8 +32,7 @@ function Polls_admin_main()
 
 /**
  * add new item
- * This is a standard function that is called whenever an administrator
- * wishes to create a new module item
+ *
  * @author Mark West
  * @return string HTML string
  */
@@ -68,8 +67,8 @@ function Polls_admin_new()
 }
 
 /**
- * This is a standard function that is called with the results of the
- * form supplied by Polls_admin_new() to create a new item
+ * create item
+ *
  * @param 'name' the name of the item to be created
  * @param 'number' the number of the item to be created
  * @author Mark West
@@ -99,8 +98,7 @@ function Polls_admin_create($args)
 
 /**
  * modify an item
- * This is a standard function that is called whenever an administrator
- * wishes to modify a current module item
+ *
  * @param 'pollid' the id of the item to be modified
  * @author Mark West
  * @return string HTML string
@@ -157,8 +155,8 @@ function Polls_admin_modify($args)
 }
 
 /**
- * This is a standard function that is called with the results of the
- * form supplied by Polls_admin_modify() to update a current item
+ * update item
+ *
  * @param 'pollid' the id of the item to be updated
  * @param 'polltitle' the name of the item to be updated
  * @param 'polllanguage' the language of the item to be updated
@@ -189,15 +187,7 @@ function Polls_admin_update($args)
 
 /**
  * delete item
- * This is a standard function that is called whenever an administrator
- * wishes to delete a current module item.  Note that this function is
- * the equivalent of both of the modify() and update() functions above as
- * it both creates a form and processes its output.  This is fine for
- * simpler functions, but for more complex operations such as creation and
- * modification it is generally easier to separate them into separate
- * functions.  There is no requirement in the PostNuke MDG to do one or the
- * other, so either or both can be used as seen appropriate by the module
- * developer
+ *
  * @param 'pollid' the id of the item to be deleted
  * @param 'confirmation' confirmation that this item can be deleted
  * @author Mark West
@@ -255,6 +245,7 @@ function Polls_admin_delete($args)
 
 /**
  * view items
+ *
  * @author Mark West
  * @return string HTML string
  */
@@ -361,8 +352,8 @@ function Polls_admin_view()
 }
 
 /**
- * This is a standard function to modify the configuration parameters of the
- * module
+ * modify module configuration
+ *
  * @author Mark West
  * @return string HTML string
  */
@@ -384,8 +375,8 @@ function Polls_admin_modifyconfig()
 }
 
 /**
- * This is a standard function to update the configuration parameters of the
- * module given the information passed back by the modification form
+ * update module configuration
+ *
  * @author Mark West
  * @param int $itemsperpage items per page
  * @param int $scale scaling factor for results bar

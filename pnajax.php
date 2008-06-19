@@ -1,12 +1,12 @@
 <?php
 /**
- * Polls Module for PostNuke
+ * Polls Module for Zikula
  *
- * @copyright (c) 2001, PostNuke Development Team
+ * @copyright (c) 2008, Mark West
  * @link http://www.markwest.me.uk
  * @version $Id: pnajax.php 20166 2006-10-01 21:43:37Z markwest $
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
- * @package PostNuke_3rdParty_Modules
+ * @package Zikula_3rdParty_Modules
  * @subpackage Polls
 */
 

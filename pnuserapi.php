@@ -1,17 +1,18 @@
  <?php
 /**
- * Polls Module for PostNuke
+ * Polls Module for Zikula
  *
  * @copyright (c) 2008, Mark West
  * @link http://www.markwest.me.uk
  * @version $Id: pnuserapi.php 20540 2006-11-18 09:53:34Z rgasch $
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
- * @package PostNuke_3rdParty_Modules
+ * @package Zikula_3rdParty_Modules
  * @subpackage Polls
 */
 
 /**
  * get all poll items
+ *
  * @author Mark West
  * @return array array of items, or false on failure
  */
@@ -91,6 +92,7 @@ function Polls_userapi_getall($args)
 
 /**
  * get a specific item
+ *
  * @param $args['pollid'] id of poll to get
  * @author Mark West
  * @return array item array, or false on failure
@@ -155,6 +157,7 @@ function Polls_userapi_get($args)
 
 /**
  * utility function to count the number of items held by this module
+ *
  * @author Mark West
  * @return integer number of items held by this module
  */
@@ -189,6 +192,7 @@ function Polls_userapi_countitems()
 
 /**
  * Add vote to db
+ *
  * @param int $args['pollid'] poll id
  * @param int $args['voteid'] option voted for
  * @param string $args['polltitle'] title of poll
@@ -238,6 +242,7 @@ function Polls_userapi_vote($args)
 
 /**
  * utility function to count the number of items held by this module
+ *
  * @author Mark West
  * @return integer number of items held by this module
  */

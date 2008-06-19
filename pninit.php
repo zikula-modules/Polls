@@ -1,18 +1,19 @@
 <?php
 /**
- * Polls Module for PostNuke
+ * Polls Module for Zikula
  *
  * @copyright (c) 2008, Mark West
  * @link http://www.markwest.me.uk
  * @version $Id: pninit.php 20616 2006-11-25 15:51:52Z rgasch $
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
- * @package PostNuke_3rdParty_Modules
+ * @package Zikula_3rdParty_Modules
  * @subpackage Polls
 */
 
 /**
  * init polls module
- * @author Xiaoyu Huang
+ *
+ * @author Mark West
  * @return bool true if successful, false otherwise
  */
 function Polls_init()
@@ -40,8 +41,9 @@ function Polls_init()
 }
 
 /**
- * upgrade
- * @author Xiaoyu Huang
+ * upgrade polls module
+ *
+ * @author Mark West
  * @return bool true if successful, false otherwise
  */
 function Polls_upgrade($oldversion)
@@ -92,7 +94,8 @@ function Polls_upgrade($oldversion)
 
 /**
  * delete the polls module
- * @author Xiaoyu Huang
+ *
+ * @author Mark West
  * @return bool true if successful, false otherwise
  */
 function Polls_delete()
@@ -111,6 +114,12 @@ function Polls_delete()
     return true;
 }
 
+/**
+ * create the default categories for this module
+ *
+ * @author Mark West
+ * @return bool true if successful, false otherwise
+ */
 function _polls_createdefaultcategory($regpath = '/__SYSTEM__/Modules/Global')
 {
     // load necessary classes
