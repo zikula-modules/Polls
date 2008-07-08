@@ -22,7 +22,7 @@ function pollvote()
     var pars = "module=Polls&func=vote&"
                + Form.serialize('pollvoteform');
     var myAjax = new Ajax.Request(
-        document.location.pnBaseURL+'ajax.php', 
+        document.location.pnbaseURL+'ajax.php', 
         {
             method: 'post', 
             parameters: pars, 

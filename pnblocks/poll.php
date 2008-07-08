@@ -74,6 +74,7 @@ function Polls_pollblock_display($blockinfo)
 
     $pnRender->assign($item);
     $pnRender->assign($vars);
+    $pnRender->assign('ajaxvoting', false);
 
     // Check the user has already voted in this poll
     $uservotedalready = false;
