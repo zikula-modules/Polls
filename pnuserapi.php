@@ -244,6 +244,7 @@ function Polls_userapi_vote($args)
  * utility function to count the number of items held by this module
  *
  * @author Mark West
+ * @TODO develop  selectObjectSumByID method and submit to core as patch
  * @return integer number of items held by this module
  */
 function Polls_userapi_countvotes($args)
@@ -253,28 +254,13 @@ function Polls_userapi_countvotes($args)
         return LogUtil::registerError (_MODARGSERROR);
     }
 
-    // Get table setup
+    // setup where clause
     $pntable = pnDBGetTables();
-    $poll_data_table = $pntable['poll_data'];
     $poll_data_column = $pntable['poll_data_column'];
+    $where = "WHERE $poll_data_column[pollid] = '".(int)DataUtil::formatForStore($args['pollid'])."'";
 
-    // Get item
-    $sql = "SELECT SUM($poll_data_column[optioncount])
-            FROM $poll_data_table
-            WHERE $poll_data_column[pollid] = '".(int)DataUtil::formatForStore($args['pollid'])."'";
-    $result = DBUtil::executeSQL($sql);
-
-    if (!$result) {
-        return false;
-    }
-
-    // Obtain the number of items
-    list($votecount) = $result->fields;
-
-    $result->Close();
-
-    // Return the number of items
-    return $votecount;
+    // Return the vote count
+    return DBUtil::selectObjectSum('poll_data', 'optioncount', $where);
 }
 
 /**
