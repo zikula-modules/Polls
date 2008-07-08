@@ -41,7 +41,7 @@ function Polls_pollblock_info()
 function Polls_pollblock_display($blockinfo)
 {
     // Security check
-    if (!SecurityUtil::checkPermission( 'Polls:Pollblock:', "$blockinfo[title]::", ACCESS_READ)) {
+    if (!SecurityUtil::checkPermission('Polls:Pollblock:', "$blockinfo[title]::", ACCESS_READ)) {
         return;
     }
 
@@ -56,14 +56,19 @@ function Polls_pollblock_display($blockinfo)
         return;
     }
 
+    // debug line
+	//SessionUtil::delVar("poll_voted{$vars['pollid']}");
+    // Check the user has already voted in this poll
+    $uservotedalready = SessionUtil::getVar("poll_voted{$vars['pollid']}");
+
     // Create output object
     $pnRender = pnRender::getInstance('Polls');
 
     // Define the cache id
-    $pnRender->cache_id = pnUserGetVar('uid') . $vars['pollid'] . pnSessionGetVar("poll_voted$vars[pollid]");
+    $pnRender->cache_id = pnUserGetVar('uid') . $vars['pollid'] . $uservotedalready;
 
     // check out if the contents are cached.
-    if ($pnRender->is_cached('poll.htm')) {
+    if ($pnRender->is_cached('polls_block_poll.htm')) {
         // Populate block info and pass to theme
         $blockinfo['content'] = $pnRender->fetch('polls_block_poll.htm');
         return themesideblock($blockinfo);
@@ -74,13 +79,6 @@ function Polls_pollblock_display($blockinfo)
 
     $pnRender->assign($item);
     $pnRender->assign($vars);
-    $pnRender->assign('ajaxvoting', false);
-
-    // Check the user has already voted in this poll
-    $uservotedalready = false;
-    if (pnSessionGetVar("poll_voted$item[pollid]")) {
-        $uservotedalready = true;
-    }
     $pnRender->assign('uservotedalready', $uservotedalready);
 
     // Populate block info and pass to theme
@@ -115,7 +113,7 @@ function Polls_Pollblock_modify($blockinfo)
     }
 
     // Create output object
-    $pnRender = new pnRender('Polls', false);
+    $pnRender = pnRender::getInstance('Polls', false);
 
     // assign data
     $pnRender->assign('polls', $polloptions);
