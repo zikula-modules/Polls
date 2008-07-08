@@ -48,6 +48,9 @@ function polls_ajax_vote()
     // Get the poll
     $item = pnModAPIFunc('Polls', 'user', 'get', array('pollid' => $pollid));
 
+    // Check the user has now voted in this poll
+    $uservotedalready = (bool)SessionUtil::getVar("poll_voted{$pollid}");
+
     $pnRender = new pnRender('Polls', false);
     $pnRender->assign($item);
     $pnRender->assign('uservotedalready', $uservotedalready);
