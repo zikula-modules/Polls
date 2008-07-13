@@ -13,7 +13,7 @@
 $modversion['name'] = 'Polls';
 $modversion['displayname'] = _POLLS_DISPLAYNAME;
 $modversion['description'] = _POLLS_DESCRIPTION;
-$modversion['version'] = '2.0.1';
+$modversion['version'] = '2.0.2';
 $modversion['credits'] = 'pndocs/credits.txt';
 $modversion['help'] = 'pndocs/install.txt';
 $modversion['changelog'] = 'pndocs/changelog.txt';
