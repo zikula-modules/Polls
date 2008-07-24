@@ -1,4 +1,4 @@
- <?php
+<?php
 /**
  * Polls Module for Zikula
  *
