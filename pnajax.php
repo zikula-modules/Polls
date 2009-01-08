@@ -51,14 +51,14 @@ function polls_ajax_vote()
     // Check the user has now voted in this poll
     $uservotedalready = (bool)SessionUtil::getVar("poll_voted{$pollid}");
 
-    $pnRender = new pnRender('Polls', false);
-    $pnRender->assign($item);
-    $pnRender->assign('uservotedalready', $uservotedalready);
+    $renderer = new pnRender('Polls', false);
+    $renderer->assign($item);
+    $renderer->assign('uservotedalready', $uservotedalready);
     // ajax voting is definately on here...
-    $pnRender->assign('ajaxvoting', true);
+    $renderer->assign('ajaxvoting', true);
 
     // Populate block info and pass to theme
-    $result = $pnRender->fetch('polls_block_poll.htm');
+    $result = $renderer->fetch('polls_block_poll.htm');
 
     // return the new content for the block
     return array('result' => $result);

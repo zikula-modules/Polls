@@ -62,27 +62,27 @@ function Polls_pollblock_display($blockinfo)
     $uservotedalready = SessionUtil::getVar("poll_voted{$vars['pollid']}");
 
     // Create output object
-    $pnRender = pnRender::getInstance('Polls');
+    $renderer = pnRender::getInstance('Polls');
 
     // Define the cache id
-    $pnRender->cache_id = pnUserGetVar('uid') . $vars['pollid'] . $uservotedalready;
+    $renderer->cache_id = pnUserGetVar('uid') . $vars['pollid'] . $uservotedalready;
 
     // check out if the contents are cached.
-    if ($pnRender->is_cached('polls_block_poll.htm')) {
+    if ($renderer->is_cached('polls_block_poll.htm')) {
         // Populate block info and pass to theme
-        $blockinfo['content'] = $pnRender->fetch('polls_block_poll.htm');
+        $blockinfo['content'] = $renderer->fetch('polls_block_poll.htm');
         return themesideblock($blockinfo);
     }
 
     // Get the poll
     $item = pnModAPIFunc('Polls', 'user', 'get', array('pollid' => $vars['pollid']));
 
-    $pnRender->assign($item);
-    $pnRender->assign($vars);
-    $pnRender->assign('uservotedalready', $uservotedalready);
+    $renderer->assign($item);
+    $renderer->assign($vars);
+    $renderer->assign('uservotedalready', $uservotedalready);
 
     // Populate block info and pass to theme
-    $blockinfo['content'] = $pnRender->fetch('polls_block_poll.htm');
+    $blockinfo['content'] = $renderer->fetch('polls_block_poll.htm');
 
     return themesideblock($blockinfo);
 }
@@ -113,14 +113,14 @@ function Polls_Pollblock_modify($blockinfo)
     }
 
     // Create output object
-    $pnRender = pnRender::getInstance('Polls', false);
+    $renderer = pnRender::getInstance('Polls', false);
 
     // assign data
-    $pnRender->assign('polls', $polloptions);
-    $pnRender->assign($vars);
+    $renderer->assign('polls', $polloptions);
+    $renderer->assign($vars);
 
     // Return output
-    return $pnRender->fetch('polls_block_poll_modify.htm');
+    return $renderer->fetch('polls_block_poll_modify.htm');
 }
 
 /**
