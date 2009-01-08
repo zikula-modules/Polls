@@ -72,7 +72,7 @@ function Polls_userapi_getall($args)
     if (count($queryargs) > 0) {
         $where = ' WHERE ' . implode(' AND ', $queryargs);
     }
-var_dump($polldesccolumn);
+
     $orderby = '';
     // Handle the sort order
     if (!isset($args['order'])) {
