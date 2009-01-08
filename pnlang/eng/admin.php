@@ -16,6 +16,9 @@ define('_POLLS_NEW', 'Create New Poll');
 // modify config template
 define('_POLLS_GENERAL', 'General settings');
 define('_POLLS_RESULTSBARSCALE', 'Scale of results bar');
+define('_POLLS_SORTORDER','Order polls by');
+define('_POLLS_SORTORDER0','Poll ID');
+define('_POLLS_SORTORDER1','Poll Date/Time');
 
 // new/modify templates
 define('_POLLS_ENTRY', 'Please enter each available choice into a single field');

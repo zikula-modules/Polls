@@ -33,6 +33,7 @@ function Polls_init()
     // Set up module variables
     pnModSetVar('Polls', 'itemsperpage', 25);
     pnModSetVar('Polls', 'scale', 1);
+    pnModSetVar('Polls', 'sortorder', 0);
     pnModSetVar('Polls', 'enablecategorization', 1);
     pnModSetVar('Polls', 'addcategorytitletopermalink', true);
 

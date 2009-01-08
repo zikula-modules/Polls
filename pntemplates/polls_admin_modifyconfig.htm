@@ -20,6 +20,13 @@
 	        <label for="polls_scale"><!--[pnml name="_POLLS_RESULTSBARSCALE"]--></label>
 	        <input id="polls_scale" type="text" name="scale" size="3" value="<!--[$scale|pnvarprepfordisplay]-->" />
 		</div>
+		<div class="pn-adminformrow">
+			<label for="polls_sortorder"><!--[pnml name="_POLLS_SORTORDER"]--></label>
+			<select id="polls_sortorder" name="sortorder" size="1">
+				<option value="0"<!--[if $sortorder eq 0]--> selected="selected"<!--[/if]-->><!--[pnml name="_POLLS_SORTORDER0"]--></option>
+				<option value="1"<!--[if $sortorder eq 1]--> selected="selected"<!--[/if]-->><!--[pnml name="_POLLS_SORTORDER1"]--></option>
+			</select>
+		</div>
 	</fieldset>
 	<fieldset>
 		<legend><!--[pnml name=_PERMALINKS]--></legend>

@@ -72,9 +72,30 @@ function Polls_userapi_getall($args)
     if (count($queryargs) > 0) {
         $where = ' WHERE ' . implode(' AND ', $queryargs);
     }
+var_dump($polldesccolumn);
+    $orderby = '';
+    // Handle the sort order
+    if (!isset($args['order'])) {
+        $args['order'] = pnModGetVar('Polls', 'sortorder');
+
+        switch ($args['order']) {
+            case 0:
+                $order = 'pollid';
+                break;
+            case 1:
+            default:
+                $order = 'cr_date';
+        }
+    } else {
+        $order = $args['order'];
+    }
+    if (!empty($order)) {
+        $orderby = $polldesccolumn[$order].' DESC';
+    }
+
 
     // get the objects from the db
-    $items = DBUtil::selectObjectArray('poll_desc', $where, 'pollid', $args['startnum']-1, $args['numitems'], '', $permFilter, $args['catFilter']);
+    $items = DBUtil::selectObjectArray('poll_desc', $where, $orderby, $args['startnum']-1, $args['numitems'], '', $permFilter, $args['catFilter']);
 
     if($items === false) {
         return LogUtil::registerError (_GETFAILED);
