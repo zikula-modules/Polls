@@ -1,27 +1,27 @@
 <!--[*  $Id: polls_admin_new.htm 18393 2006-03-29 19:45:33Z markwest $  *]-->
 <!--[include file="polls_admin_menu.htm"]-->
-<!--[pnml name="_POLLS_NEW" assign=templatetitle]-->
+<!--[gt text="Create New Poll" assign=templatetitle]-->
 <div class="pn-admincontainer">
-<div class="pn-adminpageicon"><!--[pnimg modname=core src=filenew.gif set=icons/large alt=$templatetitle]--></div>
+<div class="pn-adminpageicon"><!--[pnimg modname='core' src='filenew.gif' set='icons/large' alt=$templatetitle]--></div>
 <h2><!--[$templatetitle]--></h2>
 <form id="polls_admin_newform" class="pn-form" action="<!--[pnmodurl modname="Polls" type="admin" func="create"]-->" method="post" enctype="application/x-www-form-urlencoded">
 <div>
     <input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="Polls"]-->" />
     <fieldset class="pn-form-fieldset">
-        <legend><!--[pnml name=_POLL_OVERVIEW]--></legend>
+        <legend><!--[gt text="Overview"]--></legend>
 		<div class="pn-formrow">
-	        <label for="polls_title"><!--[pnml name="_TITLE"]--></label>
+	        <label for="polls_title"><!--[gt text="Title"]--></label>
 	        <input id="polls_title" class="pn-form-text" type="text" name="poll[title]" size="32" maxlength="100" />
 		</div>
 	    <div class="pn-formrow">
-	        <label for="pages_urltitle"><!--[pnml name="_PERMALINKTITLE"]--></label>
+	        <label for="pages_urltitle"><!--[gt text="PermaLink URL title"]--></label>
 	        <input id="pages_urltitle" class="pn-form-text" name="poll[urltitle]" type="text" size="32" maxlength="255" />
-			<!--[pnml name=_PERMALINKTITLEBLANK]-->
+			<!--[gt text="(Blank = auto-generate)"]-->
 	    </div>
 		<!--[if $enablecategorization]-->
 		<div class="pn-formrow">
-			<label for="polls_categories"><!--[pnml name="_CATEGORY"]--></label>
-			<!--[ pnml assign="lblDef" name="_CHOOSECATEGORY" ]-->
+			<label for="polls_categories"><!--[gt text="Category"]--></label>
+			<!--[pnml assign="lblDef" name="Choose Category"]-->
 			<!--[nocache]-->
 			<ul id="polls_categories" class="selector_category">
 			<!--[foreach from=$catregistry key=property item=category]-->
@@ -34,67 +34,67 @@
 		<!--[pnconfiggetvar name=multilingual assign=multilingual]-->
 		<!--[if $multilingual]-->
 		<div class="pn-formrow">
-			<label for="polls_language"><!--[pnml name="_LANGUAGE"]--></label>
+			<label for="polls_language"><!--[gt text="Language"]--></label>
 			<!--[languagelist id=polls_language name=poll[language] all=true installed=true selected=$lang]-->
 		</div>
 		<!--[/if]-->
     </fieldset>
     <fieldset class="pn-form-fieldset">
-        <legend><!--[pnml name=_POLLS_OPTIONS]--></legend>
-		<p><!--[pnml name="_POLLS_ENTRY"]--></p>
+        <legend><!--[gt text="Voting choices"]--></legend>
+		<p><!--[gt text="Please enter each available choice into a single field"]--></p>
 		<div class="pn-adminformrow">
-	        <label for="polls_polloption1"><!--[pnml name="_POLLS_OPTION"]--> 1</label>
+	        <label for="polls_polloption1"><!--[gt text="Option"]--> 1</label>
 	        <input id="polls_polloption1" type="text" name="poll[options][1]" size="50" maxlength="50" />
 		</div>
 		<div class="pn-adminformrow">
-	        <label for="polls_polloption2"><!--[pnml name="_POLLS_OPTION"]--> 2</label>
+	        <label for="polls_polloption2"><!--[gt text="Option"]--> 2</label>
 	        <input id="polls_polloption2" type="text" name="poll[options][2]" size="50" maxlength="50" />
 		</div>
 		<div class="pn-adminformrow">
-	        <label for="polls_polloption3"><!--[pnml name="_POLLS_OPTION"]--> 3</label>
+	        <label for="polls_polloption3"><!--[gt text="Option"]--> 3</label>
 	        <input id="polls_polloption3" type="text" name="poll[options][3]" size="50" maxlength="50" />
 		</div>
 		<div class="pn-adminformrow">
-	        <label for="polls_polloption4"><!--[pnml name="_POLLS_OPTION"]--> 4</label>
+	        <label for="polls_polloption4"><!--[gt text="Option"]--> 4</label>
 	        <input id="polls_polloption4" type="text" name="poll[options][4]" size="50" maxlength="50" />
 		</div>
 		<div class="pn-adminformrow">
-	        <label for="polls_polloption5"><!--[pnml name="_POLLS_OPTION"]--> 5</label>
+	        <label for="polls_polloption5"><!--[gt text="Option"]--> 5</label>
 	        <input id="polls_polloption5" type="text" name="poll[options][5]" size="50" maxlength="50" />
 		</div>
 		<div class="pn-adminformrow">
-	        <label for="polls_polloption6"><!--[pnml name="_POLLS_OPTION"]--> 6</label>
+	        <label for="polls_polloption6"><!--[gt text="Option"]--> 6</label>
 	        <input id="polls_polloption6" type="text" name="poll[options][6]" size="50" maxlength="50" />
 		</div>
 		<div class="pn-adminformrow">
-	        <label for="polls_polloption7"><!--[pnml name="_POLLS_OPTION"]--> 7</label>
+	        <label for="polls_polloption7"><!--[gt text="Option"]--> 7</label>
 	        <input id="polls_polloption7" type="text" name="poll[options][7]" size="50" maxlength="50" />
 		</div>
 		<div class="pn-adminformrow">
-	        <label for="polls_polloption8"><!--[pnml name="_POLLS_OPTION"]--> 8</label>
+	        <label for="polls_polloption8"><!--[gt text="Option"]--> 8</label>
 	        <input id="polls_polloption8" type="text" name="poll[options][8]" size="50" maxlength="50" />
 		</div>
 		<div class="pn-adminformrow">
-	        <label for="polls_polloption9"><!--[pnml name="_POLLS_OPTION"]--> 9</label>
+	        <label for="polls_polloption9"><!--[gt text="Option"]--> 9</label>
 	        <input id="polls_polloption9" type="text" name="poll[options][9]" size="50" maxlength="50" />
 		</div>
 		<div class="pn-adminformrow">
-	        <label for="polls_polloption10"><!--[pnml name="_POLLS_OPTION"]--> 10</label>
+	        <label for="polls_polloption10"><!--[gt text="Option"]--> 10</label>
 	        <input id="polls_polloption10" type="text" name="poll[options][10]" size="50" maxlength="50" />
 		</div>
 		<div class="pn-adminformrow">
-	        <label for="polls_polloption11"><!--[pnml name="_POLLS_OPTION"]--> 11</label>
+	        <label for="polls_polloption11"><!--[gt text="Option"]--> 11</label>
 	        <input id="polls_polloption11" type="text" name="poll[options][11]" size="50" maxlength="50" />
 		</div>
 		<div class="pn-adminformrow">
-	        <label for="polls_polloption12"><!--[pnml name="_POLLS_OPTION"]--> 12</label>
+	        <label for="polls_polloption12"><!--[gt text="Option"]--> 12</label>
 	        <input id="polls_polloption12" type="text" name="poll[options][12]" size="50" maxlength="50" />
 		</div>
     </fieldset>
     <!--[pnmodcallhooks hookobject=item hookaction=new module=Polls]-->
     <div class="pn-formrow pn-formbuttons">
-    <!--[pnbutton src=button_ok.gif set=icons/small alt="_CREATE" title="_CREATE"]-->
-    <a href="<!--[pnmodurl modname=Polls type=admin func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_CANCEL" title="_CANCEL"]--></a>
+    <!--[pnbutton src='button_ok.gif' set='icons/small' __alt="Create" __title="Create"]-->
+    <a href="<!--[pnmodurl modname=Polls type=admin func=view]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
     </div>
 </div>
 </form>

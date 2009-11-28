@@ -14,11 +14,11 @@
 	  <!--[/if]-->
 	<!--[/foreach]-->
   </ul>
-  <input name="submit" type="submit" value="<!--[pnml name="_POLLS_ADDVOTE"]-->" />
+  <input name="submit" type="submit" value="<!--[gt text="Vote"]-->" />
   </div>
 </form>
 <div class="polls-voteformlinks">
-[ <a href="<!--[pnmodurl modname="Polls" type="user" func="results" pollid=$pollid]-->"><!--[pnml name=_POLLS_RESULTS]--></a> | <a href="<!--[pnmodurl modname="Polls" type="user" func="view"]-->"><!--[pnml name="_POLLS_OTHERPOLLS"]--></a> ]
+[ <a href="<!--[pnmodurl modname="Polls" type="user" func="results" pollid=$pollid]-->"><!--[gt text="Results"]--></a> | <a href="<!--[pnmodurl modname="Polls" type="user" func="view"]-->"><!--[gt text="Other Polls"]--></a> ]
 </div>
 <!--[pnmodurl modname=Polls func=display pollid=$pollid assign=returnurl]-->
 <!--[pnmodcallhooks hookobject=item hookaction=display hookid=$pollid module=Polls returnurl=$returnurl]-->

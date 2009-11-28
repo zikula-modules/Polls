@@ -18,6 +18,7 @@
  */
 function Polls_init()
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     $tables = array('poll_check', 'poll_data', 'poll_desc');
     foreach ($tables as $table) {
         if (!DBUtil::createTable($table)) {
@@ -27,7 +28,7 @@ function Polls_init()
 
     // create our default category
     if (!_polls_createdefaultcategory()) {
-        return LogUtil::registerError (_CREATEFAILED);
+        return LogUtil::registerError (__('Error! Creation attempt failed.', $dom));
     }
 
     // Set up module variables
@@ -49,6 +50,7 @@ function Polls_init()
  */
 function Polls_upgrade($oldversion)
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     // update tables
     $tables = array('poll_check', 'poll_data', 'poll_desc');
     foreach ($tables as $table) {
@@ -58,16 +60,17 @@ function Polls_upgrade($oldversion)
     }
 
     switch ($oldversion) {
-        case 1.1:
+        case '1.1':
             // check for the ezcomments module
             if (!pnModAvailable('EZComments')) {
-                return LogUtil::registerError (_POLLS_NOEZCOMMENTS);
+                LogUtil::registerError (__('EZComments module not available - this is required to migrate any poll comments', $dom));
+                return '1.1';
             }
             // migrate the comments to ezcomments
             // and drop the comments table if successful
             if (pnModAPIFunc('EZComments', 'migrate', 'polls')) {
                 if (!DBUtil::dropTable('poll_comments')) {
-                    return false;
+                    return '1.1';
                 }
             }
             pnModSetVar('Polls', 'itemsperpage', 25);
@@ -77,15 +80,16 @@ function Polls_upgrade($oldversion)
             // create indexes
             DBUtil::createIndex('pn_ip', 'poll_check', 'ip');
             DBUtil::createIndex('pn_pollid', 'poll_data', 'pollid');
-            return polls_upgrade(1.2);
-        case 1.2:
-            return polls_upgrade(2.0);
-        case 2.0:
+
+        case '1.2':
+
+        case '2.0':
             pnModSetVar('Polls', 'enablecategorization', true);
             pnModSetVar('Polls', 'addcategorytitletopermalink', true);
             pnModDBInfoLoad('Polls', 'Polls', true);
             if (!_polls_createdefaultcategory()) {
-                return LogUtil::registerError (_UPDATEFAILED);
+                LogUtil::registerError (__('Error! Update attempt failed.', $dom));
+                return '2.0';
             }
             break;
     }
@@ -129,7 +133,7 @@ function _polls_createdefaultcategory($regpath = '/__SYSTEM__/Modules/Global')
     Loader::loadClassFromModule('Categories', 'CategoryRegistry');
 
     // get the language file
-    $lang = pnUserGetLang();
+    $lang = ZLanguage::getLanguageCode();
 
     // get the category path for which we're going to insert our place holder category
     $rootcat = CategoryUtil::getCategoryByPath('/__SYSTEM__/Modules');
@@ -140,8 +144,8 @@ function _polls_createdefaultcategory($regpath = '/__SYSTEM__/Modules/Global')
         $cat = new PNCategory ();
         $cat->setDataField('parent_id', $rootcat['id']);
         $cat->setDataField('name', 'Polls');
-        $cat->setDataField('display_name', array($lang => _POLLS_NAME));
-        $cat->setDataField('display_desc', array($lang => _POLLS_CATEGORY_DESCRIPTION));
+        $cat->setDataField('display_name', array($lang => __('Poll Name', $dom)));
+        $cat->setDataField('display_desc', array($lang => __('Polls', $dom)));
         if (!$cat->validate('admin')) {
             return false;
         }

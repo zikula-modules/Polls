@@ -19,14 +19,15 @@
  */
 function Polls_adminapi_create($args)
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     // Argument check
     if (!isset($args['title']) || !isset($args['options'])) {
-        return LogUtil::registerError (_MODARGSERROR);
+        return LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
     }
 
     // Security check
     if (!SecurityUtil::checkPermission( 'Polls::', "$args[title]::", ACCESS_ADD)) {
-        return LogUtil::registerError (_MODULENOAUTH);
+        return LogUtil::registerError (__('Sorry! No authorization to access this module.', $dom));
     }
 
     // defaults
@@ -41,13 +42,13 @@ function Polls_adminapi_create($args)
 
     // create the poll
     if (!DBUtil::insertObject($args, 'poll_desc', 'pollid')) {
-        return LogUtil::registerError (_CREATEFAILED);
+        return LogUtil::registerError (__('Error! Creation attempt failed.', $dom));
     }
 
     for ($count = 0; $count <= (sizeof($args['options'])-1); $count++) {
         $item = array('pollid' => $args['pollid'], 'optiontext' => $args['options'][$count+1], 'optioncount' => 0, 'voteid' => $count);
         if (!DBUtil::insertObject($item, 'poll_data')) {
-            return LogUtil::registerError (_CREATEFAILED);
+            return LogUtil::registerError (__('Error! Creation attempt failed.', $dom));
         }
     }
 
@@ -66,29 +67,30 @@ function Polls_adminapi_create($args)
  */
 function Polls_adminapi_delete($args)
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     // Argument check
     if (!isset($args['pollid'])) {
-        return LogUtil::registerError (_MODARGSERROR);
+        return LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
     }
 
     // Get the poll
     $item = pnModAPIFunc('Polls', 'user', 'get', array('pollid' => $args['pollid']));
 
     if ($item == false) {
-        return LogUtil::registerError (_NOSUCHITEM);
+        return LogUtil::registerError (__('No such item found.', $dom));
     }
 
     // Security check
     if (!SecurityUtil::checkPermission( 'Polls::Item', "$item[title]::$args[pollid]", ACCESS_DELETE)) {
-        return LogUtil::registerError (_MODULENOAUTH);
+        return LogUtil::registerError (__('Sorry! No authorization to access this module.', $dom));
     }
 
     // Delete the object
     if (!DBUtil::deleteObjectByID('poll_data', $args['pollid'], 'pollid')) {
-        return LogUtil::registerError (_DELETEFAILED);
+        return LogUtil::registerError (__('Error! Sorry! Deletion attempt failed.', $dom));
     }
     if (!DBUtil::deleteObjectByID('poll_desc', $args['pollid'], 'pollid')) {
-        return LogUtil::registerError (_DELETEFAILED);
+        return LogUtil::registerError (__('Error! Sorry! Deletion attempt failed.', $dom));
     }
 
     // Let any hooks know that we have deleted an item
@@ -108,11 +110,12 @@ function Polls_adminapi_delete($args)
  */
 function Polls_adminapi_update($args)
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     // Argument check
     if (!isset($args['pollid']) ||
         !isset($args['title']) ||
         !isset($args['options'])) {
-        return LogUtil::registerError (_MODARGSERROR);
+        return LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
     }
 
     // set some defaults
@@ -127,26 +130,26 @@ function Polls_adminapi_update($args)
     $item = pnModAPIFunc('Polls', 'user', 'get', array('pollid' => $args['pollid']));
 
     if ($item == false) {
-        return LogUtil::registerError (_NOSUCHITEM);
+        return LogUtil::registerError (__('No such item found.', $dom));
     }
 
     // Security check
     if (!SecurityUtil::checkPermission( 'Polls::Item', "$item[title]::$args[pollid]", ACCESS_EDIT)) {
-        return LogUtil::registerError (_MODULENOAUTH);
+        return LogUtil::registerError (__('Sorry! No authorization to access this module.', $dom));
     }
     if (!SecurityUtil::checkPermission( 'Polls::Item', "$args[title]::$args[pollid]", ACCESS_EDIT)) {
-        return LogUtil::registerError (_MODULENOAUTH);
+        return LogUtil::registerError (__('Sorry! No authorization to access this module.', $dom));
     }
 
     if (!DBUtil::updateObject($args, 'poll_desc', '', 'pollid')) {
-        return LogUtil::registerError (_UPDATEFAILED);
+        return LogUtil::registerError (__('Error! Update attempt failed.', $dom));
     }
 
     for ($count = 0; $count <= (sizeof($args['options'])-1); $count++) {
         $item = array('pollid' => $args['pollid'], 'optiontext' => $args['options'][$count+1], 'optioncount' => 0, 'voteid' => $count);
         $where = 'WHERE pn_voteid = \''.DataUtil::formatForOS($count) . '\' AND pn_pollid = \'' . DataUtil::formatForOS($args['pollid']) . '\'';
         if (!DBUtil::updateObject($item, 'poll_data', $where)) {
-            return LogUtil::registerError (_UPDATEFAILED);
+            return LogUtil::registerError (__('Error! Update attempt failed.', $dom));
         }
     }
 
@@ -165,18 +168,17 @@ function Polls_adminapi_update($args)
  */
 function polls_adminapi_getlinks()
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     $links = array();
 
-    pnModLangLoad('Polls', 'admin');
-
     if (SecurityUtil::checkPermission('Polls::', '::', ACCESS_READ)) {
-        $links[] = array('url' => pnModURL('Polls', 'admin', 'view'), 'text' => _POLLS_VIEW);
+        $links[] = array('url' => pnModURL('Polls', 'admin', 'view'), 'text' => __('View Polls', $dom));
     }
     if (SecurityUtil::checkPermission('Polls::', '::', ACCESS_ADD)) {
-        $links[] = array('url' => pnModURL('Polls', 'admin', 'new'), 'text' => _POLLS_NEW);
+        $links[] = array('url' => pnModURL('Polls', 'admin', 'new'), 'text' => __('Create New Poll', $dom));
     }
     if (SecurityUtil::checkPermission('Polls::', '::', ACCESS_ADMIN)) {
-        $links[] = array('url' => pnModURL('Polls', 'admin', 'modifyconfig'), 'text' => _MODIFYCONFIG);
+        $links[] = array('url' => pnModURL('Polls', 'admin', 'modifyconfig'), 'text' => __('Settings', $dom));
     }
 
     return $links;

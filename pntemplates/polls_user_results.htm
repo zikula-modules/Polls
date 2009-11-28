@@ -9,7 +9,7 @@
   <li>
     <span class="item"><!--[$options[options].optiontext|pnvarprepfordisplay]--></span> 
     <span class="count"><!--[$options[options].percent|pnvarprepfordisplay]-->%</span>
-    <span class="index" style="width: <!--[$options[options].percent|pnvarprepfordisplay]-->%"> <!--[$options[options].optioncount|pnvarprepfordisplay]--> <!--[pnml name="_POLLS_VOTES"]--></span>
+    <span class="index" style="width: <!--[$options[options].percent|pnvarprepfordisplay]-->%"> <!--[$options[options].optioncount|pnvarprepfordisplay]--> <!--[gt text="Votes"]--></span>
   </li>
   <!--[/if]-->
  <!--[/section]-->
@@ -18,16 +18,16 @@
 <div class="polls-resultlinks">
 <!--[$votecount|pnvarprepfordisplay]-->
 <!--[if $votecount eq 1]-->
- <!--[pnml name="_POLLS_VOTE"]-->
+ <!--[gt text="Vote"]-->
 <!--[else]-->
- <!--[pnml name="_POLLS_VOTES"]-->
+ <!--[gt text="Votes"]-->
 <!--[/if]-->
 </div>
 <div class="polls-resultlinks">
-<!--[pnml name="_POLLS_ONEVOTEPERDAY"]-->
+<!--[gt text="We only allow one vote per day"]-->
 </div>
 <div class="polls-resultlinks">
-[ <a href="<!--[pnmodurl modname="Polls" type="user" func="display" pollid=$pollid]-->"><!--[pnml name="_POLLS_VOTINGBOOTH"]--></a> | <a href="<!--[pnmodurl modname="Polls" type="user" func="view"]-->"><!--[pnml name="_POLLS_OTHERPOLLS"]--></a> ]
+[ <a href="<!--[pnmodurl modname="Polls" type="user" func="display" pollid=$pollid]-->"><!--[gt text="Voting Booth"]--></a> | <a href="<!--[pnmodurl modname="Polls" type="user" func="view"]-->"><!--[gt text="Other Polls"]--></a> ]
 </div>
 <!--[pnmodurl modname=Polls func=display pollid=$pollid assign=returnurl]-->
 <!--[pnmodcallhooks hookobject=item hookaction=display hookid=$pollid module=Polls returnurl=$returnurl]-->

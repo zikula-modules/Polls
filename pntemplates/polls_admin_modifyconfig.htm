@@ -1,44 +1,44 @@
 <!--[*  $Id: polls_admin_modifyconfig.htm 18393 2006-03-29 19:45:33Z markwest $  *]-->
 <!--[include file="polls_admin_menu.htm"]-->
 <div class="pn-admincontainer">
-<div class="pn-adminpageicon"><!--[pnimg modname=core src=configure.gif set=icons/large alt='_MODIFYCONFIG' altml=true]--></div>
-<h2><!--[pnml name="_MODIFYCONFIG"]--></h2>
+<div class="pn-adminpageicon"><!--[pnimg modname='core' src='configure.gif' set='icons/large' __alt='Settings' ]--></div>
+<h2><!--[gt text="Settings"]--></h2>
 <form class="pn-adminform" action="<!--[pnmodurl modname="Polls" type="admin" func="updateconfig"]-->" method="post" enctype="application/x-www-form-urlencoded">
 <div>
     <input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="Polls"]-->" />
 	<fieldset>
-		<legend><!--[pnml name=_POLLS_GENERAL]--></legend>
+		<legend><!--[gt text="General settings"]--></legend>
 		<div class="pn-adminformrow">
-			<label for="pages_enablecategorization"><!--[pnml name="_ENABLECATEGORIZATION"]--></label>
+			<label for="pages_enablecategorization"><!--[gt text="Enable categorization"]--></label>
 			<input id="pages_enablecategorization" type="checkbox" name="enablecategorization"<!--[if $enablecategorization]--> checked="checked"<!--[/if]--> />
 		</div>
 		<div class="pn-adminformrow">
-	        <label for="polls_itemsperpage"><!--[pnml name="_ITEMSPERPAGE"]--></label>
+	        <label for="polls_itemsperpage"><!--[gt text="Items per page"]--></label>
 	        <input id="polls_itemsperpage" type="text" name="itemsperpage" size="3" value="<!--[$itemsperpage|pnvarprepfordisplay]-->" />
 		</div>
 		<div class="pn-adminformrow">
-	        <label for="polls_scale"><!--[pnml name="_POLLS_RESULTSBARSCALE"]--></label>
+	        <label for="polls_scale"><!--[gt text="Scale of results bar"]--></label>
 	        <input id="polls_scale" type="text" name="scale" size="3" value="<!--[$scale|pnvarprepfordisplay]-->" />
 		</div>
 		<div class="pn-adminformrow">
-			<label for="polls_sortorder"><!--[pnml name="_POLLS_SORTORDER"]--></label>
+			<label for="polls_sortorder"><!--[gt text="Order polls by"]--></label>
 			<select id="polls_sortorder" name="sortorder" size="1">
-				<option value="0"<!--[if $sortorder eq 0]--> selected="selected"<!--[/if]-->><!--[pnml name="_POLLS_SORTORDER0"]--></option>
-				<option value="1"<!--[if $sortorder eq 1]--> selected="selected"<!--[/if]-->><!--[pnml name="_POLLS_SORTORDER1"]--></option>
+				<option value="0"<!--[if $sortorder eq 0]--> selected="selected"<!--[/if]-->><!--[gt text="Poll ID"]--></option>
+				<option value="1"<!--[if $sortorder eq 1]--> selected="selected"<!--[/if]-->><!--[gt text="Poll Date/Time"]--></option>
 			</select>
 		</div>
 	</fieldset>
 	<fieldset>
-		<legend><!--[pnml name=_PERMALINKS]--></legend>
+		<legend><!--[gt text="PermaLinks"]--></legend>
 		<div class="pn-adminformrow">
-			<label for="pages_addcategorytitletopermalink"><!--[pnml name="_ADDCATEGORYTITLETOPERMALINK"]--></label>
+			<label for="pages_addcategorytitletopermalink"><!--[gt text="Add category title to PermaLink"]--></label>
 			<input id="pages_addcategorytitletopermalink" type="checkbox" name="addcategorytitletopermalink"<!--[if $addcategorytitletopermalink]--> checked="checked"<!--[/if]--> />
 		</div>
 	</fieldset>
     <!--[pnmodcallhooks hookobject=module hookaction=modifyconfig module=Polls]-->
     <div class="pn-adminformrow pn-adminformbuttons">
-    <!--[pnbutton src=button_ok.gif set=icons/small alt="_UPDATECONFIG" title="_UPDATECONFIG"]-->
-    <a href="<!--[pnmodurl modname=Polls type=admin func=view]-->"><!--[pnimg modname=core src=button_cancel.gif set=icons/small altml=true titleml=true alt="_CANCEL" title="_CANCEL"]--></a>
+    <!--[pnbutton src='button_ok.gif' set='icons/small' __alt="Update Configuration" __title="Update Configuration"]-->
+    <a href="<!--[pnmodurl modname=Polls type=admin func=view]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
     </div>
 </div>
 </form>

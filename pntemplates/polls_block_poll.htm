@@ -12,7 +12,7 @@
   <li>
     <span class="item"><!--[$options[options].optiontext|pnvarprepfordisplay]--></span> 
     <span class="count"><!--[$options[options].percent|pnvarprepfordisplay]-->%</span>
-    <span class="index" style="width: <!--[$options[options].percent|pnvarprepfordisplay]-->%"> <!--[$options[options].optioncount|pnvarprepfordisplay]--> <!--[pnml name="_POLLS_VOTES"]--></span>
+    <span class="index" style="width: <!--[$options[options].percent|pnvarprepfordisplay]-->%"> <!--[$options[options].optioncount|pnvarprepfordisplay]--> <!--[gt text="Votes"]--></span>
   </li>
   <!--[/if]-->
  <!--[/section]-->
@@ -36,22 +36,22 @@
   <!--[/section]-->
   </table>
   <!--[if $ajaxvoting]-->
-  <input onclick="javascript:pollvote();" name="vote" type="button" value="<!--[pnml name="_POLLS_ADDVOTE"]-->" />
+  <input onclick="javascript:pollvote();" name="vote" type="button" value="<!--[gt text="Vote"]-->" />
   <!--[else]-->
-  <input name="submit" type="submit" value="<!--[pnml name="_POLLS_ADDVOTE"]-->" />
+  <input name="submit" type="submit" value="<!--[gt text="Vote"]-->" />
   <!--[/if]-->
   </div>
 </form>
 <div id="pollvoteinfo">&nbsp;</div>
 <!--[/if]-->
 <div style="text-align:center">
-  <a href="<!--[pnmodurl modname="Polls" type="user" func="results" pollid=$pollid]-->"><!--[pnml name="_POLLS_RESULTS"]--></a>
+  <a href="<!--[pnmodurl modname="Polls" type="user" func="results" pollid=$pollid]-->"><!--[gt text="Results"]--></a>
   <br />
-  <a href="<!--[pnmodurl modname="Polls" type="user"]-->"><!--[pnml name="_POLLS_OTHERPOLLS"]--></a>
+  <a href="<!--[pnmodurl modname="Polls" type="user"]-->"><!--[gt text="Other Polls"]--></a>
 </div>
 <!--[if $ajaxvoting]-->
 <script type="text/javascript">
-    var recordingvote  = '<!--[pnml name=_POLLS_RECORDINGVOTE]-->';
+    var recordingvote  = '<!--[gt text="Recording vote"]-->';
 </script>
 <!--[/if]-->
 </div>

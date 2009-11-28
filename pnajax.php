@@ -20,16 +20,17 @@
  */
 function polls_ajax_vote()
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     $pollid = FormUtil::getPassedValue('pollid', null, 'POST');
     $title  = FormUtil::getPassedValue('title', null, 'POST');
     $voteid = FormUtil::getPassedValue('voteid', null, 'POST');
 
     if (!SecurityUtil::checkPermission('Polls::', "$title::", ACCESS_COMMENT)) {
-        AjaxUtil::error(_MODULENOAUTH);
+        AjaxUtil::error(__('Sorry! No authorization to access this module.', $dom));
     }
 
     if (!SecurityUtil::confirmAuthKey()) {
-        AjaxUtil::error(_BADAUTHKEY);
+        AjaxUtil::error(__("Invalid 'authkey':  this probably means that you pressed the 'Back' button, or that the page 'authkey' expired. Please refresh the page and try again.", $dom));
     }
 
     // load the language file

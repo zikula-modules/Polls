@@ -1,15 +1,15 @@
 <!--[*  $Id: polls_admin_view.htm 18393 2006-03-29 19:45:33Z markwest $  *]-->
 <!--[pnajaxheader modname=Polls filename=polls_admin.js nobehaviour=true noscriptaculous=true]-->
 <!--[include file="polls_admin_menu.htm"]-->
-<!--[pnml name="_POLLS_VIEW" assign=templatetitle]-->
+<!--[gt text="View Polls" assign=templatetitle]-->
 <div class="pn-admincontainer">
-<div class="pn-adminpageicon"><!--[pnimg modname=core src=windowlist.gif set=icons/large alt=$templatetitle]--></div>
+<div class="pn-adminpageicon"><!--[pnimg modname='core' src='windowlist.gif' set='icons/large' alt=$templatetitle]--></div>
 <h2><!--[$templatetitle]--></h2>
 <!--[if $enablecategorization]-->
   <form action="<!--[pnmodurl modname=Polls type=admin func=view]-->" method="post" enctype="application/x-www-form-urlencoded">
     <div id="polls_multicategory_filter">
-        <label for="polls_property"><!--[pnml name=_CATEGORY]--></label>
-        <!--[pnml assign="lblDef" name="_CHOOSEONE"]-->
+        <label for="polls_property"><!--[gt text="Category"]--></label>
+        <!--[pnml assign="lblDef" name="Choose One"]-->
         <!--[nocache]-->
             <!--[if $numproperties gt 1]-->
                 <!--[html_options id="polls_property" name="polls_property" options=$properties selected=$property]-->
@@ -31,20 +31,20 @@
             <!--[/foreach]-->
             </div>
         <!--[/nocache]-->
-        <input name="submit" type="submit" value="<!--[pnml name="_FILTER"]-->" />
-        <input name="clear" type="submit" value="<!--[pnml name="_RESET"]-->" />
+        <input name="submit" type="submit" value="<!--[gt text="Filter"]-->" />
+        <input name="clear" type="submit" value="<!--[gt text="Reset"]-->" />
     </div>
   </form>
 <!--[/if]-->
 <table class="pn-admintable">
   <thead>
   <tr>
-    <th><!--[pnml name="_TITLE"]--></th>
-    <th><!--[pnml name="_ID"]--></th>
+    <th><!--[gt text="Title"]--></th>
+    <th><!--[gt text="Internal ID"]--></th>
     <!--[if $enablecategorization]-->
-	<th><!--[pnml name="_CATEGORY"]--></th>
+	<th><!--[gt text="Category"]--></th>
 	<!--[/if]-->
-    <th><!--[pnml name="_OPTIONS"]--></th>
+    <th><!--[gt text="Options"]--></th>
   </tr>
   </thead>
   <tbody>
@@ -59,19 +59,19 @@
               <!--[array_field_isset assign="catname" array=$cat.display_name field=$lang returnValue=1]-->
               <!--[if $catname eq '']--><!--[assign var="catname" value=$cat.name]--><!--[/if]-->
               <li><!--[$catname]--></li>
-          <!--[ /foreach ]-->
+          <!--[/foreach]-->
           </ul>
       </td>
       <!--[/if]-->
 	  <td>
 	    <!--[assign var="options" value=$poll.options]-->
         <!--[section name=options loop=$options]-->
-          <a href="<!--[$options[options].url|pnvarprepfordisplay]-->"><!--[pnimg modname=core set=icons/extrasmall src=$options[options].image alt=$options[options].title]--></a>
+          <a href="<!--[$options[options].url|pnvarprepfordisplay]-->"><!--[pnimg modname='core' set='icons/extrasmall' src=$options[options].image alt=$options[options].title]--></a>
         <!--[/section]-->
       </td>
     </tr>
   <!--[foreachelse]-->
-    <tr class="pn-admintableempty"><td <!--[if $enablecategorization]-->colspan="4"<!--[else]-->colspan="3"<!--[/if]-->><!--[pnml name=_NOITEMSFOUND]--></td></tr>
+    <tr class="pn-admintableempty"><td <!--[if $enablecategorization]-->colspan="4"<!--[else]-->colspan="3"<!--[/if]-->><!--[gt text="No items found."]--></td></tr>
   <!--[/foreach]-->
   </tbody>
 </table>

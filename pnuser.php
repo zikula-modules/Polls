@@ -39,6 +39,7 @@ function Polls_user_main()
  */
 function Polls_user_view()
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     // Security check
     if (!SecurityUtil::checkPermission( 'Polls::', '::', ACCESS_OVERVIEW)) {
         return LogUtil::registerPermissionError();
@@ -59,7 +60,7 @@ function Polls_user_view()
     // check if categorization is enabled
     if ($modvars['enablecategorization']) {
         if (!($class = Loader::loadClass('CategoryUtil')) || !($class = Loader::loadClass('CategoryRegistryUtil'))) {
-            pn_exit (pnML('_UNABLETOLOADCLASS', array('s' => 'CategoryUtil | CategoryRegistryUtil')));
+            pn_exit (__f('Error! Unable to load class [%s%]', 'CategoryUtil | CategoryRegistryUtil', $dom));
         }
         // get the categories registered for the Pages
         $catregistry = CategoryRegistryUtil::getRegisteredModuleCategories('Polls', 'poll_desc');
@@ -84,9 +85,9 @@ function Polls_user_view()
                     foreach ($categories as $category) {
                         $catstofilter[] = $category['id'];
                     }
-                    $catFilter = array($prop => $catstofilter); 
+                    $catFilter = array($prop => $catstofilter);
                 } else {
-                    LogUtil::registerError(_NOTAVALIDCATEGORY);
+                    LogUtil::registerError(__('Invalid category', $dom));
                 }
             }
         }
@@ -100,7 +101,7 @@ function Polls_user_view()
                                 'catregistry' => isset($catregistry) ? $catregistry : null));
 
     if ($items == false) {
-        LogUtil::registerError(_NOITEMSFOUND);
+        LogUtil::registerError(__('No items found.', $dom));
     }
 
     // Create output object
@@ -141,6 +142,7 @@ function Polls_user_view()
  */
 function Polls_user_display($args)
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     $pollid = FormUtil::getPassedValue('pollid', isset($args['pollid']) ? $args['pollid'] : null, 'GET');
     $title = FormUtil::getPassedValue('title', isset($args['title']) ? $args['title'] : null, 'GET');
     $objectid = FormUtil::getPassedValue('objectid', isset($args['objectid']) ? $args['objectid'] : null, 'GET');
@@ -157,12 +159,12 @@ function Polls_user_display($args)
     }
 
     if ($item == false) {
-        return LogUtil::registerError (_NOSUCHITEM, 404);
+        return LogUtil::registerError (__('No such item found.', $dom), 404);
     }
 
     // Check the user has already voted in this poll
     if (SessionUtil::getVar("poll_voted{$item['pollid']}")) {
-		LogUtil::registerStatus(_POLLS_YOUVOTEDALREADY);
+		LogUtil::registerStatus(__('You already voted today!', $dom));
 		return pnModFunc('Polls', 'user', 'results', $args);
     }
 
@@ -184,6 +186,7 @@ function Polls_user_display($args)
  */
 function Polls_user_results($args)
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     $pollid = FormUtil::getPassedValue('pollid', isset($args['pollid']) ? $args['pollid'] : null, 'GET');
     $objectid = FormUtil::getPassedValue('objectid', isset($args['objectid']) ? $args['objectid'] : null, 'GET');
     $title = FormUtil::getPassedValue('title', isset($args['title']) ? $args['title'] : null, 'GET');
@@ -200,7 +203,7 @@ function Polls_user_results($args)
     }
 
     if ($item == false) {
-        return LogUtil::registerError (_NOSUCHITEM, 404);
+        return LogUtil::registerError (__('No such item found.', $dom), 404);
     }
 
     // Create output object
@@ -223,6 +226,7 @@ function Polls_user_results($args)
  */
 function Polls_user_vote($args)
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     $pollid = FormUtil::getPassedValue('pollid', null, 'POST');
     $title = FormUtil::getPassedValue('title', null, 'POST');
     $displayresults = FormUtil::getPassedValue('displayresults', null, 'POST');
@@ -232,7 +236,7 @@ function Polls_user_vote($args)
     // Argument check
     if (!isset($title) ||
         !isset($pollid)) {
-        LogUtil::registerError (_MODARGSERROR);
+        LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
         return pnRedirect(pnModURL('Polls', 'user', 'view'));
     }
 
@@ -242,7 +246,7 @@ function Polls_user_vote($args)
     }
 
     if (SessionUtil::getVar("poll_voted$pollid")) {
-        LogUtil::registerError(_POLLS_YOUVOTEDALREADY);
+        LogUtil::registerError(__('You already voted today!', $dom));
     } else {
         $result = pnModAPIFunc('Polls', 'user', 'vote',
                                array('pollid' => $pollid,

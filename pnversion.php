@@ -10,10 +10,13 @@
  * @subpackage Polls
 */
 
+$dom = ZLanguage::getModuleDomain('Polls');
 $modversion['name'] = 'Polls';
-$modversion['displayname'] = _POLLS_DISPLAYNAME;
-$modversion['description'] = _POLLS_DESCRIPTION;
-$modversion['version'] = '2.0.2';
+$modversion['displayname'] = __('Polls', $dom);
+$modversion['description'] = __('Voting System Module', $dom);
+//! module URL must be different to displayname
+$modversion['url'] = __('polls', $dom);
+$modversion['version'] = '2.1';
 $modversion['credits'] = 'pndocs/credits.txt';
 $modversion['help'] = 'pndocs/install.txt';
 $modversion['changelog'] = 'pndocs/changelog.txt';

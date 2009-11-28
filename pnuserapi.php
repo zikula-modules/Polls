@@ -18,6 +18,7 @@
  */
 function Polls_userapi_getall($args)
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     // Optional arguments
     if (!isset($args['startnum']) || !is_numeric($args['startnum'])) {
         $args['startnum'] = 1;
@@ -31,7 +32,7 @@ function Polls_userapi_getall($args)
 
     if (!is_numeric($args['startnum']) ||
         !is_numeric($args['numitems'])) {
-        return LogUtil::registerError (_MODARGSERROR);
+        return LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
     }
 
     // create a empty result set
@@ -44,7 +45,7 @@ function Polls_userapi_getall($args)
 
     $args['catFilter'] = array();
     if (isset($args['category']) && !empty($args['category'])){
-        if (is_array($args['category'])) { 
+        if (is_array($args['category'])) {
             $args['catFilter'] = $args['category'];
         } elseif (isset($args['property'])) {
             $property = $args['property'];
@@ -98,7 +99,7 @@ function Polls_userapi_getall($args)
     $items = DBUtil::selectObjectArray('poll_desc', $where, $orderby, $args['startnum']-1, $args['numitems'], '', $permFilter, $args['catFilter']);
 
     if($items === false) {
-        return LogUtil::registerError (_GETFAILED);
+        return LogUtil::registerError (__('Error! Could not load items.', $dom));
     }
 
     // need to do this here as the category expansion code can't know the
@@ -120,6 +121,7 @@ function Polls_userapi_getall($args)
  */
 function Polls_userapi_get($args)
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     // optional arguments
     if (isset($args['objectid'])) {
        $args['pollid'] = $args['objectid'];
@@ -128,7 +130,7 @@ function Polls_userapi_get($args)
     // Argument check
     if ((!isset($args['pollid']) || !is_numeric($args['pollid'])) &&
          !isset($args['title'])) {
-        return LogUtil::registerError (_MODARGSERROR);
+        return LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
     }
 
     // define the permission filter to apply
@@ -166,7 +168,7 @@ function Polls_userapi_get($args)
 
     if (pnModGetVar('Polls', 'enablecategorization') && !empty($poll['__CATEGORIES__'])) {
         if (!($class = Loader::loadClass('CategoryRegistryUtil'))) {
-            pn_exit (pnML('_UNABLETOLOADCLASS', array('s' => 'CategoryRegistryUtil')));
+            pn_exit (__f('Error! Unable to load class [%s%]', 'CategoryRegistryUtil', $dom));
         }
         $registeredCats  = CategoryRegistryUtil::getRegisteredModuleCategories('Polls', 'poll_desc');
         ObjectUtil::postProcessExpandedObjectCategories($poll['__CATEGORIES__'], $registeredCats);
@@ -186,7 +188,7 @@ function Polls_userapi_countitems()
 {
     $args['catFilter'] = array();
     if (isset($args['category']) && !empty($args['category'])){
-        if (is_array($args['category'])) { 
+        if (is_array($args['category'])) {
             $args['catFilter'] = $args['category'];
 	    } elseif (isset($args['property'])) {
             $property = $args['property'];
@@ -221,9 +223,10 @@ function Polls_userapi_countitems()
  */
 function Polls_userapi_vote($args)
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     // Argument check
     if (!isset($args['pollid']) || !isset($args['voteid']) || !isset($args['title'])) {
-        return LogUtil::registerError (_MODARGSERROR);
+        return LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
     }
 
     if (SecurityUtil::checkPermission( 'Polls::', "$args[title]::$args[pollid]", ACCESS_COMMENT)) {
@@ -270,9 +273,10 @@ function Polls_userapi_vote($args)
  */
 function Polls_userapi_countvotes($args)
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     // Argument check
     if (!isset($args['pollid'])) {
-        return LogUtil::registerError (_MODARGSERROR);
+        return LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
     }
 
     // setup where clause
@@ -292,9 +296,10 @@ function Polls_userapi_countvotes($args)
  */
 function polls_userapi_encodeurl($args)
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     // check we have the required input
     if (!isset($args['modname']) || !isset($args['func']) || !isset($args['args'])) {
-        return LogUtil::registerError (_MODARGSERROR);
+        return LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
     }
 
     // create an empty string ready for population
@@ -319,7 +324,7 @@ function polls_userapi_encodeurl($args)
         }
         if (pnModGetVar('Polls', 'addcategorytitletopermalink') && isset($args['args']['cat'])) {
             $vars = $args['args']['cat'].'/'.$item['urltitle'];
-        } else { 
+        } else {
             $vars = $item['urltitle'];
         }
         if (isset($args['args']['page']) && $args['args']['page'] != 1) {
@@ -351,9 +356,10 @@ function polls_userapi_encodeurl($args)
  */
 function Polls_userapi_decodeurl($args)
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     // check we actually have some vars to work with...
     if (!isset($args['vars'])) {
-        return LogUtil::registerError (_MODARGSERROR);
+        return LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
     }
 
     // define the available user functions

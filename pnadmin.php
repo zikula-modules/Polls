@@ -38,6 +38,7 @@ function Polls_admin_main()
  */
 function Polls_admin_new()
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     // Security check
     if (!SecurityUtil::checkPermission( 'Polls::', '::', ACCESS_ADD)) {
         return LogUtil::registerPermissionError();
@@ -52,10 +53,10 @@ function Polls_admin_new()
     if ($modvars['enablecategorization']) {
         // load the category registry util
         if (!($class = Loader::loadClass('CategoryRegistryUtil'))) {
-            pn_exit (pnML('_UNABLETOLOADCLASS', array('s' => 'CategoryRegistryUtil')));
+            pn_exit (__f('Error! Unable to load class [%s]', 'CategoryRegistryUtil', $dom));
         }
         $catregistry = CategoryRegistryUtil::getRegisteredModuleCategories ('Polls', 'poll_desc');
-        
+
         $renderer->assign('catregistry', $catregistry);
     }
 
@@ -76,6 +77,7 @@ function Polls_admin_new()
  */
 function Polls_admin_create($args)
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     $poll = FormUtil::getPassedValue('poll', isset($args['poll']) ? $args['poll'] : null, 'POST');
 
     // Confirm authorisation code
@@ -90,7 +92,7 @@ function Polls_admin_create($args)
 
     if ($pollid != false) {
         // Success
-        LogUtil::registerStatus (_CREATESUCCEDED);
+        LogUtil::registerStatus (__('Done! Item created.', $dom));
     }
 
     return pnRedirect(pnModURL('Polls', 'admin', 'view'));
@@ -105,6 +107,7 @@ function Polls_admin_create($args)
  */
 function Polls_admin_modify($args)
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     $pollid = FormUtil::getPassedValue('pollid', isset($args['pollid']) ? $args['pollid'] : null, 'GET');
     $objectid = FormUtil::getPassedValue('objectid', isset($args['objectid']) ? $args['objectid'] : null, 'GET');
 
@@ -114,14 +117,14 @@ function Polls_admin_modify($args)
 
     // Validate the essential parameters
     if (empty($pollid)) {
-        return LogUtil::registerError(_MODARGSERROR);
+        return LogUtil::registerError(__('Error! Could not do what you wanted. Please check your input.', $dom));
     }
 
     // Get the poll
     $item = pnModAPIFunc('Polls', 'user', 'get', array('pollid' => $pollid));
 
     if ($item == false) {
-        return LogUtil::registerError(pnML('_NOSUCHITEM', array('i' => _POLL)), 404);
+        return LogUtil::registerError(__('No such poll found %s', $dom), 404);
     }
 
     // Security check
@@ -139,10 +142,10 @@ function Polls_admin_modify($args)
     if ($modvars['enablecategorization']) {
         // load the category registry util
         if (!($class = Loader::loadClass('CategoryRegistryUtil'))) {
-            pn_exit (pnML('_UNABLETOLOADCLASS', array('s' => 'CategoryRegistryUtil')));
+            pn_exit (__f('Error! Unable to load class [%s]', 'CategoryRegistryUtil', $dom));
         }
         $catregistry = CategoryRegistryUtil::getRegisteredModuleCategories ('Polls', 'poll_desc');
-        
+
         $renderer->assign('catregistry', $catregistry);
     }
 
@@ -165,6 +168,7 @@ function Polls_admin_modify($args)
  */
 function Polls_admin_update($args)
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     $poll = FormUtil::getPassedValue('poll', isset($args['poll']) ? $args['poll'] : null, 'POST');
     if (!empty($poll['objectid'])) {
         $poll['pollid'] = $poll['objectid'];
@@ -179,7 +183,7 @@ function Polls_admin_update($args)
     // Update the poll
     if (pnModAPIFunc('Polls', 'admin', 'update', $poll)) {
         // Success
-        LogUtil::registerStatus (_UPDATESUCCEDED);
+        LogUtil::registerStatus (__('Done! Item updated.', $dom));
     }
 
     return pnRedirect(pnModURL('Polls', 'admin', 'view'));
@@ -195,6 +199,7 @@ function Polls_admin_update($args)
  */
 function Polls_admin_delete($args)
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     $pollid = FormUtil::getPassedValue('pollid', isset($args['pollid']) ? $args['pollid'] : null, 'REQUEST');
     $objectid = FormUtil::getPassedValue('objectid', isset($args['objectid']) ? $args['objectid'] : null, 'REQUEST');
     $confirmation = FormUtil::getPassedValue('confirmation', null, 'POST');
@@ -206,12 +211,12 @@ function Polls_admin_delete($args)
     $item = pnModAPIFunc('Polls', 'user', 'get', array('pollid' => $pollid));
 
     if ($item == false) {
-        return LogUtil::registerError (_NOSUCHITEM, 404);
+        return LogUtil::registerError (__('No such item found.', $dom), 404);
     }
 
     // Security check
     if (!SecurityUtil::checkPermission( 'Polls::Item', "$item[title]::$pollid", ACCESS_DELETE)) {
-        return LogUtil::registerError (_MODULENOAUTH);
+        return LogUtil::registerError (__('Sorry! No authorization to access this module.', $dom));
     }
 
     // Check for confirmation.
@@ -237,7 +242,7 @@ function Polls_admin_delete($args)
     // Delete the poll
     if (pnModAPIFunc('Polls', 'admin', 'delete', array('pollid' => $pollid))) {
         // Success
-        LogUtil::registerStatus (_DELETESUCCEDED);
+        LogUtil::registerStatus (__('Done! Item deleted.', $dom));
     }
 
     return pnRedirect(pnModURL('Polls', 'admin', 'view'));
@@ -251,6 +256,7 @@ function Polls_admin_delete($args)
  */
 function Polls_admin_view()
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     // Security check
     if (!SecurityUtil::checkPermission( 'Polls::', '::', ACCESS_EDIT)) {
         return LogUtil::registerPermissionError();
@@ -272,7 +278,7 @@ function Polls_admin_view()
     if ($modvars['enablecategorization']) {
         // load the category registry util
         if (!($class = Loader::loadClass('CategoryRegistryUtil'))) {
-            pn_exit (pnML('_UNABLETOLOADCLASS', array('s' => 'CategoryRegistryUtil')));
+            pn_exit (__f('Error! Unable to load class [%s]', 'CategoryRegistryUtil', $dom));
         }
         $catregistry  = CategoryRegistryUtil::getRegisteredModuleCategories('Polls', 'poll_desc');
         $properties = array_keys($catregistry);
@@ -311,11 +317,11 @@ function Polls_admin_view()
          if (SecurityUtil::checkPermission( 'Polls::', "$item[title]::$item[pollid]", ACCESS_EDIT)) {
             $options[] = array('url' => pnModURL('Polls', 'admin', 'modify', array('pollid' => $item['pollid'])),
                                'image' => 'xedit.gif',
-                               'title' => _EDIT);
+                               'title' => __('Edit', $dom));
             if (SecurityUtil::checkPermission( 'Polls::', "$item[title]::$item[pollid]", ACCESS_DELETE)) {
                 $options[] = array('url' => pnModURL('Polls', 'admin', 'delete', array('pollid' => $item['pollid'])),
                                    'image' => '14_layer_deletelayer.gif',
-                                   'title' => _DELETE);
+                                   'title' => __('Delete', $dom));
             }
         }
 
@@ -384,6 +390,7 @@ function Polls_admin_modifyconfig()
  */
 function Polls_admin_updateconfig()
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
     // Security check
     if (!SecurityUtil::checkPermission( 'Polls::', '::', ACCESS_ADMIN)) {
         return LogUtil::registerPermissionError();
@@ -411,7 +418,7 @@ function Polls_admin_updateconfig()
     pnModCallHooks('module','updateconfig','Polls', array('module' => 'Polls'));
 
     // the module configuration has been updated successfuly
-    LogUtil::registerStatus (_CONFIGUPDATED);
+    LogUtil::registerStatus (__('Done! Module configuration updated.', $dom));
 
     return pnRedirect(pnModURL('Polls', 'admin', 'view'));
 }
