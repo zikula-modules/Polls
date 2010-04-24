@@ -1,24 +1,31 @@
 <!--[*  $Id: polls_user_display.htm 18013 2006-02-21 22:52:26Z markwest $  *]-->
 <!--[include file="polls_user_menu.htm"]-->
-<h2><!--[$title|pnmodcallhooks:"Polls"|pnvarprephtmldisplay]--></h2>
-<form action="<!--[pnmodurl modname="Polls" type="user" func="vote"]-->" method="post" enctype="application/x-www-form-urlencoded">
-  <div class="polls-voteform" >
-  <input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="Polls"]-->" />
-  <input type="hidden" name="pollid" value="<!--[$pollid|pnvarprepfordisplay]-->" />
-  <input type="hidden" name="title" value="<!--[$title|pnvarprepfordisplay]-->" />
-  <ul class="poll-options-list">
-    <!--[foreach from=$options item=option]-->
-	  <!--[if $option.optiontext neq '']-->
-		  <li><input id="polls_<!--[$option.voteid]-->" name="voteid" type="radio" value="<!--[$option.voteid]-->" />
-	      <label for="polls_<!--[$option.voteid]-->"><!--[$option.optiontext|pnmodcallhooks:"Polls"|pnvarprephtmldisplay]--></label></li>
-	  <!--[/if]-->
-	<!--[/foreach]-->
-  </ul>
-  <input name="submit" type="submit" value="<!--[gt text="Vote"]-->" />
-  </div>
+<h3><!--[$title|pnmodcallhooks:"Polls"|pnvarprephtmldisplay]--></h3>
+
+<form class="z-form" action="<!--[pnmodurl modname="Polls" type="user" func="vote"]-->" method="post" enctype="application/x-www-form-urlencoded">
+    <div>
+        <input type="hidden" name="authid" value="<!--[insert name='generateauthkey' module='Polls']-->" />
+        <input type="hidden" name="pollid" value="<!--[$pollid|pnvarprepfordisplay]-->" />
+        <input type="hidden" name="title" value="<!--[$title|pnvarprepfordisplay]-->" />
+        <fieldset>
+            <!--[foreach from=$options item=option]-->
+            <!--[if $option.optiontext neq '']-->
+            <div class="z-formlist">
+                <input id="polls_<!--[$option.voteid]-->" name="voteid" type="radio" value="<!--[$option.voteid]-->" />
+                <label for="polls_<!--[$option.voteid]-->"><!--[$option.optiontext|pnmodcallhooks:"Polls"|pnvarprephtmldisplay]--></label>
+            </div>
+            <!--[/if]-->
+            <!--[/foreach]-->
+        </fieldset>
+        <div class="z-formbuttons">
+            <input name="submit" type="submit" value="<!--[gt text="Vote"]-->" />
+        </div>
+    </div>
 </form>
-<div class="polls-voteformlinks">
-[ <a href="<!--[pnmodurl modname="Polls" type="user" func="results" pollid=$pollid]-->"><!--[gt text="Results"]--></a> | <a href="<!--[pnmodurl modname="Polls" type="user" func="view"]-->"><!--[gt text="Other Polls"]--></a> ]
+
+<div class="z-menuitem-title polls-voteformlinks">
+    [ <a href="<!--[pnmodurl modname="Polls" type="user" func="results" pollid=$pollid]-->"><!--[gt text="Results"]--></a> | <a href="<!--[pnmodurl modname="Polls" type="user" func="view"]-->"><!--[gt text="Other Polls"]--></a> ]
 </div>
+
 <!--[pnmodurl modname=Polls func=display pollid=$pollid assign=returnurl]-->
 <!--[pnmodcallhooks hookobject=item hookaction=display hookid=$pollid module=Polls returnurl=$returnurl]-->

@@ -32,7 +32,7 @@ function Polls_userapi_getall($args)
 
     if (!is_numeric($args['startnum']) ||
         !is_numeric($args['numitems'])) {
-        return LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
+        return LogUtil::registerArgsError();
     }
 
     // create a empty result set
@@ -66,7 +66,7 @@ function Polls_userapi_getall($args)
     $polldesccolumn = $pntable['poll_desc_column'];
     $queryargs = array();
     if (pnConfigGetVar('multilingual') == 1 && !$args['ignoreml']) {
-        $queryargs[] = "($polldesccolumn[language]='" . DataUtil::formatForStore(pnUserGetLang()) . "' OR $polldesccolumn[language]='')";
+        $queryargs[] = "($polldesccolumn[language]='" . DataUtil::formatForStore(ZLanguage::getLanguageCode()) . "' OR $polldesccolumn[language]='')";
     }
 
     $where = null;
@@ -130,7 +130,7 @@ function Polls_userapi_get($args)
     // Argument check
     if ((!isset($args['pollid']) || !is_numeric($args['pollid'])) &&
          !isset($args['title'])) {
-        return LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
+        return LogUtil::registerArgsError();
     }
 
     // define the permission filter to apply
@@ -202,7 +202,7 @@ function Polls_userapi_countitems()
     $polldesccolumn = $pntable['poll_desc_column'];
     $queryargs = array();
     if (pnConfigGetVar('multilingual') == 1 && isset($args['ignoreml']) && !$args['ignoreml']) {
-        $queryargs[] = "($polldesccolumn[language]='" . DataUtil::formatForStore(pnUserGetLang()) . "' OR $polldesccolumn[language]='')";
+        $queryargs[] = "($polldesccolumn[language]='" . DataUtil::formatForStore(ZLanguage::getLanguageCode()) . "' OR $polldesccolumn[language]='')";
     }
 
     $where = '';
@@ -226,7 +226,7 @@ function Polls_userapi_vote($args)
     $dom = ZLanguage::getModuleDomain('Polls');
     // Argument check
     if (!isset($args['pollid']) || !isset($args['voteid']) || !isset($args['title'])) {
-        return LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
+        return LogUtil::registerArgsError();
     }
 
     if (SecurityUtil::checkPermission( 'Polls::', "$args[title]::$args[pollid]", ACCESS_COMMENT)) {
@@ -244,7 +244,7 @@ function Polls_userapi_vote($args)
                 AND ($poll_data_column[voteid] = '" . (int)DataUtil::formatForStore($args['voteid']) . "')";
         $result = DBUtil::executeSQL($sql);
         if (!$result) {
-            return LogUtil::registerError (_POLLS_VOTEFAILED);
+            return LogUtil::registerError (__('Error! Error creating vote.', $dom));
         }
 
         // add second part of the vote - adds 1 to total vote count
@@ -253,7 +253,7 @@ function Polls_userapi_vote($args)
                WHERE $poll_desc_column[pollid] = '" . (int)DataUtil::formatForStore($args['pollid']) . "'";
         $result = DBUtil::executeSQL($sql);
         if (!$result) {
-            return LogUtil::registerError (_POLLS_VOTEFAILED);
+            return LogUtil::registerError (__('Error! Error creating vote.', $dom));
         }
 
         // set cookie to indicate vote made in this poll used only with cookie based voting
@@ -276,7 +276,7 @@ function Polls_userapi_countvotes($args)
     $dom = ZLanguage::getModuleDomain('Polls');
     // Argument check
     if (!isset($args['pollid'])) {
-        return LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
+        return LogUtil::registerArgsError();
     }
 
     // setup where clause
@@ -299,7 +299,7 @@ function polls_userapi_encodeurl($args)
     $dom = ZLanguage::getModuleDomain('Polls');
     // check we have the required input
     if (!isset($args['modname']) || !isset($args['func']) || !isset($args['args'])) {
-        return LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
+        return LogUtil::registerArgsError();
     }
 
     // create an empty string ready for population
@@ -359,7 +359,7 @@ function Polls_userapi_decodeurl($args)
     $dom = ZLanguage::getModuleDomain('Polls');
     // check we actually have some vars to work with...
     if (!isset($args['vars'])) {
-        return LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
+        return LogUtil::registerArgsError();
     }
 
     // define the available user functions

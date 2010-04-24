@@ -87,7 +87,7 @@ function Polls_user_view()
                     }
                     $catFilter = array($prop => $catstofilter);
                 } else {
-                    LogUtil::registerError(__('Invalid category', $dom));
+                    LogUtil::registerError(__('Error! Invalid category', $dom));
                 }
             }
         }
@@ -120,7 +120,7 @@ function Polls_user_view()
 
     // assign various useful template variables
     $renderer->assign('startnum', $startnum);
-    $renderer->assign('lang', pnUserGetLang());
+    $renderer->assign('lang', ZLanguage::getLanguageCode());
     $renderer->assign($modvars);
     $renderer->assign('shorturls', pnConfigGetVar('shorturls'));
     $renderer->assign('shorturlstype', pnConfigGetVar('shorturlstype'));
@@ -236,7 +236,7 @@ function Polls_user_vote($args)
     // Argument check
     if (!isset($title) ||
         !isset($pollid)) {
-        LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
+        LogUtil::registerArgsError();
         return pnRedirect(pnModURL('Polls', 'user', 'view'));
     }
 

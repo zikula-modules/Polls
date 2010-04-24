@@ -1,9 +1,9 @@
 <!--[*  $Id: polls_user_view.htm 18013 2006-02-21 22:52:26Z markwest $  *]-->
 <!--[include file="polls_user_menu.htm"]-->
-<h2><!--[gt text="Past Surveys"]--></h2>
+<h3><!--[gt text="Past surveys"]--></h3>
 <ul>
-	<!--[foreach item=poll from=$polls]-->
-	<li><!--[$poll]--></li>
-	<!--[/foreach]-->
+    <!--[foreach item=poll from=$polls]-->
+    <li><!--[$poll]--></li>
+    <!--[/foreach]-->
 </ul>
 <!--[pager show=page rowcount=$pager.numitems limit=$pager.itemsperpage posvar=startnum shift=1]-->

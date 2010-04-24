@@ -1,21 +1,22 @@
 <!--[*  $Id: polls_admin_delete.htm 18393 2006-03-29 19:45:33Z markwest $  *]-->
 <!--[include file="polls_admin_menu.htm"]-->
 <!--[gt text="Delete Poll" assign=templatetitle]-->
-<div class="pn-admincontainer">
-<div class="pn-adminpageicon"><!--[pnimg modname='core' src='editdelete.gif' set='icons/large' alt=$templatetitle]--></div>
-<h2><!--[$templatetitle]--></h2>
-<form class="pn-adminform" action="<!--[pnmodurl modname="Polls" type="admin" func="delete"]-->" method="post" enctype="application/x-www-form-urlencoded">
-<div>
-    <input type="hidden" name="authid" value="<!--[pnsecgenauthkey module="Polls"]-->">
-    <input type="hidden" name="confirmation" value="1">
-    <input type="hidden" name="pollid" value="<!--[$pollid|pnvarprepfordisplay]-->">
-	<div class="pn-adminformrow">
-	    <p><!--[gt text="Confirm Deletion of Poll"]--></p>
-	</div>
-    <div class="pn-adminformrow pn-adminformbuttons">
-    <!--[pnbutton src='button_ok.gif' set='icons/small' __alt="Confirm deletion?" __title="Confirm deletion?"]-->
-    <a href="<!--[pnmodurl modname=Polls type=admin func=view]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
-    </div>
-</div>
-</form>
+<div class="z-admincontainer">
+    <div class="z-adminpageicon"><!--[pnimg modname='core' src='editdelete.gif' set='icons/large' alt=$templatetitle]--></div>
+    <h2><!--[$templatetitle]--></h2>
+    <p class="z-warningmsg"><!--[gt text="Do you really want to delete this poll?"]--></p>
+    <form class="z-form" action="<!--[pnmodurl modname="Polls" type="admin" func="delete"]-->" method="post" enctype="application/x-www-form-urlencoded">
+        <div>
+            <input type="hidden" name="authid" value="<!--[insert name='generateauthkey' module='Polls']-->" />
+            <input type="hidden" name="confirmation" value="1" />
+            <input type="hidden" name="pollid" value="<!--[$pollid|pnvarprepfordisplay]-->" />
+            <fieldset>
+                <legend><!--[gt text="Confirmation prompt"]--></legend>
+                <div class="z-formbuttons">
+                    <!--[pnbutton src='button_ok.gif' set='icons/small' __alt="Delete" __title="Delete"]-->
+                    <a href="<!--[pnmodurl modname=Polls type=admin func=view]-->"><!--[pnimg modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"]--></a>
+                </div>
+            </fieldset>
+        </div>
+    </form>
 </div>

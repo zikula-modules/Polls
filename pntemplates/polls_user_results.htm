@@ -1,33 +1,37 @@
 <!--[*  $Id: polls_user_results.htm 18013 2006-02-21 22:52:26Z markwest $  *]-->
 <!--[include file="polls_user_menu.htm"]-->
-<h2><!--[$title]--></h2>
+<h3><!--[$title]--></h3>
 
 <div class="polls-resultstable">
-<ul class="polls-resultschart">
- <!--[section name=options loop=$options]-->
-  <!--[if $options[options].optiontext neq ""]-->
-  <li>
-    <span class="item"><!--[$options[options].optiontext|pnvarprepfordisplay]--></span> 
-    <span class="count"><!--[$options[options].percent|pnvarprepfordisplay]-->%</span>
-    <span class="index" style="width: <!--[$options[options].percent|pnvarprepfordisplay]-->%"> <!--[$options[options].optioncount|pnvarprepfordisplay]--> <!--[gt text="Votes"]--></span>
-  </li>
-  <!--[/if]-->
- <!--[/section]-->
-</ul>
+    <ul class="polls-resultschart">
+        <!--[section name=options loop=$options]-->
+        <!--[if $options[options].optiontext neq ""]-->
+        <li>
+            <span class="item"><!--[$options[options].optiontext|pnvarprepfordisplay]--></span>
+            <span class="count"><!--[$options[options].percent|pnvarprepfordisplay]-->%</span>
+            <span class="index" style="width: <!--[$options[options].percent|pnvarprepfordisplay]-->%"> <!--[$options[options].optioncount|pnvarprepfordisplay]--> <!--[gt text="Votes"]--></span>
+        </li>
+        <!--[/if]-->
+        <!--[/section]-->
+    </ul>
 </div>
+
 <div class="polls-resultlinks">
-<!--[$votecount|pnvarprepfordisplay]-->
-<!--[if $votecount eq 1]-->
- <!--[gt text="Vote"]-->
-<!--[else]-->
- <!--[gt text="Votes"]-->
-<!--[/if]-->
+    <!--[$votecount|pnvarprepfordisplay]-->
+    <!--[if $votecount eq 1]-->
+    <!--[gt text="Vote"]-->
+    <!--[else]-->
+    <!--[gt text="Votes"]-->
+    <!--[/if]-->
 </div>
+
 <div class="polls-resultlinks">
-<!--[gt text="We only allow one vote per day"]-->
+    <!--[gt text="We only allow one vote per day"]-->
 </div>
+
 <div class="polls-resultlinks">
-[ <a href="<!--[pnmodurl modname="Polls" type="user" func="display" pollid=$pollid]-->"><!--[gt text="Voting Booth"]--></a> | <a href="<!--[pnmodurl modname="Polls" type="user" func="view"]-->"><!--[gt text="Other Polls"]--></a> ]
+    [ <a href="<!--[pnmodurl modname="Polls" type="user" func="display" pollid=$pollid]-->"><!--[gt text="Voting Booth"]--></a> | <a href="<!--[pnmodurl modname="Polls" type="user" func="view"]-->"><!--[gt text="Other Polls"]--></a> ]
 </div>
+
 <!--[pnmodurl modname=Polls func=display pollid=$pollid assign=returnurl]-->
 <!--[pnmodcallhooks hookobject=item hookaction=display hookid=$pollid module=Polls returnurl=$returnurl]-->

@@ -33,9 +33,6 @@ function polls_ajax_vote()
         AjaxUtil::error(__("Invalid 'authkey':  this probably means that you pressed the 'Back' button, or that the page 'authkey' expired. Please refresh the page and try again.", $dom));
     }
 
-    // load the language file
-    pnModLangLoad('Polls', 'user');
-
     // Check the user has already voted in this poll
     $uservotedalready = (bool)SessionUtil::getVar("poll_voted{$pollid}");
 

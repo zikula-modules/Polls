@@ -22,12 +22,12 @@ function Polls_adminapi_create($args)
     $dom = ZLanguage::getModuleDomain('Polls');
     // Argument check
     if (!isset($args['title']) || !isset($args['options'])) {
-        return LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
+        return LogUtil::registerArgsError();
     }
 
     // Security check
     if (!SecurityUtil::checkPermission( 'Polls::', "$args[title]::", ACCESS_ADD)) {
-        return LogUtil::registerError (__('Sorry! No authorization to access this module.', $dom));
+        return LogUtil::registerPermissionError();
     }
 
     // defaults
@@ -70,27 +70,27 @@ function Polls_adminapi_delete($args)
     $dom = ZLanguage::getModuleDomain('Polls');
     // Argument check
     if (!isset($args['pollid'])) {
-        return LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
+        return LogUtil::registerArgsError();
     }
 
     // Get the poll
     $item = pnModAPIFunc('Polls', 'user', 'get', array('pollid' => $args['pollid']));
 
     if ($item == false) {
-        return LogUtil::registerError (__('No such item found.', $dom));
+        return LogUtil::registerError (__('Erro! No such item found.', $dom));
     }
 
     // Security check
     if (!SecurityUtil::checkPermission( 'Polls::Item', "$item[title]::$args[pollid]", ACCESS_DELETE)) {
-        return LogUtil::registerError (__('Sorry! No authorization to access this module.', $dom));
+        return LogUtil::registerPermissionError();
     }
 
     // Delete the object
     if (!DBUtil::deleteObjectByID('poll_data', $args['pollid'], 'pollid')) {
-        return LogUtil::registerError (__('Error! Sorry! Deletion attempt failed.', $dom));
+        return LogUtil::registerError (__('Error! Deletion attempt failed.', $dom));
     }
     if (!DBUtil::deleteObjectByID('poll_desc', $args['pollid'], 'pollid')) {
-        return LogUtil::registerError (__('Error! Sorry! Deletion attempt failed.', $dom));
+        return LogUtil::registerError (__('Error! Deletion attempt failed.', $dom));
     }
 
     // Let any hooks know that we have deleted an item
@@ -115,7 +115,7 @@ function Polls_adminapi_update($args)
     if (!isset($args['pollid']) ||
         !isset($args['title']) ||
         !isset($args['options'])) {
-        return LogUtil::registerError (__('Error! Could not do what you wanted. Please check your input.', $dom));
+        return LogUtil::registerArgsError();
     }
 
     // set some defaults
@@ -130,15 +130,15 @@ function Polls_adminapi_update($args)
     $item = pnModAPIFunc('Polls', 'user', 'get', array('pollid' => $args['pollid']));
 
     if ($item == false) {
-        return LogUtil::registerError (__('No such item found.', $dom));
+        return LogUtil::registerError (__('Error! No such item found.', $dom));
     }
 
     // Security check
     if (!SecurityUtil::checkPermission( 'Polls::Item', "$item[title]::$args[pollid]", ACCESS_EDIT)) {
-        return LogUtil::registerError (__('Sorry! No authorization to access this module.', $dom));
+        return LogUtil::registerPermissionError();
     }
     if (!SecurityUtil::checkPermission( 'Polls::Item', "$args[title]::$args[pollid]", ACCESS_EDIT)) {
-        return LogUtil::registerError (__('Sorry! No authorization to access this module.', $dom));
+        return LogUtil::registerPermissionError();
     }
 
     if (!DBUtil::updateObject($args, 'poll_desc', '', 'pollid')) {
@@ -172,10 +172,10 @@ function polls_adminapi_getlinks()
     $links = array();
 
     if (SecurityUtil::checkPermission('Polls::', '::', ACCESS_READ)) {
-        $links[] = array('url' => pnModURL('Polls', 'admin', 'view'), 'text' => __('View Polls', $dom));
+        $links[] = array('url' => pnModURL('Polls', 'admin', 'view'), 'text' => __('View polls', $dom));
     }
     if (SecurityUtil::checkPermission('Polls::', '::', ACCESS_ADD)) {
-        $links[] = array('url' => pnModURL('Polls', 'admin', 'new'), 'text' => __('Create New Poll', $dom));
+        $links[] = array('url' => pnModURL('Polls', 'admin', 'new'), 'text' => __('Create new poll', $dom));
     }
     if (SecurityUtil::checkPermission('Polls::', '::', ACCESS_ADMIN)) {
         $links[] = array('url' => pnModURL('Polls', 'admin', 'modifyconfig'), 'text' => __('Settings', $dom));

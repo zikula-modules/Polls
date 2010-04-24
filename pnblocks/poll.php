@@ -45,9 +45,6 @@ function Polls_pollblock_display($blockinfo)
         return;
     }
 
-    // load the module language file
-    pnModLangLoad('Polls', 'user');
-
     // Get variables from content block
     $vars = pnBlockVarsFromContent($blockinfo['content']);
 
