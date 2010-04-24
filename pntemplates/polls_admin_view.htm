@@ -55,6 +55,7 @@
                 <td><!--[$poll.pollid|pnvarprepfordisplay]--></td>
                 <!--[if $enablecategorization]-->
                 <td>
+                    <!--[if $poll.__CATEGORIES__]-->
                     <ul>
                         <!--[ foreach from=$poll.__CATEGORIES__ item=cat ]-->
                         <!--[array_field_isset assign="catname" array=$cat.display_name field=$lang returnValue=1]-->
@@ -62,6 +63,7 @@
                         <li><!--[$catname]--></li>
                         <!--[/foreach]-->
                     </ul>
+                    <!--[/if]-->
                 </td>
                 <!--[/if]-->
                 <td>

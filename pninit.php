@@ -91,6 +91,12 @@ function Polls_upgrade($oldversion)
                 LogUtil::registerError (__('Error! Update attempt failed.', $dom));
                 return '2.0';
             }
+        case '2.0.1':
+        case '2.0.2':
+            _upgrade_updatePollsLanguages();
+
+        case '2.1':
+            // future upgrade routines
             break;
     }
     // Upgrade successful
@@ -163,6 +169,26 @@ function _polls_createdefaultcategory($regpath = '/__SYSTEM__/Modules/Global')
         $registry->setDataField('property', 'Main');
         $registry->setDataField('category_id', $rootcat['id']);
         $registry->insert();
+    }
+
+    return true;
+}
+
+function _upgrade_updatePollsLanguages()
+{
+    $obj = DBUtil::selectObjectArray('poll_desc');
+
+    if (count($obj) == 0) {
+        // nothing to do
+        return;
+    }
+
+    foreach ($obj as $pollid) {
+        // translate l3 -> l2
+        if ($l2 = ZLanguage::translateLegacyCode($pollid['language'])) {
+            $pollid['language'] = $l2;
+        }
+        DBUtil::updateObject($pollid, 'poll_desc', '', 'pollid', true);
     }
 
     return true;
