@@ -13,7 +13,7 @@
                     <input id="pages_enablecategorization" type="checkbox" name="enablecategorization"<!--[if $enablecategorization]--> checked="checked"<!--[/if]--> />
                 </div>
                 <div class="z-formrow">
-                    <label for="polls_itemsperpage"><!--[gt text="Items per page"]--></label>
+                    <label for="polls_itemsperpage"><!--[gt text="Polls per page"]--></label>
                     <input id="polls_itemsperpage" type="text" name="itemsperpage" size="3" value="<!--[$itemsperpage|pnvarprepfordisplay]-->" />
                 </div>
                 <div class="z-formrow">
@@ -23,8 +23,8 @@
                 <div class="z-formrow">
                     <label for="polls_sortorder"><!--[gt text="Order polls by"]--></label>
                     <select id="polls_sortorder" name="sortorder" size="1">
-                        <option value="0"<!--[if $sortorder eq 0]--> selected="selected"<!--[/if]-->><!--[gt text="Poll ID"]--></option>
-                        <option value="1"<!--[if $sortorder eq 1]--> selected="selected"<!--[/if]-->><!--[gt text="Poll Date/Time"]--></option>
+                        <option value="0"<!--[if $sortorder eq 0]--> selected="selected"<!--[/if]-->><!--[gt text="Internal ID"]--></option>
+                        <option value="1"<!--[if $sortorder eq 1]--> selected="selected"<!--[/if]-->><!--[gt text="Date/Time"]--></option>
                     </select>
                 </div>
             </fieldset>

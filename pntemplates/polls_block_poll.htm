@@ -15,7 +15,7 @@
             <li>
                 <span class="item"><!--[$options[options].optiontext|pnvarprepfordisplay]--></span>
                 <span class="count"><!--[$options[options].percent|pnvarprepfordisplay]-->%</span>
-                <span class="index" style="width: <!--[$options[options].percent|pnvarprepfordisplay]-->%"> <!--[$options[options].optioncount|pnvarprepfordisplay]--> <!--[gt text="Votes" domain="module_polls"]--></span>
+                <span class="index" style="width: <!--[$options[options].percent|pnvarprepfordisplay]-->%"> <!--[gt text="%s vote" plural="%s votes" count=$options[options].optioncount tag1=$options[options].optioncount domain="module_polls"]--></span>
             </li>
             <!--[/if]-->
             <!--[/section]-->

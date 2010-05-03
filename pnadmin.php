@@ -51,7 +51,7 @@ function Polls_admin_new()
     if ($modvars['enablecategorization']) {
         // load the category registry util
         if (!($class = Loader::loadClass('CategoryRegistryUtil'))) {
-            pn_exit (__f('Error! Unable to load class [%s]', 'CategoryRegistryUtil', $dom));
+            pn_exit (__f('Error! Unable to load class [%s].', 'CategoryRegistryUtil', $dom));
         }
         $catregistry = CategoryRegistryUtil::getRegisteredModuleCategories ('Polls', 'poll_desc');
 
@@ -90,7 +90,7 @@ function Polls_admin_create($args)
 
     if ($pollid != false) {
         // Success
-        LogUtil::registerStatus (__('Done! Item created.', $dom));
+        LogUtil::registerStatus (__('Done! Poll created.', $dom));
     }
 
     return pnRedirect(pnModURL('Polls', 'admin', 'view'));
@@ -122,7 +122,7 @@ function Polls_admin_modify($args)
     $item = pnModAPIFunc('Polls', 'user', 'get', array('pollid' => $pollid));
 
     if ($item == false) {
-        return LogUtil::registerError(__('Error! No such poll found %s', $dom), 404);
+        return LogUtil::registerError(__('Error! No such poll found.', $dom), 404);
     }
 
     // Security check
@@ -140,7 +140,7 @@ function Polls_admin_modify($args)
     if ($modvars['enablecategorization']) {
         // load the category registry util
         if (!($class = Loader::loadClass('CategoryRegistryUtil'))) {
-            pn_exit (__f('Error! Unable to load class [%s]', 'CategoryRegistryUtil', $dom));
+            pn_exit (__f('Error! Unable to load class [%s].', 'CategoryRegistryUtil', $dom));
         }
         $catregistry = CategoryRegistryUtil::getRegisteredModuleCategories ('Polls', 'poll_desc');
 
@@ -181,7 +181,7 @@ function Polls_admin_update($args)
     // Update the poll
     if (pnModAPIFunc('Polls', 'admin', 'update', $poll)) {
         // Success
-        LogUtil::registerStatus (__('Done! Item updated.', $dom));
+        LogUtil::registerStatus (__('Done! Poll updated.', $dom));
     }
 
     return pnRedirect(pnModURL('Polls', 'admin', 'view'));
@@ -209,7 +209,7 @@ function Polls_admin_delete($args)
     $item = pnModAPIFunc('Polls', 'user', 'get', array('pollid' => $pollid));
 
     if ($item == false) {
-        return LogUtil::registerError (__('Error! No such item found.', $dom), 404);
+        return LogUtil::registerError (__('Error! No such poll found.', $dom), 404);
     }
 
     // Security check
@@ -240,7 +240,7 @@ function Polls_admin_delete($args)
     // Delete the poll
     if (pnModAPIFunc('Polls', 'admin', 'delete', array('pollid' => $pollid))) {
         // Success
-        LogUtil::registerStatus (__('Done! Item deleted.', $dom));
+        LogUtil::registerStatus (__('Done! Poll deleted.', $dom));
     }
 
     return pnRedirect(pnModURL('Polls', 'admin', 'view'));
@@ -276,7 +276,7 @@ function Polls_admin_view()
     if ($modvars['enablecategorization']) {
         // load the category registry util
         if (!($class = Loader::loadClass('CategoryRegistryUtil'))) {
-            pn_exit (__f('Error! Unable to load class [%s]', 'CategoryRegistryUtil', $dom));
+            pn_exit (__f('Error! Unable to load class [%s].', 'CategoryRegistryUtil', $dom));
         }
         $catregistry  = CategoryRegistryUtil::getRegisteredModuleCategories('Polls', 'poll_desc');
         $properties = array_keys($catregistry);
@@ -409,7 +409,7 @@ function Polls_admin_updateconfig()
     $sortorder = FormUtil::getPassedValue('sortorder', 0, 'POST');
     pnModSetVar('Polls', 'sortorder', $sortorder);
 
-    $scale = FormUtil::getPassedValue('enablecategorization', 1, 'POST');
+    $enablecategorization = (bool)FormUtil::getPassedValue('enablecategorization', false, 'POST');
     pnModSetVar('Polls', 'enablecategorization', $enablecategorization);
 
     $addcategorytitletopermalink = (bool)FormUtil::getPassedValue('addcategorytitletopermalink', false, 'POST');

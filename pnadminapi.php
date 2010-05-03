@@ -75,7 +75,7 @@ function Polls_adminapi_delete($args)
     $item = pnModAPIFunc('Polls', 'user', 'get', array('pollid' => $args['pollid']));
 
     if ($item == false) {
-        return LogUtil::registerError (__('Erro! No such item found.', $dom));
+        return LogUtil::registerError (__('Error! No such poll found.', $dom));
     }
 
     // Security check
@@ -128,7 +128,7 @@ function Polls_adminapi_update($args)
     $item = pnModAPIFunc('Polls', 'user', 'get', array('pollid' => $args['pollid']));
 
     if ($item == false) {
-        return LogUtil::registerError (__('Error! No such item found.', $dom));
+        return LogUtil::registerError (__('Error! No such poll found.', $dom));
     }
 
     // Security check

@@ -110,7 +110,7 @@ function Polls_Pollblock_modify($blockinfo)
     $items = pnModAPIFunc('Polls', 'user', 'getall');
 
     // form a list of polls suitable for html_options
-    $polloptions = array(-1 => __('Latest Poll', $dom));
+    $polloptions = array(-1 => __('Latest poll', $dom));
 
     foreach ($items as $item) {
         $polloptions[$item['pollid']] = $item['title'];

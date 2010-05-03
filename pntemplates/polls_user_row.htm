@@ -6,5 +6,4 @@
     <a href="<!--[pnmodurl modname="Polls" func="display" pollid=$pollid]-->"><!--[$title|pnvarprephtmldisplay]--></a>
 <!--[/if]-->
 
-(<a href="<!--[pnmodurl modname="Polls" func="results" pollid=$pollid]-->"><!--[gt text="Results"]--></a> -
-<!--[$votecount|pnvarprepfordisplay]--> <!--[gt text="Votes"]-->)
+(<a href="<!--[pnmodurl modname="Polls" func="results" pollid=$pollid]-->"><!--[gt text="Results"]--></a> - <!--[gt text="%s vote" plural="%s votes" count=$votecount tag1=$votecount]-->)

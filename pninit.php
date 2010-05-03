@@ -61,7 +61,7 @@ function Polls_upgrade($oldversion)
         case '1.1':
             // check for the ezcomments module
             if (!pnModAvailable('EZComments')) {
-                LogUtil::registerError (__('Error! EZComments module not available - this is required to migrate any poll comments', $dom));
+                LogUtil::registerError (__('Error! EZComments module not available - this is required to migrate any poll comments.', $dom));
                 return '1.1';
             }
             // migrate the comments to ezcomments

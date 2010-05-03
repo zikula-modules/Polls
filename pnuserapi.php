@@ -97,7 +97,7 @@ function Polls_userapi_getall($args)
     $items = DBUtil::selectObjectArray('poll_desc', $where, $orderby, $args['startnum']-1, $args['numitems'], '', $permFilter, $args['catFilter']);
 
     if($items === false) {
-        return LogUtil::registerError (__('Error! Could not load items.', $dom));
+        return LogUtil::registerError (__('Error! Could not load polls.', $dom));
     }
 
     // need to do this here as the category expansion code can't know the
@@ -174,7 +174,7 @@ function Polls_userapi_get($args)
 
     if (pnModGetVar('Polls', 'enablecategorization') && !empty($poll['__CATEGORIES__'])) {
         if (!($class = Loader::loadClass('CategoryRegistryUtil'))) {
-            pn_exit (__f('Error! Unable to load class [%s%]', 'CategoryRegistryUtil', $dom));
+            pn_exit (__f('Error! Unable to load class [%s].', 'CategoryRegistryUtil', $dom));
         }
         $registeredCats  = CategoryRegistryUtil::getRegisteredModuleCategories('Polls', 'poll_desc');
         ObjectUtil::postProcessExpandedObjectCategories($poll['__CATEGORIES__'], $registeredCats);

@@ -28,7 +28,7 @@ function Polls_user_main()
     // load the categories system
     if (pnModGetVar('Polls', 'enablecategorization')) {
         if (!($class = Loader::loadClass('CategoryUtil')) || !($class = Loader::loadClass('CategoryRegistryUtil'))) {
-            pn_exit (__f('Error! Unable to load class [%s%]', 'CategoryUtil | CategoryRegistryUtil', $dom));
+            pn_exit (__f('Error! Unable to load class [%s].', 'CategoryUtil | CategoryRegistryUtil', $dom));
         }
         $catregistry = CategoryRegistryUtil::getRegisteredModuleCategories('Polls', 'poll_desc');
         $categories = array();
@@ -82,7 +82,7 @@ function Polls_user_view()
     // load the categories system
     if ($modvars['enablecategorization'] && !empty($prop) && !empty($cat)) {
         if (!($class = Loader::loadClass('CategoryUtil')) || !($class = Loader::loadClass('CategoryRegistryUtil'))) {
-            pn_exit (__f('Error! Unable to load class [%s%]', 'CategoryUtil | CategoryRegistryUtil', $dom));
+            pn_exit (__f('Error! Unable to load class [%s].', 'CategoryUtil | CategoryRegistryUtil', $dom));
         }
         // get the categories registered for the Pages
         $catregistry = CategoryRegistryUtil::getRegisteredModuleCategories('Polls', 'poll_desc');
@@ -106,7 +106,7 @@ function Polls_user_view()
                 }
                 $catFilter = array($prop => $catstofilter);
             } else {
-            	LogUtil::registerError(__('Invalid category', $dom));
+            	LogUtil::registerError(__('Error! Invalid category.', $dom));
             }
         }
     }
@@ -119,7 +119,7 @@ function Polls_user_view()
                                 'catregistry' => isset($catregistry) ? $catregistry : null));
 
     if ($items == false) {
-        LogUtil::registerError(__('No items found.', $dom));
+        LogUtil::registerError(__('No polls found.', $dom));
     }
 
     // Create output object
@@ -182,7 +182,7 @@ function Polls_user_display($args)
     }
 
     if ($item == false) {
-        return LogUtil::registerError (__('No such item found.', $dom), 404);
+        return LogUtil::registerError (__('No such poll found.', $dom), 404);
     }
 
     // Check the user has already voted in this poll
@@ -226,7 +226,7 @@ function Polls_user_results($args)
     }
 
     if ($item == false) {
-        return LogUtil::registerError (__('No such item found.', $dom), 404);
+        return LogUtil::registerError (__('No such poll found.', $dom), 404);
     }
 
     // Create output object

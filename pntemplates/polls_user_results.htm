@@ -28,14 +28,7 @@
 </div>
 
 <p class="polls-resultlinks">
-    <strong>
-        <!--[$votecount|pnvarprepfordisplay]-->
-        <!--[if $votecount eq 1]-->
-        <!--[gt text="Vote"]-->
-        <!--[else]-->
-        <!--[gt text="Votes"]-->
-        <!--[/if]-->
-    </strong>
+    <strong><!--[gt text="%s vote" plural="%s votes" count=$votecount tag1=$votecount]--></strong>
 </p>
 
 <p class="polls-resultlinks"><!--[gt text="We only allow one vote per day"]--></p>

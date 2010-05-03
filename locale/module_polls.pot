@@ -1,0 +1,373 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Zikula 1.2.x\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-05-03 15:39+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: pnadmin.php:54 pnadmin.php:143 pnadmin.php:279 pnuserapi.php:177
+#: pnuser.php:31 pnuser.php:85
+#, php-format
+msgid "Error! Unable to load class [%s]."
+msgstr ""
+
+#: pnadmin.php:93
+msgid "Done! Poll created."
+msgstr ""
+
+#: pnadmin.php:125 pnadmin.php:212 pnadminapi.php:78 pnadminapi.php:131
+msgid "Error! No such poll found."
+msgstr ""
+
+#: pnadmin.php:184
+msgid "Done! Poll updated."
+msgstr ""
+
+#: pnadmin.php:243
+msgid "Done! Poll deleted."
+msgstr ""
+
+#: pnadmin.php:318
+msgid "Edit"
+msgstr ""
+
+#: pnadmin.php:322 pntemplates/polls_admin_delete.htm:16
+msgid "Delete"
+msgstr ""
+
+#: pnadmin.php:422
+msgid "Done! Module configuration updated."
+msgstr ""
+
+#: pnajax.php:27
+msgid "Sorry! No authorization to access this module."
+msgstr ""
+
+#: pnajax.php:31
+msgid ""
+"Invalid 'authkey':  this probably means that you pressed the 'Back' button, "
+"or that the page 'authkey' expired. Please refresh the page and try again."
+msgstr ""
+
+#: pnversion.php:13 pnblocks/poll.php:29 pninit.php:152
+#: pntemplates/polls_admin_menu.htm:4 pntemplates/polls_user_menu.htm:3
+#: pntemplates/polls_user_view.htm:3 pntemplates/polls_user_main.htm:2
+msgid "Polls"
+msgstr ""
+
+#: pnversion.php:14 pninit.php:153
+msgid "Voting System Module"
+msgstr ""
+
+#: pnversion.php:15
+msgid "polls"
+msgstr ""
+
+#: pnuserapi.php:100
+msgid "Error! Could not load polls."
+msgstr ""
+
+#: pnuserapi.php:253 pnuserapi.php:262
+msgid "Error! Error creating vote."
+msgstr ""
+
+#: pnblocks/poll.php:30
+msgid "Show a poll"
+msgstr ""
+
+#: pnblocks/poll.php:113
+msgid "Latest poll"
+msgstr ""
+
+#: pnuser.php:109
+msgid "Error! Invalid category."
+msgstr ""
+
+#: pnuser.php:122 pntemplates/polls_admin_view.htm:77
+msgid "No polls found."
+msgstr ""
+
+#: pnuser.php:185 pnuser.php:229
+msgid "No such poll found."
+msgstr ""
+
+#: pnuser.php:190 pnuser.php:272
+msgid "You already voted today!"
+msgstr ""
+
+#: pnadminapi.php:43 pnadminapi.php:49 pninit.php:29
+msgid "Error! Creation attempt failed."
+msgstr ""
+
+#: pnadminapi.php:88 pnadminapi.php:91
+msgid "Error! Deletion attempt failed."
+msgstr ""
+
+#: pnadminapi.php:143 pnadminapi.php:150 pninit.php:89
+msgid "Error! Update attempt failed."
+msgstr ""
+
+#: pnadminapi.php:173 pntemplates/polls_user_display.htm:8
+#: pntemplates/polls_admin_view.htm:4 pntemplates/polls_user_view.htm:7
+#: pntemplates/polls_user_results.htm:8 pntemplates/polls_user_main.htm:6
+msgid "View polls"
+msgstr ""
+
+#: pnadminapi.php:176 pntemplates/polls_admin_new.htm:3
+msgid "Create new poll"
+msgstr ""
+
+#: pnadminapi.php:179 pntemplates/polls_admin_modifyconfig.htm:4
+#: pntemplates/polls_admin_modifyconfig.htm:5
+msgid "Settings"
+msgstr ""
+
+#: pninit.php:64
+msgid ""
+"Error! EZComments module not available - this is required to migrate any "
+"poll comments."
+msgstr ""
+
+#: pntemplates/polls_block_poll.htm:18 pntemplates/polls_user_row.htm:9
+#: pntemplates/polls_user_results.htm:31
+#, php-format
+msgid "%s vote"
+msgid_plural "%s votes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: pntemplates/polls_block_poll.htm:42 pntemplates/polls_block_poll.htm:44
+#: pntemplates/polls_user_display.htm:32
+msgid "Vote"
+msgstr ""
+
+#: pntemplates/polls_block_poll.htm:52 pntemplates/polls_user_row.htm:9
+#: pntemplates/polls_user_display.htm:9
+msgid "Results"
+msgstr ""
+
+#: pntemplates/polls_block_poll.htm:53
+msgid "Other Polls"
+msgstr ""
+
+#: pntemplates/polls_block_poll.htm:58
+msgid "Recording vote"
+msgstr ""
+
+#: pntemplates/polls_admin_modify.htm:3
+msgid "Modify poll"
+msgstr ""
+
+#: pntemplates/polls_admin_modify.htm:12 pntemplates/polls_admin_new.htm:11
+msgid "Overview"
+msgstr ""
+
+#: pntemplates/polls_admin_modify.htm:14 pntemplates/polls_admin_view.htm:43
+#: pntemplates/polls_admin_new.htm:13
+msgid "Title"
+msgstr ""
+
+#: pntemplates/polls_admin_modify.htm:18 pntemplates/polls_admin_new.htm:17
+msgid "PermaLink URL title"
+msgstr ""
+
+#: pntemplates/polls_admin_modify.htm:20 pntemplates/polls_admin_new.htm:19
+msgid "(Blank = auto-generate)"
+msgstr ""
+
+#: pntemplates/polls_admin_modify.htm:25 pntemplates/polls_admin_view.htm:12
+#: pntemplates/polls_admin_view.htm:46 pntemplates/polls_admin_new.htm:24
+msgid "Category"
+msgstr ""
+
+#: pntemplates/polls_admin_modify.htm:34 pntemplates/polls_admin_new.htm:27
+msgid "Choose Category"
+msgstr ""
+
+#: pntemplates/polls_admin_modify.htm:43 pntemplates/polls_admin_new.htm:36
+msgid "Language"
+msgstr ""
+
+#: pntemplates/polls_admin_modify.htm:50 pntemplates/polls_admin_new.htm:43
+msgid "Voting choices"
+msgstr ""
+
+#: pntemplates/polls_admin_modify.htm:51 pntemplates/polls_admin_new.htm:44
+msgid "Please enter each available choice into a single field"
+msgstr ""
+
+#: pntemplates/polls_admin_modify.htm:53 pntemplates/polls_admin_modify.htm:57
+#: pntemplates/polls_admin_modify.htm:61 pntemplates/polls_admin_modify.htm:65
+#: pntemplates/polls_admin_modify.htm:69 pntemplates/polls_admin_modify.htm:73
+#: pntemplates/polls_admin_modify.htm:77 pntemplates/polls_admin_modify.htm:81
+#: pntemplates/polls_admin_modify.htm:85 pntemplates/polls_admin_modify.htm:89
+#: pntemplates/polls_admin_modify.htm:93 pntemplates/polls_admin_modify.htm:97
+#: pntemplates/polls_admin_new.htm:46 pntemplates/polls_admin_new.htm:50
+#: pntemplates/polls_admin_new.htm:54 pntemplates/polls_admin_new.htm:58
+#: pntemplates/polls_admin_new.htm:62 pntemplates/polls_admin_new.htm:66
+#: pntemplates/polls_admin_new.htm:70 pntemplates/polls_admin_new.htm:74
+#: pntemplates/polls_admin_new.htm:78 pntemplates/polls_admin_new.htm:82
+#: pntemplates/polls_admin_new.htm:86 pntemplates/polls_admin_new.htm:90
+msgid "Option"
+msgstr ""
+
+#: pntemplates/polls_admin_modify.htm:103
+msgid "Meta data"
+msgstr ""
+
+#: pntemplates/polls_admin_modify.htm:106
+#, php-format
+msgid "Created by %s"
+msgstr ""
+
+#: pntemplates/polls_admin_modify.htm:107
+#, php-format
+msgid "Created on %s"
+msgstr ""
+
+#: pntemplates/polls_admin_modify.htm:109
+#, php-format
+msgid "Last updated by %s"
+msgstr ""
+
+#: pntemplates/polls_admin_modify.htm:110
+#, php-format
+msgid "Updated on %s"
+msgstr ""
+
+#: pntemplates/polls_admin_modify.htm:116
+msgid "Update"
+msgstr ""
+
+#: pntemplates/polls_admin_modify.htm:117
+#: pntemplates/polls_admin_modifyconfig.htm:41
+#: pntemplates/polls_admin_delete.htm:17 pntemplates/polls_admin_new.htm:98
+msgid "Cancel"
+msgstr ""
+
+#: pntemplates/polls_user_display.htm:2
+#, php-format
+msgid "Voting booth %s"
+msgstr ""
+
+#: pntemplates/polls_block_poll_modify.htm:2
+msgid "Poll to display"
+msgstr ""
+
+#: pntemplates/polls_block_poll_modify.htm:9
+msgid "Use ajax for voting"
+msgstr ""
+
+#: pntemplates/polls_admin_view.htm:30
+msgid "Choose One"
+msgstr ""
+
+#: pntemplates/polls_admin_view.htm:34
+msgid "Filter"
+msgstr ""
+
+#: pntemplates/polls_admin_view.htm:35
+msgid "Reset"
+msgstr ""
+
+#: pntemplates/polls_admin_view.htm:44
+#: pntemplates/polls_admin_modifyconfig.htm:26
+msgid "Internal ID"
+msgstr ""
+
+#: pntemplates/polls_admin_view.htm:48
+msgid "Options"
+msgstr ""
+
+#: pntemplates/polls_admin_modifyconfig.htm:10
+msgid "General settings"
+msgstr ""
+
+#: pntemplates/polls_admin_modifyconfig.htm:12
+msgid "Enable categorization"
+msgstr ""
+
+#: pntemplates/polls_admin_modifyconfig.htm:16
+msgid "Polls per page"
+msgstr ""
+
+#: pntemplates/polls_admin_modifyconfig.htm:20
+msgid "Scale of results bar"
+msgstr ""
+
+#: pntemplates/polls_admin_modifyconfig.htm:24
+msgid "Order polls by"
+msgstr ""
+
+#: pntemplates/polls_admin_modifyconfig.htm:27
+msgid "Date/Time"
+msgstr ""
+
+#: pntemplates/polls_admin_modifyconfig.htm:32
+msgid "Permalinks"
+msgstr ""
+
+#: pntemplates/polls_admin_modifyconfig.htm:34
+msgid "Add category title to permalink"
+msgstr ""
+
+#: pntemplates/polls_admin_modifyconfig.htm:40
+msgid "Update Configuration"
+msgstr ""
+
+#: pntemplates/polls_user_view.htm:18
+#, php-format
+msgid "Polls %s"
+msgstr ""
+
+#: pntemplates/polls_user_view.htm:24
+msgid "Past surveys"
+msgstr ""
+
+#: pntemplates/polls_admin_delete.htm:3
+msgid "Delete Poll"
+msgstr ""
+
+#: pntemplates/polls_admin_delete.htm:7
+msgid "Do you really want to delete this poll?"
+msgstr ""
+
+#: pntemplates/polls_admin_delete.htm:14
+msgid "Confirmation prompt"
+msgstr ""
+
+#: pntemplates/polls_admin_new.htm:97
+msgid "Create"
+msgstr ""
+
+#: pntemplates/polls_user_results.htm:2
+#, php-format
+msgid "Results %s"
+msgstr ""
+
+#: pntemplates/polls_user_results.htm:9
+msgid "Voting booth"
+msgstr ""
+
+#: pntemplates/polls_user_results.htm:23
+msgid "Votes"
+msgstr ""
+
+#: pntemplates/polls_user_results.htm:34
+msgid "We only allow one vote per day"
+msgstr ""
+
+#: pntemplates/polls_user_main.htm:11
+msgid "Categories"
+msgstr ""
