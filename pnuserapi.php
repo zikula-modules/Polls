@@ -305,9 +305,12 @@ function polls_userapi_encodeurl($args)
     // create an empty string ready for population
     $vars = '';
 
-    // view function
-    if ($args['func'] == 'view' && isset($args['args']['cat'])) {
-        $vars = substr($args['args']['cat'], 1);
+    // add the category name to the view link
+    if ($args['func'] == 'view' && isset($args['args']['prop'])) {
+        $vars = $args['args']['prop'];
+        if (isset($args['args']['cat'])) {
+            $vars .= '/'.$args['args']['cat'];
+        }
     }
 
     // for the display function use either the title (if present) or the page id
@@ -378,8 +381,19 @@ function Polls_userapi_decodeurl($args)
     $func = FormUtil::getPassedValue('func');
 
     // add the category info
-    if ($func == 'view') {
-        pnQueryStringSetVar('cat', (string)$args['vars'][$nextvar]);
+    if ($func == 'view' && isset($args['vars'][$nextvar])) {
+        // get rid of unused vars
+        $args['vars'] = array_slice($args['vars'], $nextvar);
+        pnQueryStringSetVar('prop', (string)$args['vars'][0]);
+
+        if (isset ($args['vars'][1])) {
+            // check if there's a page arg
+            $varscount = count($args['vars']);
+            ($args['vars'][$varscount-2] == 'page') ? $pagersize = 2 : $pagersize = 0;
+            // extract the category path
+            $cat = implode('/', array_slice($args['vars'], 1, $varscount - $pagersize - 1));
+            pnQueryStringSetVar('cat', $cat);
+        }
     }
 
     // identify the correct parameter to identify the page

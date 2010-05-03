@@ -133,6 +133,7 @@ function Polls_delete()
  */
 function _polls_createdefaultcategory($regpath = '/__SYSTEM__/Modules/Global')
 {
+    $dom = ZLanguage::getModuleDomain('FAQ');
     // load necessary classes
     Loader::loadClass('CategoryUtil');
     Loader::loadClassFromModule('Categories', 'Category');
@@ -169,6 +170,8 @@ function _polls_createdefaultcategory($regpath = '/__SYSTEM__/Modules/Global')
         $registry->setDataField('property', 'Main');
         $registry->setDataField('category_id', $rootcat['id']);
         $registry->insert();
+    } else {
+        return false;
     }
 
     return true;

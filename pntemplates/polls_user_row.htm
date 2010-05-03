@@ -1,9 +1,10 @@
 <!--[* $Id: polls_user_row.htm 23954 2008-03-13 11:55:37Z markwest $ *]-->
+
 <!--[if $enablecategorization and $shorturls and $shorturlstype eq 0 and $addcategorytitletopermalink]-->
-<!--[assign var="prop" value=$properties.0]-->
-<a href="<!--[pnmodurl modname="Polls" func="display" pollid=$pollid cat=$__CATEGORIES__.$prop.path_relative]-->"><!--[$title|pnvarprephtmldisplay]--></a>
+    <a href="<!--[pnmodurl modname="Polls" func="display" pollid=$pollid cat=$__CATEGORIES__.Main.name]-->"><!--[$title|pnvarprephtmldisplay]--></a>
 <!--[else]-->
-<a href="<!--[pnmodurl modname="Polls" func="display" pollid=$pollid]-->"><!--[$title|pnvarprephtmldisplay]--></a>
+    <a href="<!--[pnmodurl modname="Polls" func="display" pollid=$pollid]-->"><!--[$title|pnvarprephtmldisplay]--></a>
 <!--[/if]-->
+
 (<a href="<!--[pnmodurl modname="Polls" func="results" pollid=$pollid]-->"><!--[gt text="Results"]--></a> -
 <!--[$votecount|pnvarprepfordisplay]--> <!--[gt text="Votes"]-->)
