@@ -173,7 +173,7 @@ msgstr[1] "%s Stimmen"
 #: pntemplates/polls_block_poll.htm:44
 #: pntemplates/polls_user_display.htm:32
 msgid "Vote"
-msgstr "Stimme"
+msgstr "Abstimmen"
 
 #: pntemplates/polls_block_poll.htm:52
 #: pntemplates/polls_user_row.htm:9
@@ -425,4 +425,3 @@ msgstr "Kategorien"
 #, fuzzy
 #~ msgid "Erro! No such poll found."
 #~ msgstr "Fehler! Keine entsprechende Umfrage gefunden %s"
-
