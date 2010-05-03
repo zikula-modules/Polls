@@ -1,5 +1,16 @@
 <!--[*  $Id$  *]-->
+<!--[gt text="Voting booth %s" tag1=$title assign=templatetitle]-->
 <!--[include file="polls_user_menu.htm"]-->
+
+<div class="z-menu">
+    <span class="z-menuitem-title">
+        [
+        <a href="<!--[pnmodurl modname="Polls" type="user" func="main"]-->"><!--[gt text="View polls"]--></a> |
+        <a href="<!--[pnmodurl modname="Polls" type="user" func="results" pollid=$pollid]-->"><!--[gt text="Results"]--></a>
+        ]
+    </span>
+</div>
+
 <h3><!--[$title|pnmodcallhooks:"Polls"|pnvarprephtmldisplay]--></h3>
 
 <form class="z-form" action="<!--[pnmodurl modname="Polls" type="user" func="vote"]-->" method="post" enctype="application/x-www-form-urlencoded">
@@ -22,10 +33,6 @@
         </div>
     </div>
 </form>
-
-<div class="z-menuitem-title polls-voteformlinks">
-    [ <a href="<!--[pnmodurl modname="Polls" type="user" func="results" pollid=$pollid]-->"><!--[gt text="Results"]--></a> | <a href="<!--[pnmodurl modname="Polls" type="user" func="main"]-->"><!--[gt text="Other Polls"]--></a> ]
-</div>
 
 <!--[pnmodurl modname=Polls func=display pollid=$pollid assign=returnurl]-->
 <!--[pnmodcallhooks hookobject=item hookaction=display hookid=$pollid module=Polls returnurl=$returnurl]-->

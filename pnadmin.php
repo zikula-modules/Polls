@@ -409,6 +409,9 @@ function Polls_admin_updateconfig()
     $sortorder = FormUtil::getPassedValue('sortorder', 0, 'POST');
     pnModSetVar('Polls', 'sortorder', $sortorder);
 
+    $scale = FormUtil::getPassedValue('enablecategorization', 1, 'POST');
+    pnModSetVar('Polls', 'enablecategorization', $enablecategorization);
+
     $addcategorytitletopermalink = (bool)FormUtil::getPassedValue('addcategorytitletopermalink', false, 'POST');
     pnModSetVar('Polls', 'addcategorytitletopermalink', $addcategorytitletopermalink);
 

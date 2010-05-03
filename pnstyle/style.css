@@ -14,8 +14,7 @@
     text-align: center;
 }
 
-.poll-options-list
-{
+.poll-options-list {
     list-style:none;
 }
 
@@ -28,6 +27,7 @@ div#polls_category_selectors {
     border-top: 1px solid #EEE;
     margin: 0px;
 }
+
 .polls-resultschart li {
     position: relative;
     display: block;
@@ -35,12 +35,14 @@ div#polls_category_selectors {
     margin: 0 0 10px 0;
     _zoom: 1;
 }
+
 .polls-resultschart li .item {
     display: block;
     padding: 0.1em 4.5em 0.1em 0.1em;
     position: relative;
     z-index: 2;
 }
+
 .polls-resultschart .count {
     display: block;
     position: absolute;
@@ -53,6 +55,7 @@ div#polls_category_selectors {
     font-size: 0.875em;
     line-height: 2em;
 }
+
 .polls-resultschart .index {
     display: block;
     height: 100%;
@@ -62,6 +65,11 @@ div#polls_category_selectors {
     overflow: hidden;
     line-height: 1.5em;
 }
+
 .polls-resultschart li:hover {
     background: #F9F9F9;
+}
+
+#pollvoteinfo {
+    color: #ff0000;
 }

@@ -1,9 +1,12 @@
 <!--[pnpageaddvar name="stylesheet" value="modules/Polls/pnstyle/style.css"]-->
+
 <!--[if $uservotedalready eq false and $ajaxvoting]-->
 <!--[pnajaxheader modname=Polls filename=polls.js]-->
 <!--[/if]-->
+
 <div id="pollblockcontent">
     <h3><!--[$title|pnmodcallhooks:"Polls"|pnvarprephtmldisplay|pnvarcensor]--></h3>
+
     <!--[if $uservotedalready]-->
     <div class="polls-resultstable">
         <ul class="polls-resultschart">
@@ -20,21 +23,21 @@
     </div>
     <!--[else]-->
     <form id="pollvoteform" action="<!--[pnmodurl modname=Polls type=user func=vote]-->" method="post" enctype="application/x-www-form-urlencoded">
-        <div style="text-align:center; margin-left:5%">
+        <div>
             <input type="hidden" name="authid" value="<!--[insert name='generateauthkey' module='Polls']-->" />
             <input type="hidden" name="title" value="<!--[$title|pnvarprepfordisplay]-->" />
             <input type="hidden" name="pollid" value="<!--[$pollid|pnvarprepfordisplay]-->" />
             <input type="hidden" name="displayresults" value="1" />
-            <table width="95%">
+            <ul class="poll-options-list">
                 <!--[section name=options loop=$options]-->
                 <!--[if $options[options].optiontext neq '']-->
-                <tr>
-                    <td><input id="polls_<!--[$options[options].voteid|pnvarprepfordisplay]-->" type="radio" name="voteid" value="<!--[$options[options].voteid]-->" /></td>
-                    <td align="left"><label for="polls_<!--[$options[options].voteid|pnvarprepfordisplay]-->"><!--[$options[options].optiontext|pnmodcallhooks:"Polls"|pnvarprephtmldisplay|pnvarcensor]--></label></td>
-                </tr>
+                <li>
+                    <input id="block_polls_<!--[$options[options].voteid|pnvarprepfordisplay]-->" type="radio" name="voteid" value="<!--[$options[options].voteid]-->" />
+                    <label for="block_polls_<!--[$options[options].voteid|pnvarprepfordisplay]-->"><!--[$options[options].optiontext|pnmodcallhooks:"Polls"|pnvarprephtmldisplay|pnvarcensor]--></label>
+                </li>
                 <!--[/if]-->
                 <!--[/section]-->
-            </table>
+            </ul>
             <!--[if $ajaxvoting]-->
             <input onclick="javascript:pollvote();" name="vote" type="button" value="<!--[gt text="Vote" domain="module_polls"]-->" />
             <!--[else]-->
@@ -42,16 +45,18 @@
             <!--[/if]-->
         </div>
     </form>
-    <div id="pollvoteinfo">&nbsp;</div>
+    <em id="pollvoteinfo">&nbsp;</em>
     <!--[/if]-->
-    <div class="z-center">
-        <a href="<!--[pnmodurl modname="Polls" type="user" func="results" pollid=$pollid]-->"><!--[gt text="Results" domain="module_polls"]--></a>
-        <br />
+
+    <p class="z-sub">
+        <a href="<!--[pnmodurl modname="Polls" type="user" func="results" pollid=$pollid]-->"><!--[gt text="Results" domain="module_polls"]--></a> |
         <a href="<!--[pnmodurl modname="Polls" type="user"]-->"><!--[gt text="Other Polls" domain="module_polls"]--></a>
-    </div>
+    </p>
+
     <!--[if $ajaxvoting]-->
     <script type="text/javascript">
         var recordingvote  = '<!--[gt text="Recording vote" domain="module_polls"]-->';
     </script>
     <!--[/if]-->
+
 </div>

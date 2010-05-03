@@ -1,6 +1,12 @@
 <!--[*  $Id$  *]-->
 <!--[if $func neq 'main']-->
+<!--[gt text="Polls" assign=templatetitle]-->
 <!--[include file="polls_user_menu.htm"]-->
+<div class="z-menu">
+    <span class="z-menuitem-title">
+        [ <a href="<!--[pnmodurl modname="Polls" type="user" func="main"]-->"><!--[gt text="View polls"]--></a> ]
+    </span>
+</div>
 <!--[/if]-->
 
 <!--[if $category]-->
@@ -9,6 +15,8 @@
 <!--[array_field_isset assign="categorydesc" array=$category.display_desc field=$lang returnValue=1]-->
 
 <h3><!--[$categoryname]--></h3>
+<!--[gt text="Polls %s" tag1=$categoryname assign=templatetitle]-->
+<!--[pnpageaddvar name="title" value=$templatetitle]-->
 <!--[if $categorydesc neq '']--><p><!--[$categorydesc]--></p><!--[/if]-->
 
 <!--[else]-->

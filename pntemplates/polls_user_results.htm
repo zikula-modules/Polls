@@ -1,6 +1,16 @@
 <!--[*  $Id$  *]-->
-<!--[pnpageaddvar name="title" value=$title]--> 
+<!--[gt text="Results %s" tag1=$title assign=templatetitle]-->
 <!--[include file="polls_user_menu.htm"]-->
+
+<div class="z-menu">
+    <span class="z-menuitem-title">
+        [
+        <a href="<!--[pnmodurl modname="Polls" type="user" func="main"]-->"><!--[gt text="View polls"]--></a> |
+        <a href="<!--[pnmodurl modname="Polls" type="user" func="display" pollid=$pollid]-->"><!--[gt text="Voting booth"]--></a>
+        ]
+    </span>
+</div>
+
 <h3><!--[$title]--></h3>
 
 <div class="polls-resultstable">
@@ -17,22 +27,18 @@
     </ul>
 </div>
 
-<div class="polls-resultlinks">
-    <!--[$votecount|pnvarprepfordisplay]-->
-    <!--[if $votecount eq 1]-->
-    <!--[gt text="Vote"]-->
-    <!--[else]-->
-    <!--[gt text="Votes"]-->
-    <!--[/if]-->
-</div>
+<p class="polls-resultlinks">
+    <strong>
+        <!--[$votecount|pnvarprepfordisplay]-->
+        <!--[if $votecount eq 1]-->
+        <!--[gt text="Vote"]-->
+        <!--[else]-->
+        <!--[gt text="Votes"]-->
+        <!--[/if]-->
+    </strong>
+</p>
 
-<div class="polls-resultlinks">
-    <!--[gt text="We only allow one vote per day"]-->
-</div>
-
-<div class="polls-resultlinks">
-    [ <a href="<!--[pnmodurl modname="Polls" type="user" func="display" pollid=$pollid]-->"><!--[gt text="Voting Booth"]--></a> | <a href="<!--[pnmodurl modname="Polls" type="user" func="main"]-->"><!--[gt text="Other Polls"]--></a> ]
-</div>
+<p class="polls-resultlinks"><!--[gt text="We only allow one vote per day"]--></p>
 
 <!--[pnmodurl modname=Polls func=display pollid=$pollid assign=returnurl]-->
 <!--[pnmodcallhooks hookobject=item hookaction=display hookid=$pollid module=Polls returnurl=$returnurl]-->
