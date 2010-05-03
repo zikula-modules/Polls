@@ -1,5 +1,5 @@
 <!--[*  $Id$  *]-->
-<!--[if $func neq 'main']-->
+<!--[if $func eq 'view']-->
 <!--[gt text="Polls" assign=templatetitle]-->
 <!--[include file="polls_user_menu.htm"]-->
 <div class="z-menu">
@@ -25,10 +25,14 @@
 
 <!--[/if]-->
 
+<!--[if $polls]-->
 <ul>
     <!--[foreach item=poll from=$polls]-->
     <li><!--[$poll]--></li>
     <!--[/foreach]-->
 </ul>
+<!--[else]-->
+<p class="z-warningmsg"><!--[gt text="No polls found."]--></p>
+<!--[/if]-->
 
 <!--[pager show=page rowcount=$pager.numitems limit=$pager.itemsperpage posvar=startnum shift=1]-->

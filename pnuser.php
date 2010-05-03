@@ -112,15 +112,12 @@ function Polls_user_view()
     }
 
     // Get all the polls
+    $items = array();
     $items = pnModAPIFunc('Polls', 'user', 'getall',
                           array('startnum' => $startnum,
                                 'numitems' => $modvars['itemsperpage'],
                                 'category' => isset($catFilter) ? $catFilter : null,
                                 'catregistry' => isset($catregistry) ? $catregistry : null));
-
-    if ($items == false) {
-        LogUtil::registerError(__('No polls found.', $dom));
-    }
 
     // Create output object
     $renderer = pnRender::getInstance('Polls');

@@ -6,10 +6,11 @@ Carsten Volmer <carsten@zikula.org>
 http://carsten-volmer.de
 --------------------------------------------------------------------------
 
-+ Gettext conversion #21
++ gettext conversion #21
 + several category issues #22
 + templates update
 - fixed several minor issues #15
+- fixed short url bugs #18
 
 
 v2.0.2  -  July 2008
