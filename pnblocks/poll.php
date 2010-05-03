@@ -22,14 +22,16 @@ function Polls_pollblock_init()
  */
 function Polls_pollblock_info()
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
+
     // Values
-    return array('text_type' => 'Polls',
-                 'module' => 'Polls',
-                 'text_type_long' => 'Show a Poll',
-                 'allow_multiple' => true,
-                 'form_content' => false,
-                 'form_refresh' => false,
-                 'show_preview' => true,
+    return array('module'          => 'Polls',
+                 'text_type'       => __('Polls', $dom),
+                 'text_type_long'  => __('Show a poll', $dom),
+                 'allow_multiple'  => true,
+                 'form_content'    => false,
+                 'form_refresh'    => false,
+                 'show_preview'    => true,
                  'admin_tableless' => true);
 }
 
@@ -51,8 +53,6 @@ function Polls_pollblock_display($blockinfo)
         return;
     }
 
-    // debug line
-	//SessionUtil::delVar("poll_voted{$vars['pollid']}");
     // Check the user has already voted in this poll
     $uservotedalready = SessionUtil::getVar("poll_voted{$vars['pollid']}");
 
@@ -70,10 +70,16 @@ function Polls_pollblock_display($blockinfo)
     }
 
     // Get the poll
-    $item = pnModAPIFunc('Polls', 'user', 'get', array('pollid' => $vars['pollid']));
+    $item = pnModAPIFunc('Polls', 'user', 'get',
+                         array('pollid' => $vars['pollid']));
 
-    $renderer->assign($item);
+    // check if there's an item to show
+    if ($item == false) {
+        return;
+    }
+
     $renderer->assign($vars);
+    $renderer->assign($item);
     $renderer->assign('uservotedalready', $uservotedalready);
 
     // Populate block info and pass to theme
@@ -87,12 +93,14 @@ function Polls_pollblock_display($blockinfo)
  */
 function Polls_Pollblock_modify($blockinfo)
 {
+    $dom = ZLanguage::getModuleDomain('Polls');
+
     // Get current content
     $vars = pnBlockVarsFromContent($blockinfo['content']);
 
     // Defaults
     if (empty($vars['pollid'])) {
-        $vars['pollid'] = 1;
+        $vars['pollid'] = -1; // latest
     }
     if (empty($vars['ajaxvoting'])) {
         $vars['ajaxvoting'] = false;
@@ -102,7 +110,8 @@ function Polls_Pollblock_modify($blockinfo)
     $items = pnModAPIFunc('Polls', 'user', 'getall');
 
     // form a list of polls suitable for html_options
-    $polloptions = array();
+    $polloptions = array(-1 => __('Latest Poll', $dom));
+
     foreach ($items as $item) {
         $polloptions[$item['pollid']] = $item['title'];
     }
@@ -123,7 +132,7 @@ function Polls_Pollblock_modify($blockinfo)
  */
 function Polls_Pollblock_update($blockinfo)
 {
-    $vars['pollid'] = FormUtil::getPassedValue('pollid', null, 'POST');
+    $vars['pollid']     = FormUtil::getPassedValue('pollid', null, 'POST');
     $vars['ajaxvoting'] = FormUtil::getPassedValue('ajaxvoting', false, 'POST');
 
     $blockinfo['content'] = pnBlockVarsToContent($vars);

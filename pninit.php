@@ -149,8 +149,8 @@ function _polls_createdefaultcategory($regpath = '/__SYSTEM__/Modules/Global')
         $cat = new PNCategory ();
         $cat->setDataField('parent_id', $rootcat['id']);
         $cat->setDataField('name', 'Polls');
-        $cat->setDataField('display_name', array($lang => __('Poll Name', $dom)));
-        $cat->setDataField('display_desc', array($lang => __('Polls', $dom)));
+        $cat->setDataField('display_name', array($lang => __('Polls', $dom)));
+        $cat->setDataField('display_desc', array($lang => __('Voting System Module', $dom)));
         if (!$cat->validate('admin')) {
             return false;
         }

@@ -113,7 +113,7 @@ function Polls_userapi_getall($args)
 /**
  * get a specific item
  *
- * @param $args['pollid'] id of poll to get
+ * @param $args['pollid'] id of poll to get or -1 to get the latest one
  * @author Mark West
  * @return array item array, or false on failure
  */
@@ -140,10 +140,18 @@ function Polls_userapi_get($args)
                           'level'          => ACCESS_READ);
 
     if (isset($args['pollid']) && is_numeric($args['pollid'])) {
-        $poll = DBUtil::selectObjectByID('poll_desc', $args['pollid'], 'pollid', '', $permFilter);
-    } else {
-        $poll = DBUtil::selectObjectByID('poll_desc', $args['title'], 'urltitle', '', $permFilter);
-    }
+        if ($args['pollid'] == -1) {
+            $poll = DBUtil::selectObjectArray('poll_desc', '', 'pn_cr_date DESC', -1, 1, '', $permFilter);
+            if ($poll !== false) {
+                $poll = $poll[0];
+            }
+        } else {
+            $poll = DBUtil::selectObjectByID('poll_desc', $args['pollid'], 'pollid', '', $permFilter);
+        }
+     } else {
+         $poll = DBUtil::selectObjectByID('poll_desc', $args['title'], 'urltitle', '', $permFilter);
+     }
+
     $poll['options'] = DBUtil::selectObjectArray('poll_data', 'pn_pollid=\''.DataUtil::formatForStore($poll['pollid']).'\'', 'voteid');
 
     $results = array();
