@@ -1,13 +1,11 @@
 /**
- * PostNuke Application Framework
+ * Polls Module for Zikula
  *
- * @copyright (c) 2002, Zikula Development Team
- * @link http://www.postnuke.com
- * @version $Id: polls.js 18677 2006-04-06 12:07:09Z markwest $
+ * @copyright (c) 2010, Mark West
+ * @link http://code.zikula.org/advancedpolls
+ * @version $Id$
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
- * @package Zikula_3rdParty_Modules
- * @subpackage Polls
-*/
+ */
 
 /**
  * Submit a poll vote

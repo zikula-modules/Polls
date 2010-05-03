@@ -1,0 +1,22 @@
+Polls - changelog
+==========================================================================
+
+v2.1.0  -  May 2010
+Carsten Volmer <carsten@zikula.org>
+http://carsten-volmer.de
+--------------------------------------------------------------------------
+
++ Gettext conversion #21
++ several category issues #22
++ templates update
+- fixed several minor issues #15
+
+
+v2.0.2  -  July 2008
+v2.0.1  -  July 2008
+v2.0    -  July 2008?
+Mark West
+http://www.markwest.me.uk
+--------------------------------------------------------------------------
+
+(No changelog available)

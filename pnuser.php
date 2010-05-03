@@ -2,12 +2,10 @@
 /**
  * Polls Module for Zikula
  *
- * @copyright (c) 2008, Mark West
- * @link http://www.markwest.me.uk
- * @version $Id: pnuser.php 20571 2006-11-22 18:25:29Z rgasch $
+ * @copyright (c) 2010, Mark West
+ * @link http://code.zikula.org/advancedpolls
+ * @version $Id$
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
- * @package Zikula_3rdParty_Modules
- * @subpackage Polls
 */
 
 /**
@@ -20,7 +18,7 @@ function Polls_user_main()
 {
     $dom = ZLanguage::getModuleDomain('Polls');
     // Security check
-    if (!SecurityUtil::checkPermission( 'Polls::', '::', ACCESS_OVERVIEW)) {
+    if (!SecurityUtil::checkPermission( 'Polls::', '::', ACCESS_READ)) {
         return LogUtil::registerPermissionError();
     }
 

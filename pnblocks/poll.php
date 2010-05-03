@@ -2,12 +2,10 @@
 /**
  * Polls Module for Zikula
  *
- * @copyright (c) 2008, Mark West
- * @link http://www.markwest.me.uk
- * @version $Id: poll.php 20108 2006-09-24 19:56:21Z rgasch $
+ * @copyright (c) 2010, Mark West
+ * @link http://code.zikula.org/advancedpolls
+ * @version $Id$
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
- * @package Zikula_3rdParty_Modules
- * @subpackage Polls
  */
 
 /**

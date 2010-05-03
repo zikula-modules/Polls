@@ -2,12 +2,10 @@
 /**
  * Polls Module for Zikula
  *
- * @copyright (c) 2008, Mark West
- * @link http://www.markwest.me.uk
- * @version $Id: pninit.php 20616 2006-11-25 15:51:52Z rgasch $
+ * @copyright (c) 2010, Mark West
+ * @link http://code.zikula.org/advancedpolls
+ * @version $Id$
  * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
- * @package Zikula_3rdParty_Modules
- * @subpackage Polls
 */
 
 /**
@@ -95,7 +93,7 @@ function Polls_upgrade($oldversion)
         case '2.0.2':
             _upgrade_updatePollsLanguages();
 
-        case '2.1':
+        case '2.1.0':
             // future upgrade routines
             break;
     }

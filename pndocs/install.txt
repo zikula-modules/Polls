@@ -1,0 +1,13 @@
+Installing the Polls module
+
+Installing a Zikula module is a simple process
+
+    * Copy contents of the downloaded archive to your modules directory.
+    * Login to your site as an admin.
+    * Go to the modules administration page and regenerate the modules list.
+    * Locate the entry for the new module and initialise it.
+    * Locate the entry for the new module and activate it. 
+
+At this point your new module is installed and you can begin to create new polls.
+
+http://code.zikula.org/advancedpolls/wiki/installation

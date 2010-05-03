@@ -1,4 +1,13 @@
 /**
+ * Polls Module for Zikula
+ *
+ * @copyright (c) 2010, Mark West
+ * @link http://code.zikula.org/advancedpolls
+ * @version $Id$
+ * @license GNU/GPL - http://www.gnu.org/copyleft/gpl.html
+ */
+
+/**
  * create the onload function to enable the respective functions
  */
 Event.observe(window, 
