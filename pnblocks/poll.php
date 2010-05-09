@@ -14,7 +14,7 @@
 function Polls_pollblock_init()
 {
     // Security
-    pnSecAddSchema('Polls:Pollblock:', 'Block title::');
+    SecurityUtil::registerPermissionSchema('Polls:Pollblock:', 'Block title::');
 }
 
 /**
