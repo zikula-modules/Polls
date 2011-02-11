@@ -334,19 +334,16 @@ class Polls_Api_User extends Zikula_Api
                 
             case 1:
                 $target_difference = 60 * 60 * 24;
-                var_dump('difference: '.$difference.' target_difference: '.$target_difference);
                 $result = ($difference > $target_difference) ? true : false;
                 break;
                 
             case 7:
                 $target_difference = 60 * 60 * 24 * 7;
-                var_dump('difference: '.$difference.' target_difference: '.$target_difference);
                 $result = ($difference > $target_difference) ? true : false;
                 break;
                 
             case 31:
                 $target_difference = 60 * 60 * 24 * 7 * date('t');
-                var_dump('difference: '.$difference.' target_difference: '.$target_difference);
                 $result = ($difference > $target_difference) ? true : false;
                 break;
         }
