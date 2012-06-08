@@ -12,7 +12,7 @@
  * information regarding copyright and licensing.
  */
  
-class Polls_Controller_Ajax extends Zikula_Controller
+class Polls_Controller_Ajax extends Zikula_AbstractController
 {
     /**
      * Log a vote and display the results form
