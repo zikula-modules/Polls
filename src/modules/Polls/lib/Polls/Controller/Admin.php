@@ -12,7 +12,7 @@
  * information regarding copyright and licensing.
  */
 
-class Polls_Controller_Admin extends Zikula_Controller
+class Polls_Controller_Admin extends Zikula_AbstractController
 {
     /**
      * Post initialize.
