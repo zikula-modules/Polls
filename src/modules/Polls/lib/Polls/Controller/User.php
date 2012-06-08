@@ -12,7 +12,7 @@
  * information regarding copyright and licensing.
  */
 
-class Polls_Controller_User extends Zikula_Controller
+class Polls_Controller_User extends Zikula_AbstractController
 {
     /**
      * the main user function
