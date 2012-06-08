@@ -3,7 +3,7 @@
 {gt text="View polls" assign="templatetitle"}
 
 <div class="z-admincontainer">
-    <div class="z-adminpageicon">{img modname="core" src="windowlist.gif" set="icons/large" alt=$templatetitle}</div>
+    <div class="z-adminpageicon">{img modname="core" src="windowlist.png" set="icons/large" alt=$templatetitle}</div>
     <h2>{$templatetitle}</h2>
     
     {if $modvars.Polls.enablecategorization}
