@@ -12,7 +12,7 @@
  * information regarding copyright and licensing.
  */
  
-class Polls_Version extends Zikula_Version
+class Polls_Version extends Zikula_AbstractVersion
 {
     public function getMetaData()
     {
