@@ -103,11 +103,11 @@ class Polls_Controller_Admin extends Zikula_AbstractController
             $options = array();
              if (SecurityUtil::checkPermission( 'Polls::', "$item[title]::$item[pollid]", ACCESS_EDIT)) {
                 $options[] = array('url' => ModUtil::url('Polls', 'admin', 'modify', array('pollid' => $item['pollid'])),
-                                   'image' => 'xedit.gif',
+                                   'image' => 'xedit.png',
                                    'title' => $this->__('Edit'));
                 if (SecurityUtil::checkPermission( 'Polls::', "$item[title]::$item[pollid]", ACCESS_DELETE)) {
                     $options[] = array('url' => ModUtil::url('Polls', 'admin', 'delete', array('pollid' => $item['pollid'])),
-                                       'image' => '14_layer_deletelayer.gif',
+                                       'image' => '14_layer_deletelayer.png',
                                        'title' => $this->__('Delete'));
                 }
             }
@@ -175,9 +175,7 @@ class Polls_Controller_Admin extends Zikula_AbstractController
         $poll = FormUtil::getPassedValue('poll', isset($args['poll']) ? $args['poll'] : null, 'POST');
 
         // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('Polls', 'admin', 'view'));
-        }
+        $this->checkCsrfToken();
 
         // Create the poll
         $pollid = ModUtil::apiFunc('Polls', 'admin', 'create', $poll);
@@ -242,10 +240,8 @@ class Polls_Controller_Admin extends Zikula_AbstractController
     {
         $poll = FormUtil::getPassedValue('poll', isset($args['poll']) ? $args['poll'] : null, 'POST');
 
-        // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError (ModUtil::url('Polls', 'admin', 'view'));
-        }
+		// Confirm authorisation code
+        $this->checkCsrfToken();
 
         // Update the poll
         if (ModUtil::apiFunc('Polls', 'admin', 'update', $poll)) {
@@ -295,9 +291,7 @@ class Polls_Controller_Admin extends Zikula_AbstractController
         // If we get here it means that the user has confirmed the action
 
         // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('Polls', 'admin', 'view'));
-        }
+		$this->checkCsrfToken();
 
         // Delete the poll
         if (ModUtil::apiFunc('Polls', 'admin', 'delete', array('pollid' => $pollid))) {
@@ -349,9 +343,7 @@ class Polls_Controller_Admin extends Zikula_AbstractController
         }
 
         // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUti::apiFunc('Polls', 'admin', 'view'));
-        }
+		$this->checkCsrfToken();
 
         // Update module variables
         $itemsperpage = FormUtil::getPassedValue('itemsperpage', 10, 'POST');

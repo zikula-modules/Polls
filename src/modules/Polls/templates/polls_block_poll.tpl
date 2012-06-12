@@ -24,7 +24,7 @@
     {else}
     <form id="pollvoteform" action="{modurl modname=Polls type=user func=vote}" method="post" enctype="application/x-www-form-urlencoded">
         <div>
-            <input type="hidden" name="authid" value="{insert name='generateauthkey' module='Polls'}" />
+			<input type="hidden" name="csrftoken" id="pollstoken" value="{insert name='csrftoken'}" />
             <input type="hidden" name="title" value="{$item.title|safetext}" />
             <input type="hidden" name="pollid" value="{$item.pollid}" />
             <input type="hidden" name="displayresults" value="1" />
@@ -54,7 +54,7 @@
 
     <p class="z-sub">
         <a href="{modurl modname='Polls' type='user' func='results' pollid=$item.pollid}">{gt text="Results" domain="module_polls"}</a> |
-        <a href="{modurl modname='Polls' type='user'}">{gt text="Other Polls" domain="module_polls"}</a>
+        <a href="{modurl modname='Polls' type='user' func='main'}">{gt text="Other Polls" domain="module_polls"}</a>
     </p>
 
     {if $vars.ajaxvoting}

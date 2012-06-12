@@ -252,6 +252,8 @@ class Polls_Controller_User extends Zikula_AbstractController
         if (!SecurityUtil::checkPermission('Polls::', "$title::", ACCESS_COMMENT)) {
             return LogUtil::registerPermissionError();
         }
+		
+		$this->checkCsrfToken();
 
         $allowedtovote = (bool)ModUtil::apiFunc('Polls', 'user', 'allowedtovote', array('pollid' => $pollid));
         if (!$allowedtovote) {

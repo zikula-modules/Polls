@@ -14,7 +14,7 @@
 
 <form class="z-form" action="{modurl modname='Polls' type='user' func='vote'}" method="post" enctype="application/x-www-form-urlencoded">
     <div>
-        <input type="hidden" name="authid" value="{insert name='generateauthkey' module='Polls'}" />
+		<input type="hidden" name="csrftoken" value="{insert name='csrftoken'}" />
         <input type="hidden" name="pollid" value="{$item.pollid}" />
         <input type="hidden" name="title" value="{$item.title|safetext}" />
         <fieldset>
