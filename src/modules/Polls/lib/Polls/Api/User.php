@@ -12,7 +12,7 @@
  * information regarding copyright and licensing.
  */
  
-class Polls_Api_User extends Zikula_Api
+class Polls_Api_User extends Zikula_AbstractApi
 {
     /**
      * get all poll items

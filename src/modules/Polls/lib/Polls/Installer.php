@@ -12,7 +12,7 @@
  * information regarding copyright and licensing.
  */
  
- class Polls_Installer extends Zikula_Installer
+ class Polls_Installer extends Zikula_AbstractInstaller
  {
     public function install()
     {

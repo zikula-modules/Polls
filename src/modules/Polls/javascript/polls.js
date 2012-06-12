@@ -9,15 +9,13 @@
 function pollvote()
 {
     Element.update('pollvoteinfo', recordingvote);
-    
+
     var pars = Form.serialize('pollvoteform');
-    
     new Zikula.Ajax.Request(
-        "ajax.php?module=Polls&func=vote", 
+        "ajax.php?module=Polls&type=user&func=vote", 
         {
             method: 'post', 
             parameters: pars, 
-            //authid: 'permissionsauthid',
             onComplete: pollsvote_response
         });
 }
@@ -34,8 +32,10 @@ function pollsvote_response(req)
         Zikula.showajaxerror(req.getMessage());
         return;
     }
-    
+	
     var data = req.getData();
     
-    Element.update('pollblockcontent', data.result);
+    Element.update('pollblockcontent', data);
+	
+	
 }
