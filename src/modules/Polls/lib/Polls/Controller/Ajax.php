@@ -12,7 +12,7 @@
  * information regarding copyright and licensing.
  */
  
-class Polls_Controller_Ajax extends Zikula_Controller
+class Polls_Controller_Ajax extends Zikula_AbstractController
 {
     /**
      * Log a vote and display the results form
@@ -31,11 +31,14 @@ class Polls_Controller_Ajax extends Zikula_Controller
             LogUtil::registerPermissionError(null, true);
             throw new Zikula_Exception_Forbidden();
         }
-
+		
+		//$this->checkCsrfToken();
+		/*
         if (!SecurityUtil::confirmAuthKey()) {
             //LogUtil::registerAuthidError();
             //throw new Zikula_Exception_Fatal();
         }
+		*/
 
         // Check if the user is allowed to vote (meaning he has already voted in this poll)
         $allowedtovote = (bool)ModUtil::apiFunc('Polls', 'user', 'allowedtovote', array('pollid' => $pollid));
@@ -76,5 +79,3 @@ class Polls_Controller_Ajax extends Zikula_Controller
         return new Zikula_Response_Ajax(array('result' => $result));
     }
 }
-
-

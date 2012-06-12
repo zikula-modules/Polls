@@ -36,7 +36,7 @@ function Polls_tables()
                                             'optioncount' => 'pn_optioncount',
                                             'voteid'      => 'pn_voteid');
     $table['poll_data_column_def']  = array('pollid'      => "I NOTNULL DEFAULT '0'",
-                                            'optiontext'  => "C(50) NOTNULL DEFAULT ''",
+                                            'optiontext'  => "C(255) NOTNULL DEFAULT ''",
                                             'optioncount' => "I NOTNULL DEFAULT '0'",
                                             'voteid'      => "I NOTNULL DEFAULT '0'");
     $table['poll_data_column_idx']  = array('pollid' => 'pollid');
@@ -50,7 +50,7 @@ function Polls_tables()
                                             'voters'    => 'pn_voters',
                                             'language'  => 'pn_language');
     $table['poll_desc_column_def']  = array('pollid'    => 'I NOTNULL AUTOINCREMENT PRIMARY',
-                                            'title'     => "C(100) NOTNULL DEFAULT ''",
+                                            'title'     => "C(255) NOTNULL DEFAULT ''",
                                             'urltitle'  => "X NOTNULL DEFAULT ''",
                                             'timestamp' => "I NOTNULL DEFAULT '0'",
                                             'voters'    => "I4 NOTNULL DEFAULT '0'",

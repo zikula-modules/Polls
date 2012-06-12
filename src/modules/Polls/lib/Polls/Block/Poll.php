@@ -12,7 +12,7 @@
  * information regarding copyright and licensing.
  */
 
-class Polls_Block_Poll extends Zikula_Controller_Block
+class Polls_Block_Poll extends Zikula_Controller_AbstractBlock
 {
     /**
      * initialise block

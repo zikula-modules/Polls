@@ -17,9 +17,9 @@
     {array_field_isset assign="categorydesc" array=$subcategory.display_desc field=$lang returnValue=1}
 
     {if $shorturls}
-    <li><a href="{modurl modname='Polls' func='view' prop=$property cat=$subcategory.path|replace:$category.path:''}" title="{$categorydesc}">{$categoryname}</a></li>
+    <li><a href="{modurl modname='Polls' type='user' func='view' prop=$property cat=$subcategory.path|replace:$category.path:''}" title="{$categorydesc}">{$categoryname}</a></li>
     {else}
-    <li><a href="{modurl modname=Polls func=view prop=$property cat=$subcategory.id}" title="{$categorydesc}">{$categoryname}</a></li>
+    <li><a href="{modurl modname=Polls type='user' func=view prop=$property cat=$subcategory.id}" title="{$categorydesc}">{$categoryname}</a></li>
     {/if}
     {/foreach}
 </ul>
