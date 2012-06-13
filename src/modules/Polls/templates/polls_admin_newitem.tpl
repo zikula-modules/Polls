@@ -91,6 +91,8 @@
                 </div>
             </fieldset>
             
+            {notifydisplayhooks eventname='polls.ui_hooks.p.form_edit'}
+            
 			<div class="z-formbuttons z-buttons">
 				{button src='button_ok.png' set='icons/extrasmall' __alt='Save' __title='Save' __text="Save"}
 				<a href="{modurl modname=$module type='admin' func='view'}" title="{gt text='Cancel'}">{img modname='core' src='button_cancel.png' set='icons/extrasmall' __alt='Cancel' __title='Cancel'} {gt text='Cancel'}</a>

@@ -16,6 +16,8 @@
             <input type="hidden" name="pollid" value="{$pollid|safetext}" />
             <fieldset>
                 <legend>{gt text="Confirmation prompt"}</legend>
+                
+                {notifydisplayhooks eventname='polls.ui_hooks.p.form_delete' id=$pollid}
 				
 			   <div class="z-formbuttons z-buttons">
 					{button src='button_ok.png' set='icons/extrasmall' __alt='Delete' __title='Delete' __text="Delete"}
