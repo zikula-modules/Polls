@@ -28,6 +28,9 @@
             return LogUtil::registerError ($this->__('Error! Creation attempt failed.'));
         }
         
+        // register hook bundles
+        HookUtil::registerSubscriberBundles($this->version->getHookSubscriberBundles());
+        
         // Set up module variables
         $vars = array(
             'itemsperpage' => 25,
@@ -109,6 +112,9 @@
                 return false;
             }
         }
+        
+        // unregister hook bundles
+        HookUtil::unregisterSubscriberBundles($this->version->getHookSubscriberBundles());
 
         // Delete module variables
         $this->delVar('Polls');
