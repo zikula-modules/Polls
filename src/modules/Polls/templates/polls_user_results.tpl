@@ -10,7 +10,7 @@
     </span>
 </div>
 
-<h3>{$item.title|safetext}</h3>
+<h3>{$item.title|safetext|notifyfilters:'polls.filter_hooks.p.filter'}</h3>
 
 <div class="polls-resultstable">
     <ul class="polls-resultschart">
@@ -45,3 +45,5 @@
 {if !$allowedtovote}
     <p class="polls-resultlinks">{gt text="You have already voted!"}</p>
 {/if}
+
+{notifydisplayhooks eventname='polls.ui_hooks.p.display_view' id=$item.pollid}

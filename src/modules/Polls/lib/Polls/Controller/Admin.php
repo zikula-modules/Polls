@@ -177,12 +177,25 @@ class Polls_Controller_Admin extends Zikula_AbstractController
         // Confirm authorisation code
         $this->checkCsrfToken();
 
-        // Create the poll
-        $pollid = ModUtil::apiFunc('Polls', 'admin', 'create', $poll);
+        // validate any hooks
+        $hook = new Zikula_ValidationHook('polls.ui_hooks.p.validate_edit', new Zikula_Hook_ValidationProviders());
+        $validators = $this->notifyHooks($hook)->getValidators();
+        
+        if ($validators->hasErrors()) {
+            LogUtil::registerError($this->__('Some errors were found.'));
+        } else {
+            // Create the poll
+            $pollid = ModUtil::apiFunc('Polls', 'admin', 'create', $poll);
+            
+            // item created/updated, so notify hooks of the event
+            $url = new Zikula_ModUrl('Polls', 'user', 'display', ZLanguage::getLanguageCode(), array('pollid' => $pollid));
+            $hook = new Zikula_ProcessHook('polls.ui_hooks.p.process_edit', $pollid, $url);
+            $this->notifyHooks($hook);
 
-        if ($pollid != false) {
-            // Success
-            LogUtil::registerStatus ($this->__('Done! Poll created.'));
+            if ($pollid != false) {
+                // Success
+                LogUtil::registerStatus ($this->__('Done! Poll created.'));
+            }
         }
 
         return System::redirect(ModUtil::url('Polls', 'admin', 'view'));
@@ -243,10 +256,23 @@ class Polls_Controller_Admin extends Zikula_AbstractController
 		// Confirm authorisation code
         $this->checkCsrfToken();
 
-        // Update the poll
-        if (ModUtil::apiFunc('Polls', 'admin', 'update', $poll)) {
-            // Success
-            LogUtil::registerStatus ($this->__('Done! Poll updated.'));
+        // validate any hooks
+        $hook = new Zikula_ValidationHook('polls.ui_hooks.p.validate_edit', new Zikula_Hook_ValidationProviders());
+        $validators = $this->notifyHooks($hook)->getValidators();
+        
+        if ($validators->hasErrors()) {
+            LogUtil::registerError($this->__('Some errors were found.'));
+        } else {
+            // Update the poll
+            if (ModUtil::apiFunc('Polls', 'admin', 'update', $poll)) {
+                // Success
+                LogUtil::registerStatus ($this->__('Done! Poll updated.'));
+            }
+            
+            // item created/updated, so notify hooks of the event
+            $url = new Zikula_ModUrl('Polls', 'user', 'display', ZLanguage::getLanguageCode(), array('pollid' => $pollid));
+            $hook = new Zikula_ProcessHook('polls.ui_hooks.p.process_edit', $pollid, $url);
+            $this->notifyHooks($hook);
         }
 
         return System::redirect(ModUtil::url('Polls', 'admin', 'view'));
@@ -292,12 +318,23 @@ class Polls_Controller_Admin extends Zikula_AbstractController
 
         // Confirm authorisation code
 		$this->checkCsrfToken();
+        
+        // validate any hooks
+        $hook = new Zikula_ValidationHook('polls.ui_hooks.p.validate_delete', new Zikula_Hook_ValidationProviders());
+        $validators = $this->notifyHooks($hook)->getValidators();
+        if ($validators->hasErrors()) {
+            return LogUtil::registerError($this->__('Some errors were found.'));
+        }
 
         // Delete the poll
         if (ModUtil::apiFunc('Polls', 'admin', 'delete', array('pollid' => $pollid))) {
             // Success
             LogUtil::registerStatus ($this->__('Done! Poll deleted.'));
         }
+        
+        // item deleted, so notify hooks of the event
+        $hook = new Zikula_ProcessHook('polls.ui_hooks.p.process_delete', $id);
+        $this->notifyHooks($hook);
 
         return System::redirect(ModUtil::url('Polls', 'admin', 'view'));
     }

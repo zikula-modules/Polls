@@ -97,6 +97,8 @@
                     <input id="polls_polloption12" type="text" name="poll[options][12]" size="255" maxlength="255" value="{$item.options.11.optiontext|safetext}" />
                 </div>
             </fieldset>
+            
+            {notifydisplayhooks eventname='polls.ui_hooks.p.form_edit' id=$item.pollid}
 
             <fieldset>
                 <legend>{gt text="Meta data"}</legend>
