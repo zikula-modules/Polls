@@ -94,8 +94,11 @@
 
             case '2.1.0':
                 $this->setVar('recurrence', 0);
-                
+            
             case '3.0.0':
+                HookUtil::registerSubscriberBundles($this->version->getHookSubscriberBundles());
+                
+            case '3.0.1':
                 // future upgrade routines
                 break;
         }
