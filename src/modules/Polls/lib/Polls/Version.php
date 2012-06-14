@@ -21,7 +21,7 @@ class Polls_Version extends Zikula_AbstractVersion
         $meta['displayname']    = $this->__('Polls');
         $meta['description']    = $this->__('Voting System Module');
         $meta['url']            = 'polls';
-        $meta['version']        = '3.0.0';
+        $meta['version']        = '3.0.1';
         $meta['securityschema'] = array('Polls::' => 'Poll title::Poll ID');
         $meta['capabilities'] = array(HookUtil::SUBSCRIBER_CAPABLE => array('enabled' => true));
         
